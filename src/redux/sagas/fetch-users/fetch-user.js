@@ -1,9 +1,9 @@
 import { call, put,takeEvery} from 'redux-saga/effects';
 import { usersLoaded } from '../../actions/actions-login';
-
+import { FETCHED_USERS } from '../../../constants/const-actions/action-types';
 
 function* watchFetchUsers() {
-    yield takeEvery('FETCHED_USERS', fetchUsersAsync);
+    yield takeEvery(FETCHED_USERS, fetchUsersAsync);
   }
 
   function* fetchUsersAsync() {
@@ -22,3 +22,4 @@ function* watchFetchUsers() {
   export {
       watchFetchUsers
   }
+  

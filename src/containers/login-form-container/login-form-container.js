@@ -3,6 +3,7 @@ import LoginForm from '../../components/login-form';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { userLoggedIn, fetchUsers } from '../../redux/actions/actions-login';
+import { SECRET_PAGE_PATH } from '../../constants/const-paths/paths'
 
 const useInputValue = (resetError=()=>{}, defaultValue = '') => {
     const [ value, setValue ] = useState(defaultValue);
@@ -16,14 +17,13 @@ const useInputValue = (resetError=()=>{}, defaultValue = '') => {
             },
             clear: () => setValue(""),
             value: () => value
-        }
-    
+        }    
 }
 
 const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, fetchUsers }) => {
 
     const name = useInputValue(resetError);
-    const password = useInputValue();
+    const password = useInputValue(resetError);
     const [hasError, setHasError] = useState(false);
 
     useEffect(()=>{
@@ -35,9 +35,8 @@ const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, fetchUsers }) => 
     }
 
     if(isLoggedIn){
-        return <Redirect to="/secret" />
+        return <Redirect to={SECRET_PAGE_PATH} />
     }
-
 
     const login = (e) => {
         e.preventDefault();
@@ -52,8 +51,7 @@ const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, fetchUsers }) => 
                     break;
                 }              
             }
-        }
-
+        }        
         errorStatus && setHasError(true);
         name.clear();
         password.clear();
@@ -68,7 +66,6 @@ const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, fetchUsers }) => 
         />
     )
 }
-
 
 const mapStateToProps = ({ users, isLoggedIn }) => {
     return{

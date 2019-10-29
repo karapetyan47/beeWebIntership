@@ -1,12 +1,12 @@
 import React from 'react';
 import classNames from 'classnames/bind';
+import { loginInput, inputFalse } from '../../constants/const-styles/styles'
 
 import './login-form.css';
 
-
-let styles = {
-    loginInput: 'login-input',
-    inputFalse: 'input-false'
+const styles = {
+    loginInput,
+    inputFalse
 }
 
 let cx = classNames.bind(styles);
@@ -40,6 +40,5 @@ const LoginForm = ({ name, submit, password,  error }) =>{
         </div>
     )
 }
-
 
 export default LoginForm;

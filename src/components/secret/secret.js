@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { MAIN_PATH } from '../../constants/const-paths/paths';
 
 const Secret = ({ isLoggedIn }) =>{
     if(isLoggedIn){
@@ -12,7 +12,7 @@ const Secret = ({ isLoggedIn }) =>{
         )
     }
 
-    return <Redirect to="/" />
+    return <Redirect to={MAIN_PATH} />
 }
 
 const mapStateToProps = ({isLoggedIn}) => {
