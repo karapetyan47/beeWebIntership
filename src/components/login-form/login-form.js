@@ -1,11 +1,11 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import { loginInput, inputFalse } from '../../constants/const-styles/styles'
+import { inputLabel, inputFalse } from '../../constants/const-styles/styles'
 
 import './login-form.css';
 
 const styles = {
-    loginInput,
+    inputLabel,
     inputFalse
 }
 
@@ -13,30 +13,45 @@ let cx = classNames.bind(styles);
 
 const LoginForm = ({ name, submit, password,  error }) =>{
 
-    let className = cx('loginInput', {inputFalse: error})
+    let className = cx('inputLabel', {inputFalse: error})
 
     return(
         <div className="login-section">
-            <form className="login-form" onSubmit= {submit}>
+            <div className="box">
                 <h2 className="login-title">Login</h2>
-                <input 
-                    className={className}
-                    placeholder="Name"
-                   {...name.bind}
-                    />
-                <input 
-                    className={className}
-                    placeholder="Password"
-                    type="password" 
-                    {...password.bind}
-                    />
-                <button 
+                <form className="login-form" onSubmit= {submit}>
+                    <div className="inputBox">                 
+                        <input
+                        type="text"
+                        required="" 
+                        {...name.bind}
+                        />
+                        <label 
+                        className={className}
+                        >
+                            Username
+                        </label>
+                    </div>
+                    <div className="inputBox">    
+                        <input 
+                        type="password"
+                        required="" 
+                        {...password.bind}
+                        />
+                        <label
+                        className={className}
+                        >
+                            Password
+                        </label>
+                    </div>      
+                    <button 
                     className="login-btn"
                     type="submit"
                     >
                         Log In
-                </button>
-            </form>
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }

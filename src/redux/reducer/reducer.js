@@ -2,7 +2,7 @@ import { USER_LOGGED_IN,
          FETCH_USERS_SUCCESS } from '../../constants/const-actions/action-types';
 
 const initialState = {
-    users: [],
+    users: [{name:'m', password: '3'}],
     isLoggedIn: false
 }
 

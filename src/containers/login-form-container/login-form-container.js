@@ -28,7 +28,7 @@ const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, fetchUsers }) => 
 
     useEffect(()=>{
         fetchUsers();
-    },[]);
+    },[fetchUsers]);
 
     function resetError(){
         setHasError(false)

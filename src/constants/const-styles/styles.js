@@ -1,2 +1,2 @@
-export const loginInput = 'login-input';
+export const inputLabel = 'input-label';
 export const inputFalse = 'input-false';
