@@ -1,7 +1,6 @@
-import { 
-  FETCHED_USERS,
-  FETCH_USERS_SUCCESS, 
-  USER_LOGGED_IN } from '../../constants/const-actions/action-types';
+export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
+export const USER_LOGGED_IN = 'USER_LOGGED_IN';
+export const FETCHED_USERS = 'FETCHED_USERS';
 
 const usersLoaded = (newUsers) => {
     return {

@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import { inputLabel, inputFalse } from '../../constants/const-styles/styles'
+import { inputLabel, inputFalse } from 'constants/const-styles/styles.js';
 
 import './login-form.css';
 

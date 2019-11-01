@@ -1,5 +1,5 @@
 import { USER_LOGGED_IN, 
-         FETCH_USERS_SUCCESS } from '../../constants/const-actions/action-types';
+         FETCH_USERS_SUCCESS } from 'redux/actions';
 
 const initialState = {
     users: [{name:'m', password: '3'}],

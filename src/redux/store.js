@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
-import { reducer } from './reducer';
+import { reducer } from 'redux/reducer';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
-import { watchFetchUsers} from './sagas/fetch-users/fetch-user'
+import { watchFetchUsers} from 'redux/sagas/fetch-users'
 
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
