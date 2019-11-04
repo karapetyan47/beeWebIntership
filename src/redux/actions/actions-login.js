@@ -1,28 +1,24 @@
-export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
-export const USER_LOGGED_IN = 'USER_LOGGED_IN';
-export const FETCHED_USERS = 'FETCHED_USERS';
+export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
+export const USER_LOGGED_IN = "USER_LOGGED_IN";
+export const FETCHED_USERS = "FETCHED_USERS";
 
-const usersLoaded = (newUsers) => {
-    return {
-      type: FETCH_USERS_SUCCESS,
-      payload: newUsers
-    };
+const usersLoaded = newUsers => {
+  return {
+    type: FETCH_USERS_SUCCESS,
+    payload: newUsers
   };
+};
 
-const userLoggedIn= () =>{
-    return {
-        type: USER_LOGGED_IN
-    }
-}
+const userLoggedIn = () => {
+  return {
+    type: USER_LOGGED_IN
+  };
+};
 
 const fetchUsers = () => {
-    return { 
-      type: FETCHED_USERS 
-    }
+  return {
+    type: FETCHED_USERS
   };
+};
 
-export {
-    userLoggedIn,
-    usersLoaded,
-    fetchUsers
-}
+export { userLoggedIn, usersLoaded, fetchUsers };

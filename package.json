@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
+    "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-cx": "^0.1.12",
     "react-dom": "^16.11.0",
@@ -36,7 +37,6 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
