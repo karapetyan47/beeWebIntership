@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import LoginForm from '../../components/login-form';
+import LoginForm from 'components/login-form';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { userLoggedIn, fetchUsers } from '../../redux/actions/actions-login';
-import { SECRET_PAGE_PATH } from '../../constants/const-paths/paths'
+import { userLoggedIn, fetchUsers } from 'redux/actions/actions-login';
+import { SECRET_PAGE_PATH } from 'constants/const-paths/paths'
 
 const useInputValue = (resetError=()=>{}, defaultValue = '') => {
     const [ value, setValue ] = useState(defaultValue);
@@ -28,7 +28,7 @@ const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, fetchUsers }) => 
 
     useEffect(()=>{
         fetchUsers();
-    },[]);
+    },[fetchUsers]);
 
     function resetError(){
         setHasError(false)

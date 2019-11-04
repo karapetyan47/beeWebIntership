@@ -1,25 +1,22 @@
-import { call, put,takeEvery} from 'redux-saga/effects';
-import { usersLoaded } from '../../actions/actions-login';
-import { FETCHED_USERS } from '../../../constants/const-actions/action-types';
+import { call, put, takeEvery } from "redux-saga/effects";
+import { FETCHED_USERS, usersLoaded } from "redux/actions";
+import UsersService from "services/users-service";
+
+const usersService = new UsersService();
 
 function* watchFetchUsers() {
-    yield takeEvery(FETCHED_USERS, fetchUsersAsync);
-  }
+  yield takeEvery(FETCHED_USERS, fetchUsersAsync);
+}
 
-  function* fetchUsersAsync() {
-    try {
-      const data = yield call(() => {
-        return fetch('some url')
-            .then(res => res.json())                                                    
-        }
-      );
-      yield put(usersLoaded(data));
-    } catch {
-        console.log("error")
-    }
+function* fetchUsersAsync() {
+  try {
+    const data = yield call(() => {
+      return usersService.getUsers().then(res => res);
+    });
+    yield put(usersLoaded(data));
+  } catch {
+    console.log("error");
   }
+}
 
-  export {
-      watchFetchUsers
-  }
-  
+export { watchFetchUsers };
