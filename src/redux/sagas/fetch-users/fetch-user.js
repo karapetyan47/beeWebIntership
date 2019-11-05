@@ -15,7 +15,7 @@ function* fetchUsersAsync() {
     });
     yield put(usersLoaded(data));
   } catch {
-    console.log("error");
+    console.log("error Users");
   }
 }
 

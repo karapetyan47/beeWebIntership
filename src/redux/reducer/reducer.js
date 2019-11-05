@@ -1,9 +1,19 @@
 import { USER_LOGGED_IN, FETCH_USERS_SUCCESS } from "redux/actions";
+import { FETCH_STAFFS_SUCCESS } from "redux/actions";
 
 const initialState = {
   users: [],
   user: null,
-  isLoggedIn: false
+  isLoggedIn: false,
+  staffs: [
+    {
+      id: 1,
+      name: "Poxos",
+      surname: "Poxosyan",
+      skills: "React, Redux",
+      salary: "200000"
+    }
+  ]
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,6 +28,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         users: action.payload
+      };
+    case FETCH_STAFFS_SUCCESS:
+      return {
+        ...state,
+        staffs: action.payload
       };
     default:
       return state;
