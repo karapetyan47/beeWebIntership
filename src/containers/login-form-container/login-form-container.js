@@ -54,7 +54,7 @@ const LoginFormContainer = ({
           userList[user].password === password.value()
         ) {
           errorStatus = false;
-          userLoggedIn();
+          userLoggedIn(userList[user].name);
           break;
         }
       }

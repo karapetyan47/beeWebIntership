@@ -9,9 +9,10 @@ const usersLoaded = newUsers => {
   };
 };
 
-const userLoggedIn = () => {
+const userLoggedIn = user => {
   return {
-    type: USER_LOGGED_IN
+    type: USER_LOGGED_IN,
+    payload: user
   };
 };
 
