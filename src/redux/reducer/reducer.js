@@ -5,15 +5,7 @@ const initialState = {
   users: [],
   user: null,
   isLoggedIn: false,
-  staffs: [
-    {
-      id: 1,
-      name: "Poxos",
-      surname: "Poxosyan",
-      skills: "React, Redux",
-      salary: "200000"
-    }
-  ]
+  staffs: []
 };
 
 const reducer = (state = initialState, action) => {

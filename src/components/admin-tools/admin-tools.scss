@@ -4,18 +4,22 @@ ul {
   margin-top: 25px;
   li {
     list-style: none;
-    color: white;
+    color: #f39c12;
     height: 10%;
-    text-align: center;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 10px 0 10px 30px;
     border-bottom: 0.5px solid #bdc3c7;
+    transition: 0.2s;
   }
   li:first-child {
     border-top: 0.5px solid #bdc3c7;
   }
   li:hover {
-    background-color: #3498db;
+    background: #f39c12;
+    color: whitesmoke;
     text-decoration: underline;
+  }
+  i {
+    margin-right: 5px;
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames/bind";
 import { inputLabel, inputFalse } from "constants/const-styles/styles.js";
 
-import "./login-form.css";
+import "./login-form.scss";
 
 const styles = {
   inputLabel,

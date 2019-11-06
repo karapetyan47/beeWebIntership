@@ -5,34 +5,56 @@ import "./admin-tools.scss";
 
 export default class AdminTools extends Component {
   render() {
+    const { url } = this.props;
     return (
       <ul>
-        <Link to="/dashboard" style={{ textDecoration: "none" }}>
-          <li>Dashboard</li>
+        <Link to="/secret" style={{ textDecoration: "none" }}>
+          <li>
+            <i className="fas fa-chart-line"></i>Dashboard
+          </li>
         </Link>
-        <Link to="/staff" style={{ textDecoration: "none" }}>
-          <li>Staff</li>
+        <Link to={`${url}/staff`} style={{ textDecoration: "none" }}>
+          <li>
+            <i class="fas fa-street-view"></i>Staff
+          </li>
         </Link>
-        <Link to="/attendance" style={{ textDecoration: "none" }}>
-          <li>Attendance</li>
+        <Link to={`${url}/attendance`} style={{ textDecoration: "none" }}>
+          <li>
+            <i class="far fa-clipboard"></i>Attendance
+          </li>
         </Link>
-        <Link to="/benefits" style={{ textDecoration: "none" }}>
-          <li>Benefits</li>
+        <Link to={`${url}/benefits`} style={{ textDecoration: "none" }}>
+          <li>
+            <i class="fas fa-coins"></i>Benefits
+          </li>
         </Link>
-        <Link to="/open-possitions" style={{ textDecoration: "none" }}>
-          <li>Open Positions</li>
+        <Link to={`${url}/open-possitions`} style={{ textDecoration: "none" }}>
+          <li>
+            <i class="fas fa-book-reader"></i>Open Positions
+          </li>
         </Link>
-        <Link to="/candidates" style={{ textDecoration: "none" }}>
-          <li>Candidates</li>
+        <Link to={`${url}/candidates`} style={{ textDecoration: "none" }}>
+          <li>
+            <i class="fas fa-users"></i>Candidates
+          </li>
         </Link>
-        <Link to="/tickets" style={{ textDecoration: "none" }}>
-          <li>Tickets</li>
+        <Link to={`${url}/tickets`} style={{ textDecoration: "none" }}>
+          <li>
+            <i class="fas fa-ticket-alt"></i>Tickets
+          </li>
         </Link>
-        <Link to="/push-notifications" style={{ textDecoration: "none" }}>
-          <li>Push Notification</li>
+        <Link
+          to={`${url}/push-notifications`}
+          style={{ textDecoration: "none" }}
+        >
+          <li>
+            <i class="fas fa-bell"></i>Push Notification
+          </li>
         </Link>
-        <Link to="/rating" style={{ textDecoration: "none" }}>
-          <li>Rating</li>
+        <Link to={`${url}/rating`} style={{ textDecoration: "none" }}>
+          <li>
+            <i class="fas fa-star-half-alt"></i>Rating
+          </li>
         </Link>
       </ul>
     );

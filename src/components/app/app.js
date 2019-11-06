@@ -14,7 +14,13 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Route path={MAIN_PATH} component={LoginFormContainer} exact />
-        <Route path={SECRET_PAGE_PATH} exact component={AdminPanel} />
+        {/* <Route path={SECRET_PAGE_PATH} component={AdminPanel} /> */}
+        <Route
+          path={`${SECRET_PAGE_PATH}`}
+          render={({ match }) => {
+            return <AdminPanel url={match.url} />;
+          }}
+        />
       </Router>
     </Provider>
   );

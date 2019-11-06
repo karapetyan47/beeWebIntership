@@ -4,31 +4,44 @@
   position: fixed;
   left: 0;
   top: 0;
-  background: #2980b9;
-  .admin-about {
+  background: #2d3436;
+  .logo {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 10%;
-    background-color: #3498db;
-    border-bottom: 1.5px solid #ecf0f1;
-    color: white;
-    label {
-      font-size: 18px;
-      letter-spacing: 1px;
-      font-weight: 500;
+    justify-content: center;
+    img {
+      margin-top: 20px;
+      max-height: 100%;
+      max-width: 50%;
     }
   }
 }
 
+.admin-about {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  background-color: #2d3436;
+  border-bottom: 1px solid #f1c40f;
+  color: #f1c40f;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  label {
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-right: 50px;
+    font-style: bold;
+  }
+}
+
 .visible-place {
-  margin-top: 30px;
+  margin-top: 64px;
   box-sizing: border-box;
   padding-left: 220px;
   padding-right: 20px;
-}
-
-.test {
-  margin-left: 210px;
-  color: black;
 }

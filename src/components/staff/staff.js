@@ -6,10 +6,10 @@ import "./staff.scss";
 
 class Staff extends Component {
   componentDidMount() {
-    fetchStaffs();
+    this.props.fetchStaffs();
   }
   componentDidUpdate() {
-    fetchStaffs();
+    this.props.fetchStaffs();
   }
 
   renderRow = staff => {
