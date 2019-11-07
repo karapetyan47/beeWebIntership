@@ -53,10 +53,22 @@ const AddStaff = ({ onAddStaff, close }) => {
       </span>
       <div className="content">
         <form className="popup-section" onSubmit={handleAddStaff}>
-          <input placeholder="name" {...name.bind} />
-          <input placeholder="surname" {...surname.bind} />
-          <input placeholder="position" {...position.bind} />
-          <input placeholder="salary" {...salary.bind} />
+          <input className="input-staff" placeholder="Name" {...name.bind} />
+          <input
+            className="input-staff"
+            placeholder="Surname"
+            {...surname.bind}
+          />
+          <input
+            className="input-staff"
+            placeholder="Position"
+            {...position.bind}
+          />
+          <input
+            className="input-staff"
+            placeholder="Salary"
+            {...salary.bind}
+          />
           <button type="submit">Add</button>
         </form>
       </div>

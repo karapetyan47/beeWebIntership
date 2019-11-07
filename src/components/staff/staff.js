@@ -57,6 +57,7 @@ class Staff extends Component {
           <tbody>{this.props.staffs.map(this.renderRow)}</tbody>
         </table>
         <Popup
+          modal
           trigger={<button className="add-staff">Add Staff</button>}
           position="center center"
         >
