@@ -11,9 +11,11 @@ import {
   staffsLoaded,
   fetchStaffs,
   removedStaff,
+  addStaff,
   FETCH_STAFFS_SUCCESS,
   FETCHED_STAFFS,
-  REMOVED_STAFF
+  REMOVED_STAFF,
+  ADD_STAFF
 } from "redux/actions/actions-staff-list";
 
 export {
@@ -28,5 +30,7 @@ export {
   removedStaff,
   FETCH_STAFFS_SUCCESS,
   FETCHED_STAFFS,
-  REMOVED_STAFF
+  REMOVED_STAFF,
+  ADD_STAFF,
+  addStaff
 };

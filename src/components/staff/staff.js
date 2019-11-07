@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStaffs, removedStaff } from "redux/actions";
+import { fetchStaffs, removedStaff, addStaff } from "redux/actions";
 import Popup from "reactjs-popup";
-import AddStaff from "./popup";
+import AddStaff from "./add-staff-popup";
 
 import "./staff.scss";
 
@@ -60,7 +60,7 @@ class Staff extends Component {
           trigger={<button className="add-staff">Add Staff</button>}
           position="center center"
         >
-          <AddStaff />
+          {close => <AddStaff close={close} onAddStaff={this.props.addStaff} />}
         </Popup>
       </div>
     );
@@ -75,7 +75,8 @@ const mapStateToProps = ({ staffs }) => {
 
 const mapDispatchToProps = {
   fetchStaffs,
-  removedStaff
+  removedStaff,
+  addStaff
 };
 
 export default connect(

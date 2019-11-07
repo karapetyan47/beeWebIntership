@@ -2,7 +2,8 @@ import {
   USER_LOGGED_IN,
   FETCH_USERS_SUCCESS,
   FETCH_STAFFS_SUCCESS,
-  REMOVED_STAFF
+  REMOVED_STAFF,
+  ADD_STAFF
 } from "redux/actions";
 
 const initialState = {
@@ -31,16 +32,21 @@ const reducer = (state = initialState, action) => {
         staffs: action.payload
       };
 
-    // case "BOOK_ADDED_TO_CART":
-    //   return updateOrder(state, action.payload, 1);
-
-    case REMOVED_STAFF:
-      const { staffs } = state;
-      const staffId = action.payload;
-      const itemIndex = staffs.findIndex(({ id }) => id === staffId);
+    case ADD_STAFF:
       return {
         ...state,
-        staffs: [...staffs.slice(0, itemIndex), ...staffs.slice(itemIndex + 1)]
+        staffs: [...state.staffs, action.payload]
+      };
+
+    case REMOVED_STAFF:
+      const staffId = action.payload;
+      const itemIndex = state.staffs.findIndex(({ id }) => id === staffId);
+      return {
+        ...state,
+        staffs: [
+          ...state.staffs.slice(0, itemIndex),
+          ...state.staffs.slice(itemIndex + 1)
+        ]
       };
     default:
       return state;
