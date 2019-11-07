@@ -11,7 +11,18 @@ import Rating from "components/rating";
 import AdminTools from "components/admin-tools";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { MAIN_PATH } from "constants/const-paths/paths";
+import {
+  MAIN_PATH,
+  SECRET_PAGE_PATH,
+  STAFF,
+  ATTENDANCE,
+  BENEFITS,
+  OPEN_POSSITIONS,
+  CANDIDATES,
+  TICKETS,
+  PUSH_NOTIFICATIONS,
+  RATING
+} from "constants/const-paths/paths";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import logo from "../../assets/images/logo.png";
@@ -33,18 +44,21 @@ const AdminPanel = ({ isLoggedIn, user, url }) => {
             <AdminTools url={url} />
           </div>
           <div className="visible-place">
-            <Route path="/secret" exact component={Dashboard} />
-            <Route path={`${url}/staff`} component={Staff} />
-            <Route path={`${url}/attendance`} component={Attendance} />
-            <Route path={`${url}/benefits`} component={Benefits} />
-            <Route path={`${url}/open-possitions`} component={OpenPossitions} />
-            <Route path={`${url}/candidates`} component={Candidates} />
-            <Route path={`${url}/tickets`} component={Tickets} />
+            <Route path={SECRET_PAGE_PATH} exact component={Dashboard} />
+            <Route path={`${url}${STAFF}`} component={Staff} />
+            <Route path={`${url}${ATTENDANCE}`} component={Attendance} />
+            <Route path={`${url}${BENEFITS}`} component={Benefits} />
             <Route
-              path={`${url}/push-notifications`}
+              path={`${url}${OPEN_POSSITIONS}`}
+              component={OpenPossitions}
+            />
+            <Route path={`${url}${CANDIDATES}`} component={Candidates} />
+            <Route path={`${url}${TICKETS}`} component={Tickets} />
+            <Route
+              path={`${url}${PUSH_NOTIFICATIONS}`}
               component={PushNotifications}
             />
-            <Route path={`${url}/rating`} component={Rating} />
+            <Route path={`${url}${RATING}`} component={Rating} />
           </div>
         </Router>
       </div>

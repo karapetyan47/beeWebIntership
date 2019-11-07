@@ -1,0 +1,25 @@
+.popup-section {
+  display: flex;
+  input {
+    border: 3px splid #f39c12;
+    box-sizing: border-box;
+    padding: 15px;
+    height: 100%;
+  }
+  button {
+    display: block;
+    padding: 8px 28px;
+    margin-top: 5px;
+    color: #f39c12;
+    background: #2d3436;
+    border: 1px solid #f39c12;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: 0.3s;
+  }
+  button:hover {
+    color: #2d3436;
+    background: #f39c12;
+    border-color: #2d3436;
+  }
+}

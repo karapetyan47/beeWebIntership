@@ -34,5 +34,27 @@ table {
     font-size: 20px;
     padding: 0;
     margin: 0;
+    &:hover {
+      .fa-user-times {
+        color: tomato;
+      }
+    }
   }
+}
+
+.add-staff {
+  display: block;
+  padding: 8px 28px;
+  margin-top: 5px;
+  color: #f39c12;
+  background: #2d3436;
+  border: 1px solid #f39c12;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.add-staff:hover {
+  color: #2d3436;
+  background: #f39c12;
+  border-color: #2d3436;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStaffs } from "redux/actions";
+import { fetchStaffs, removedStaff } from "redux/actions";
+import Popup from "reactjs-popup";
+import AddStaff from "./popup";
 
 import "./staff.scss";
 
@@ -8,24 +10,30 @@ class Staff extends Component {
   componentDidMount() {
     this.props.fetchStaffs();
   }
-  componentDidUpdate() {
-    this.props.fetchStaffs();
-  }
 
   renderRow = staff => {
-    const { id, name, surname, skills, salary } = staff;
+    const { id, name, surname, position, salary } = staff;
 
     return (
       <tr key={id}>
         <td>{name}</td>
         <td>{surname}</td>
-        <td>{skills}</td>
+        <td>{position}</td>
         <td>{salary}</td>
         <td>
-          <button onClick={() => {}}>&times;</button>
+          <button onClick={() => {}}>
+            <i className="fas fa-user-edit"></i>
+          </button>
         </td>
         <td>
-          <button onClick={() => {}}>Edit</button>
+          <button
+            onClick={() => {
+              console.log(id);
+              this.props.removedStaff(id);
+            }}
+          >
+            <i className="fas fa-user-times"></i>
+          </button>
         </td>
       </tr>
     );
@@ -39,15 +47,21 @@ class Staff extends Component {
             <tr>
               <th>Name</th>
               <th>Surname</th>
-              <th>Skills</th>
+              <th>Position</th>
               <th>Salary</th>
-              <th>Delete</th>
               <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
 
           <tbody>{this.props.staffs.map(this.renderRow)}</tbody>
         </table>
+        <Popup
+          trigger={<button className="add-staff">Add Staff</button>}
+          position="center center"
+        >
+          <AddStaff />
+        </Popup>
       </div>
     );
   }
@@ -60,7 +74,8 @@ const mapStateToProps = ({ staffs }) => {
 };
 
 const mapDispatchToProps = {
-  fetchStaffs
+  fetchStaffs,
+  removedStaff
 };
 
 export default connect(

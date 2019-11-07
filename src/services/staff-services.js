@@ -4,14 +4,14 @@ export default class StaffServices {
       id: 1,
       name: "Poxos",
       surname: "Poxosyan",
-      skills: "React, Redux",
+      position: "front-end",
       salary: "200000"
     },
     {
       id: 2,
       name: "Petros",
       surname: "Petrosyan",
-      skills: "Node.js, PHP",
+      position: "back-end",
       salary: "270000"
     }
   ];

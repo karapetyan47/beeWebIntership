@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { staffsLoaded, FETCHED_STAFFS } from "redux/actions";
-
 import StaffServices from "services/staff-services";
 
 const staffService = new StaffServices();

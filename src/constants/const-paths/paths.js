@@ -1,2 +1,10 @@
 export const MAIN_PATH = "/";
 export const SECRET_PAGE_PATH = "/secret";
+export const STAFF = "/staff";
+export const ATTENDANCE = "/attendance";
+export const BENEFITS = "/benefits";
+export const OPEN_POSSITIONS = "open-possitions";
+export const CANDIDATES = "/candidates";
+export const TICKETS = "/tickets";
+export const PUSH_NOTIFICATIONS = "/push-notifications";
+export const RATING = "/rating";

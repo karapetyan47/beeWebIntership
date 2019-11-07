@@ -10,8 +10,10 @@ import {
 import {
   staffsLoaded,
   fetchStaffs,
+  removedStaff,
   FETCH_STAFFS_SUCCESS,
-  FETCHED_STAFFS
+  FETCHED_STAFFS,
+  REMOVED_STAFF
 } from "redux/actions/actions-staff-list";
 
 export {
@@ -23,6 +25,8 @@ export {
   FETCHED_USERS,
   staffsLoaded,
   fetchStaffs,
+  removedStaff,
   FETCH_STAFFS_SUCCESS,
-  FETCHED_STAFFS
+  FETCHED_STAFFS,
+  REMOVED_STAFF
 };

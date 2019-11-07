@@ -1,5 +1,5 @@
-import { watchFetchUsers } from "redux/sagas/fetch-users";
-import { watchFetchStaffs } from "redux/sagas/fetch-staffs";
+import { watchFetchUsers } from "./fetch-user";
+import { watchFetchStaffs } from "./fetch-staffs";
 
 import { all } from "redux-saga/effects";
 
