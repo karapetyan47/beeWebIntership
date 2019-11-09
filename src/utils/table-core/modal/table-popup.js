@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import "./popup.scss";
+
+import "./table-popup.scss";
+// import PopupInput from "./table-popup-input";
 
 const useInputValue = (resetError = () => {}, defaultValue = "") => {
   const [value, setValue] = useState(defaultValue);
@@ -17,7 +19,7 @@ const useInputValue = (resetError = () => {}, defaultValue = "") => {
   };
 };
 
-const AddStaff = ({ onAddStaff, close }) => {
+const AddStaff = ({ onAddStaff, close, places }) => {
   const name = useInputValue();
   const surname = useInputValue();
   const position = useInputValue();
@@ -52,6 +54,7 @@ const AddStaff = ({ onAddStaff, close }) => {
         &times;
       </span>
       <div className="content">
+        <h2>Staff About</h2>
         <form className="popup-section" onSubmit={handleAddStaff}>
           <input className="input-staff" placeholder="Name" {...name.bind} />
           <input
@@ -69,6 +72,9 @@ const AddStaff = ({ onAddStaff, close }) => {
             placeholder="Salary"
             {...salary.bind}
           />
+          {/* {places.map((x, i) => (
+            <PopupInput key={i} placeName={x.name} setInput={handleInput} />
+          ))} */}
           <button type="submit">Add</button>
         </form>
       </div>

@@ -1,8 +1,5 @@
 .modal {
   font-size: 12px;
-  .content {
-    width: 100%;
-  }
   .close {
     cursor: pointer;
     position: absolute;
@@ -19,39 +16,52 @@
   .close:hover {
     background: tomato;
   }
+  .content {
+    width: 100%;
+    h2 {
+      height: 30px;
+      width: 100%;
+      color: #2d3436;
+      text-align: center;
+    }
+  }
 
   .popup-section {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     .input-staff {
-      width: 25%;
+      width: 100%;
       color: black;
       font-style: bold;
-      border: 1.5px solid #2d3436;
-      border-left: none;
+      border: none;
+      border-bottom: 1px solid rgb(83, 121, 122);
       text-align: center;
       box-sizing: border-box;
       padding: 15px;
       height: 100%;
     }
-    .input-staff:first-child {
-      border-left: 1.5px solid #2d3436;
+    input:focus {
+      outline: none;
     }
+
     button {
       display: block;
       padding: 8px 28px;
-      margin: 5px auto;
-      color: #f39c12;
-      background: #2d3436;
-      border: 1px solid #f39c12;
+      margin: 15px 10px 7px auto;
+      height: 50px;
+      width: 130px;
+      color: black;
+      background-size: 200%;
+      background-image: linear-gradient(to left, #ffc321, #fd2137, #ffc321);
+      font-size: 15px;
+      cursor: pointer;
+      border: 1px solid #2d3436;
       border-radius: 10px;
       transition: 0.3s;
     }
     button:hover {
-      color: #2d3436;
-      background: #f39c12;
-      border-color: #2d3436;
+      background-position: right;
     }
   }
 }

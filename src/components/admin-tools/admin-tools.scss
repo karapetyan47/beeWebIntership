@@ -1,25 +1,26 @@
 ul {
   padding: 0;
   margin: 0;
-  margin-top: 25px;
+  margin-top: 75px;
   li {
+    display: flex;
+    align-items: center;
     list-style: none;
     color: #f39c12;
     height: 10%;
     box-sizing: border-box;
     padding: 10px 0 10px 30px;
-    border-bottom: 0.5px solid #bdc3c7;
     transition: 0.2s;
-  }
-  li:first-child {
-    border-top: 0.5px solid #bdc3c7;
   }
   li:hover {
     background: #f39c12;
     color: whitesmoke;
-    text-decoration: underline;
+    i {
+      font-size: 20px;
+    }
   }
   i {
-    margin-right: 5px;
+    font-size: 17px;
+    margin-right: 7px;
   }
 }

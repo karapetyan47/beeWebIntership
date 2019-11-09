@@ -23,7 +23,7 @@ import {
   PUSH_NOTIFICATIONS,
   RATING
 } from "constants/const-paths/paths";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import logo from "../../assets/images/logo.png";
 
@@ -32,11 +32,24 @@ import "./admin-panel.scss";
 const AdminPanel = ({ isLoggedIn, user, url }) => {
   if (isLoggedIn) {
     return (
-      <div>
-        <div className="admin-about">
-          <label>{user}</label>
-        </div>
+      <div className="back">
         <Router>
+          <div className="admin-about">
+            <div className="search">
+              <input value="" placeholder="Search" onChange={() => {}} />
+              <i className="fas fa-search"></i>
+            </div>
+            <div>
+              <Link
+                to={`${url}${PUSH_NOTIFICATIONS}`}
+                style={{ textDecoration: "none" }}
+              >
+                <i className="fas fa-bell"></i>
+              </Link>
+              <label>{user}</label>
+            </div>
+          </div>
+
           <div className="left">
             <div className="logo">
               <img src={logo} alt="logo" />

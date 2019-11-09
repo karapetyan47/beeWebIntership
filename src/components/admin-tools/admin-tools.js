@@ -8,7 +8,6 @@ import {
   OPEN_POSSITIONS,
   CANDIDATES,
   TICKETS,
-  PUSH_NOTIFICATIONS,
   RATING
 } from "constants/const-paths/paths";
 
@@ -57,14 +56,7 @@ export default class AdminTools extends Component {
             <i className="fas fa-ticket-alt"></i>Tickets
           </li>
         </Link>
-        <Link
-          to={`${url}${PUSH_NOTIFICATIONS}`}
-          style={{ textDecoration: "none" }}
-        >
-          <li>
-            <i className="fas fa-bell"></i>Push Notification
-          </li>
-        </Link>
+
         <Link to={`${url}${RATING}`} style={{ textDecoration: "none" }}>
           <li>
             <i className="fas fa-star-half-alt"></i>Rating
