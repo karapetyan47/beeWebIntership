@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/karapetyan47/beeWebIntership.git/static/css/main.84f5d5b6.chunk.css",
-    "main.js": "/karapetyan47/beeWebIntership.git/static/js/main.64042955.chunk.js",
-    "main.js.map": "/karapetyan47/beeWebIntership.git/static/js/main.64042955.chunk.js.map",
-    "runtime-main.js": "/karapetyan47/beeWebIntership.git/static/js/runtime-main.8a6686be.js",
-    "runtime-main.js.map": "/karapetyan47/beeWebIntership.git/static/js/runtime-main.8a6686be.js.map",
-    "static/js/2.3fc19e47.chunk.js": "/karapetyan47/beeWebIntership.git/static/js/2.3fc19e47.chunk.js",
-    "static/js/2.3fc19e47.chunk.js.map": "/karapetyan47/beeWebIntership.git/static/js/2.3fc19e47.chunk.js.map",
-    "index.html": "/karapetyan47/beeWebIntership.git/index.html",
-    "precache-manifest.869cad1d39424f3d78355491f48aff57.js": "/karapetyan47/beeWebIntership.git/precache-manifest.869cad1d39424f3d78355491f48aff57.js",
-    "service-worker.js": "/karapetyan47/beeWebIntership.git/service-worker.js",
-    "static/css/main.84f5d5b6.chunk.css.map": "/karapetyan47/beeWebIntership.git/static/css/main.84f5d5b6.chunk.css.map",
-    "static/media/admin-panel.scss": "/karapetyan47/beeWebIntership.git/static/media/back.3e841f81.jpg",
-    "static/media/login-form.scss": "/karapetyan47/beeWebIntership.git/static/media/bee.244a3e95.jpg",
-    "static/media/logo.png": "/karapetyan47/beeWebIntership.git/static/media/logo.05c01c77.png"
+    "main.css": "/beeWebIntership/static/css/main.a2c670f9.chunk.css",
+    "main.js": "/beeWebIntership/static/js/main.64042955.chunk.js",
+    "main.js.map": "/beeWebIntership/static/js/main.64042955.chunk.js.map",
+    "runtime-main.js": "/beeWebIntership/static/js/runtime-main.c64912c7.js",
+    "runtime-main.js.map": "/beeWebIntership/static/js/runtime-main.c64912c7.js.map",
+    "static/js/2.3fc19e47.chunk.js": "/beeWebIntership/static/js/2.3fc19e47.chunk.js",
+    "static/js/2.3fc19e47.chunk.js.map": "/beeWebIntership/static/js/2.3fc19e47.chunk.js.map",
+    "index.html": "/beeWebIntership/index.html",
+    "precache-manifest.3f19733c1bb1d25fc1e222e37bdcbec0.js": "/beeWebIntership/precache-manifest.3f19733c1bb1d25fc1e222e37bdcbec0.js",
+    "service-worker.js": "/beeWebIntership/service-worker.js",
+    "static/css/main.a2c670f9.chunk.css.map": "/beeWebIntership/static/css/main.a2c670f9.chunk.css.map",
+    "static/media/admin-panel.scss": "/beeWebIntership/static/media/back.3e841f81.jpg",
+    "static/media/login-form.scss": "/beeWebIntership/static/media/bee.244a3e95.jpg",
+    "static/media/logo.png": "/beeWebIntership/static/media/logo.05c01c77.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.8a6686be.js",
+    "static/js/runtime-main.c64912c7.js",
     "static/js/2.3fc19e47.chunk.js",
-    "static/css/main.84f5d5b6.chunk.css",
+    "static/css/main.a2c670f9.chunk.css",
     "static/js/main.64042955.chunk.js"
   ]
 }
