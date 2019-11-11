@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TableInput = ({ value, updateValue = () => {} }) => {
+const TableInput = ({ value, updateValue = () => {}, name, id }) => {
   const [inputValue, setInputValue] = useState(value);
   const [prevInputValue, setPrevInputValue] = useState(value);
 
@@ -31,14 +31,17 @@ const TableInput = ({ value, updateValue = () => {} }) => {
   };
   const select = e => {
     if (e.keyCode === 13) {
-      updateValue(e.target.value);
-      setPrevInputValue(e.target.value);
+      if (e.target.value !== prevInputValue) {
+        updateValue(e.target.name, e.target.value, id);
+        setPrevInputValue(e.target.value);
+      }
       disabledOn(e);
     }
   };
 
   return (
     <input
+      name={name}
       onDoubleClick={onDbClick}
       onChange={changeValue}
       onKeyUp={select}

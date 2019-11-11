@@ -28,6 +28,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
 import "./admin-panel.scss";
+import BenefitsHistory from "../benefits/benefits-history";
 
 const AdminPanel = ({ isLoggedIn, user, url }) => {
   if (isLoggedIn) {
@@ -60,7 +61,16 @@ const AdminPanel = ({ isLoggedIn, user, url }) => {
             <Route path={SECRET_PAGE_PATH} exact component={Dashboard} />
             <Route path={`${url}${STAFF}`} component={Staff} />
             <Route path={`${url}${ATTENDANCE}`} component={Attendance} />
-            <Route path={`${url}${BENEFITS}`} component={Benefits} />
+            <Route
+              path={`${url}${BENEFITS}`}
+              exact
+              render={() => <Benefits url={`${url}${BENEFITS}`} />}
+            />
+            <Route
+              path={`${url}${BENEFITS}/history`}
+              render={() => <BenefitsHistory url={`${url}${BENEFITS}`} />}
+              exact
+            />
             <Route
               path={`${url}${OPEN_POSSITIONS}`}
               component={OpenPossitions}

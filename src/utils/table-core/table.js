@@ -1,14 +1,14 @@
 import React from "react";
 import Popup from "reactjs-popup";
 import TableInput from "./table-input";
-import AddStaff from "./modal/table-popup";
+import AddStaff from "../../components/staff/modal/table-popup";
 
 import "./table.scss";
 
 const Table = ({
   data,
   header,
-  title,
+  message,
   deleteItem = () => {},
   updateItem = () => {},
   add = () => {}
@@ -17,7 +17,12 @@ const Table = ({
     <tr key={i}>
       {header.map((y, k) => (
         <td key={k}>
-          <TableInput updateValue={updateItem} value={x[y.prop]} />
+          <TableInput
+            id={x.id}
+            updateValue={updateItem}
+            value={x[y.prop]}
+            name={y.prop}
+          />
         </td>
       ))}
       <td>
@@ -32,7 +37,7 @@ const Table = ({
     <div className="table-section">
       <Popup
         modal
-        trigger={<button className="add-staff">{`Add ${title}`}</button>}
+        trigger={<button className="add-staff">{`Add ${message}`}</button>}
         position="center center"
       >
         {close => <AddStaff close={close} onAddStaff={add} places={header} />}

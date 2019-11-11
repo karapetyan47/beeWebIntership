@@ -3,7 +3,8 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_STAFFS_SUCCESS,
   REMOVED_STAFF,
-  ADD_STAFF
+  ADD_STAFF,
+  EDIT_STAFF
 } from "redux/actions";
 
 const initialState = {
@@ -46,6 +47,23 @@ const reducer = (state = initialState, action) => {
         staffs: [
           ...state.staffs.slice(0, itemIndex),
           ...state.staffs.slice(itemIndex + 1)
+        ]
+      };
+
+    case EDIT_STAFF:
+      const editStaffId = action.payload.id;
+      const editItemIndex = state.staffs.findIndex(
+        ({ id }) => id === editStaffId
+      );
+      const editName = action.payload.name;
+      const editValue = action.payload.value;
+
+      return {
+        ...state,
+        staffs: [
+          ...state.staffs.slice(0, editItemIndex),
+          { [editName]: editValue },
+          ...state.staffs.slice(editItemIndex + 1)
         ]
       };
     default:

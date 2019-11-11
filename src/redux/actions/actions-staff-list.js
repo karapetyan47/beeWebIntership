@@ -2,6 +2,7 @@ export const FETCH_STAFFS_SUCCESS = "FETCH_STAFFS_SUCCESS";
 export const FETCHED_STAFFS = "FETCHED_STAFFS";
 export const REMOVED_STAFF = "REMOVED_STAFF";
 export const ADD_STAFF = "ADD_STAFF";
+export const EDIT_STAFF = "EDIT_STAFF";
 
 const staffsLoaded = newStaffs => {
   return {
@@ -14,6 +15,13 @@ const removedStaff = staffId => {
   return {
     type: REMOVED_STAFF,
     payload: staffId
+  };
+};
+
+const editStaff = payload => {
+  return {
+    type: EDIT_STAFF,
+    payload: payload
   };
 };
 
@@ -30,4 +38,4 @@ const fetchStaffs = () => {
   };
 };
 
-export { staffsLoaded, removedStaff, fetchStaffs, addStaff };
+export { staffsLoaded, removedStaff, fetchStaffs, addStaff, editStaff };

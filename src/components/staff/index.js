@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStaffs, removedStaff, addStaff } from "redux/actions";
+import { fetchStaffs, removedStaff, addStaff, editStaff } from "redux/actions";
 
 import Table from "utils/table-core/table";
 
@@ -32,9 +32,11 @@ class Staff extends Component {
           }
         ]}
         deleteItem={this.props.removedStaff}
-        updateItem={val => console.log(val)}
+        updateItem={(name, value, id) =>
+          this.props.editStaff({ name, value, id })
+        }
         add={this.props.addStaff}
-        title="Staff"
+        message="Staff"
       />
     );
   }
@@ -49,7 +51,8 @@ const mapStateToProps = ({ staffs }) => {
 const mapDispatchToProps = {
   fetchStaffs,
   removedStaff,
-  addStaff
+  addStaff,
+  editStaff
 };
 
 export default connect(
