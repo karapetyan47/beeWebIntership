@@ -1,7 +1,7 @@
 import React from "react";
 import Popup from "reactjs-popup";
 import TableInput from "./table-input";
-import AddStaff from "../../components/staff/modal/table-popup";
+import AddStaff from "../../components/staff/staff-modal/table-popup";
 
 import "./table.scss";
 
