@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import "./table-popup.scss";
-// import PopupInput from "./table-popup-input";
+import "./add-staff.scss";
 
 const useInputValue = (resetError = () => {}, defaultValue = "") => {
   const [value, setValue] = useState(defaultValue);
@@ -19,7 +19,7 @@ const useInputValue = (resetError = () => {}, defaultValue = "") => {
   };
 };
 
-const AddStaff = ({ onAddStaff, close, places }) => {
+const AddStaff = ({ onAddStaff, url }) => {
   const name = useInputValue();
   const surname = useInputValue();
   const position = useInputValue();
@@ -49,10 +49,10 @@ const AddStaff = ({ onAddStaff, close, places }) => {
   };
 
   return (
-    <div className="modal">
-      <span className="close" onClick={close}>
-        &times;
-      </span>
+    <div>
+      <Link to={url} style={{ textDecoration: "none" }}>
+        <button>Staff list</button>
+      </Link>
       <div className="content">
         <h2>Staff About</h2>
         <form className="popup-section" onSubmit={handleAddStaff}>
@@ -72,9 +72,6 @@ const AddStaff = ({ onAddStaff, close, places }) => {
             placeholder="Salary"
             {...salary.bind}
           />
-          {/* {places.map((x, i) => (
-            <PopupInput key={i} placeName={x.name} setInput={handleInput} />
-          ))} */}
           <button type="submit">Add</button>
         </form>
       </div>

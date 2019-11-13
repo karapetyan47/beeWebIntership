@@ -1,0 +1,18 @@
+button {
+  display: block;
+  padding: 8px 28px;
+  margin: 15px 10px 7px;
+  height: 50px;
+  width: 130px;
+  color: black;
+  background-size: 200%;
+  background-image: linear-gradient(to left, #e67e22, #ffc321, #e67e22);
+  font-size: 15px;
+  cursor: pointer;
+  border: 1px solid #2d3436;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+button:hover {
+  background-position: right;
+}

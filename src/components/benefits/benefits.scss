@@ -1,9 +1,11 @@
 .btn {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   text-align: center;
-  font-size: 18px;
-  padding: 8px 0 8px 28px;
+  font-size: 15px;
+  padding: 8px 18px 8px 18px;
   margin-left: auto;
   margin-bottom: 10px;
   color: #2d3436;

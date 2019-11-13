@@ -29,8 +29,10 @@ import logo from "../../assets/images/logo.png";
 
 import "./admin-panel.scss";
 import BenefitsHistory from "../benefits/benefits-history";
+import AddStaff from "../staff/add-staff";
+import { addStaff } from "redux/actions";
 
-const AdminPanel = ({ isLoggedIn, user, url }) => {
+const AdminPanel = ({ isLoggedIn, user, url, addStaff }) => {
   if (isLoggedIn) {
     return (
       <div className="back">
@@ -59,7 +61,17 @@ const AdminPanel = ({ isLoggedIn, user, url }) => {
           </div>
           <div className="visible-place">
             <Route path={SECRET_PAGE_PATH} exact component={Dashboard} />
-            <Route path={`${url}${STAFF}`} component={Staff} />
+            <Route
+              path={`${url}${STAFF}`}
+              render={() => <Staff url={`${url}${STAFF}`} />}
+              exact
+            />
+            <Route
+              path={`${url}${STAFF}/add`}
+              render={() => (
+                <AddStaff onAddStaff={addStaff} url={`${url}${STAFF}`} />
+              )}
+            />
             <Route path={`${url}${ATTENDANCE}`} component={Attendance} />
             <Route
               path={`${url}${BENEFITS}`}
@@ -98,4 +110,11 @@ const mapStateToProps = ({ isLoggedIn, user }) => {
   };
 };
 
-export default connect(mapStateToProps)(AdminPanel);
+const mapDispatchToProps = {
+  addStaff
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminPanel);

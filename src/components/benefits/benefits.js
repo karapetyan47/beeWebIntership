@@ -6,7 +6,7 @@ import Table from "utils/table-core/table";
 import "./benefits.scss";
 
 export default class Benefits extends Component {
-  data = [{ id: 0, name: "premya" }, { id: 1, name: "birthday" }];
+  data = [{ id: 0, name: "reward" }, { id: 1, name: "birthday" }];
 
   render() {
     return (
@@ -18,7 +18,7 @@ export default class Benefits extends Component {
           }}
         >
           <button className="btn">
-            Benefits History <i className="fas fa-arrow-right"></i>
+            Benefits History<i className="fas fa-arrow-right"></i>
           </button>
         </Link>
 
