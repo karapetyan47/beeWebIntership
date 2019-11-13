@@ -4,10 +4,16 @@ import createSagaMiddleware from "redux-saga";
 import { createLogger } from "redux-logger";
 import rootSaga from "redux/sagas";
 
+const mode = process.env.NODE_ENV;
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
+let store = null;
 
-const store = createStore(reducer, applyMiddleware(sagaMiddleware, logger));
+if (mode === "development") {
+  store = createStore(reducer, applyMiddleware(sagaMiddleware, logger));
+} else {
+  store = createStore(reducer, applyMiddleware(sagaMiddleware));
+}
 
 sagaMiddleware.run(rootSaga);
 
