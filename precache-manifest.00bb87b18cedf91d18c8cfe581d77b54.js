@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2d761dd6b31f70b6f52577e9fb4382be",
+    "revision": "d4227a9ed6f9edebc814e4b1fa1cbbd9",
     "url": "/beeWebIntership/index.html"
   },
   {
-    "revision": "52b33aa4fe9b418b5731",
-    "url": "/beeWebIntership/static/css/main.a2c670f9.chunk.css"
+    "revision": "509e6b93c4ad58ae34e9",
+    "url": "/beeWebIntership/static/css/main.a8f3aa83.chunk.css"
   },
   {
-    "revision": "8093b575b9a676c5acab",
-    "url": "/beeWebIntership/static/js/2.3fc19e47.chunk.js"
+    "revision": "894fda2d22bb2998206e",
+    "url": "/beeWebIntership/static/js/2.ae6f67b6.chunk.js"
   },
   {
-    "revision": "52b33aa4fe9b418b5731",
-    "url": "/beeWebIntership/static/js/main.64042955.chunk.js"
+    "revision": "509e6b93c4ad58ae34e9",
+    "url": "/beeWebIntership/static/js/main.5d58c037.chunk.js"
   },
   {
     "revision": "0b8716b79dd02a30b130",
