@@ -8,6 +8,7 @@ const mode = process.env.NODE_ENV;
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
 let store = null;
+console.log(mode);
 
 if (mode === "development") {
   store = createStore(reducer, applyMiddleware(sagaMiddleware, logger));

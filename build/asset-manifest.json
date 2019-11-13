@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/beeWebIntership/static/css/main.a8f3aa83.chunk.css",
-    "main.js": "/beeWebIntership/static/js/main.5d58c037.chunk.js",
-    "main.js.map": "/beeWebIntership/static/js/main.5d58c037.chunk.js.map",
+    "main.js": "/beeWebIntership/static/js/main.ff1a9276.chunk.js",
+    "main.js.map": "/beeWebIntership/static/js/main.ff1a9276.chunk.js.map",
     "runtime-main.js": "/beeWebIntership/static/js/runtime-main.c64912c7.js",
     "runtime-main.js.map": "/beeWebIntership/static/js/runtime-main.c64912c7.js.map",
-    "static/js/2.ae6f67b6.chunk.js": "/beeWebIntership/static/js/2.ae6f67b6.chunk.js",
-    "static/js/2.ae6f67b6.chunk.js.map": "/beeWebIntership/static/js/2.ae6f67b6.chunk.js.map",
+    "static/js/2.9027cbe9.chunk.js": "/beeWebIntership/static/js/2.9027cbe9.chunk.js",
+    "static/js/2.9027cbe9.chunk.js.map": "/beeWebIntership/static/js/2.9027cbe9.chunk.js.map",
     "index.html": "/beeWebIntership/index.html",
-    "precache-manifest.00bb87b18cedf91d18c8cfe581d77b54.js": "/beeWebIntership/precache-manifest.00bb87b18cedf91d18c8cfe581d77b54.js",
+    "precache-manifest.88af67dfca0cd4788bdd0aa1bca65531.js": "/beeWebIntership/precache-manifest.88af67dfca0cd4788bdd0aa1bca65531.js",
     "service-worker.js": "/beeWebIntership/service-worker.js",
     "static/css/main.a8f3aa83.chunk.css.map": "/beeWebIntership/static/css/main.a8f3aa83.chunk.css.map",
     "static/media/admin-panel.scss": "/beeWebIntership/static/media/back.3e841f81.jpg",
@@ -17,8 +17,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.c64912c7.js",
-    "static/js/2.ae6f67b6.chunk.js",
+    "static/js/2.9027cbe9.chunk.js",
     "static/css/main.a8f3aa83.chunk.css",
-    "static/js/main.5d58c037.chunk.js"
+    "static/js/main.ff1a9276.chunk.js"
   ]
 }
