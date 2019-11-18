@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
   SECRET_PAGE_PATH,
   STAFF,
@@ -14,6 +14,13 @@ import {
 import "./admin-tools.scss";
 
 export default class AdminTools extends Component {
+  logOut = () => {
+    console.log("logOut");
+    localStorage.removeItem("jwtToken");
+    console.log(localStorage);
+    return <Redirect to="/" />;
+  };
+
   render() {
     const { url } = this.props;
     return (
@@ -62,6 +69,9 @@ export default class AdminTools extends Component {
             <i className="fas fa-star-half-alt"></i>Rating
           </li>
         </Link>
+        <button className="log-out" onClick={this.logOut}>
+          <i className="fas fa-sign-out-alt fa-2x"></i>
+        </button>
       </ul>
     );
   }

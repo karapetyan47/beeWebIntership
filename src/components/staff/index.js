@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStaffs, removedStaff, addStaff, editStaff } from "redux/actions";
+import { fetchStaffs, removedUser, addUser, editUser } from "redux/actions";
 import { Link } from "react-router-dom";
 
 import Table from "utils/table-core/table";
@@ -11,36 +11,50 @@ class Staff extends Component {
   componentDidMount() {
     this.props.fetchStaffs();
   }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.users !== this.props.users) this.props.fetchStaffs();
+  // }
 
   render() {
     return (
       <div>
         <Link to={`${this.props.url}/add`} style={{ textDecoration: "none" }}>
-          <button>Add Staff</button>
+          <button className="btn btn-success">Add User</button>
         </Link>
         <Table
-          data={this.props.staffs}
+          data={this.props.users}
           header={[
             {
               name: "Name",
-              prop: "name"
+              prop: "firstName"
             },
             {
               name: "Surname",
-              prop: "surname"
+              prop: "lastName"
             },
             {
-              name: "Position",
-              prop: "position"
+              name: "Email",
+              prop: "email"
             },
             {
-              name: "Salary",
-              prop: "salary"
+              name: "Role",
+              prop: "role"
+            },
+            {
+              name: "Birthday",
+              prop: "birthday"
+            },
+            {
+              name: "Phone number",
+              prop: "phoneNumber"
             }
           ]}
-          deleteItem={this.props.removedStaff}
+          deleteItem={id => {
+            console.log(id);
+            this.props.removedUser(id);
+          }}
           updateItem={(name, value, id) =>
-            this.props.editStaff({ name, value, id })
+            this.staffServices.editUser({ name, value, id })
           }
         />
       </div>
@@ -48,17 +62,17 @@ class Staff extends Component {
   }
 }
 
-const mapStateToProps = ({ staffs }) => {
+const mapStateToProps = ({ users }) => {
   return {
-    staffs
+    users
   };
 };
 
 const mapDispatchToProps = {
   fetchStaffs,
-  removedStaff,
-  addStaff,
-  editStaff
+  removedUser,
+  addUser,
+  editUser
 };
 
 export default connect(

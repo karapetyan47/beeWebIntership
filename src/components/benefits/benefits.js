@@ -17,9 +17,7 @@ export default class Benefits extends Component {
             textDecoration: "none"
           }}
         >
-          <button className="btn">
-            Benefits History<i className="fas fa-arrow-right"></i>
-          </button>
+          <button className="btn btn-success">Benefits History</button>
         </Link>
 
         <Table

@@ -16,8 +16,8 @@ const BenefitsHistory = ({ url }) => {
         to={`${url}`}
         style={{ textDecoration: "none", display: "inline-block" }}
       >
-        <button className="btn">
-          Benefits <i className="fas fa-arrow-left"></i>
+        <button className="btn btn-outline-success">
+          <i className="fas fa-arrow-left"></i>
         </button>
       </Link>
       <Table

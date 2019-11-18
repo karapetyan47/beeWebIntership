@@ -30,73 +30,77 @@ import logo from "../../assets/images/logo.png";
 import "./admin-panel.scss";
 import BenefitsHistory from "../benefits/benefits-history";
 import AddStaff from "../staff/add-staff";
-import { addStaff } from "redux/actions";
+import { addUser } from "redux/actions";
+import PrivateRoute from "../../containers/private-route";
 
-const AdminPanel = ({ isLoggedIn, user, url, addStaff }) => {
-  if (isLoggedIn) {
+const AdminPanel = ({ isLoggedIn, user, url, addUser }) => {
+  if (localStorage.jwtToken) {
+    console.log("admin panel");
     return (
-      <div className="back">
-        <Router>
-          <div className="admin-about">
-            <div className="search">
-              <input value="" placeholder="Search" onChange={() => {}} />
-              <i className="fas fa-search"></i>
+      <PrivateRoute>
+        <div className="back">
+          <Router>
+            <div className="admin-about">
+              <div className="search">
+                <input value="" placeholder="Search" onChange={() => {}} />
+                <i className="fas fa-search"></i>
+              </div>
+              <div>
+                <Link
+                  to={`${url}${PUSH_NOTIFICATIONS}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <i className="fas fa-bell"></i>
+                </Link>
+                <label>{user.firstName}</label>
+              </div>
             </div>
-            <div>
-              <Link
-                to={`${url}${PUSH_NOTIFICATIONS}`}
-                style={{ textDecoration: "none" }}
-              >
-                <i className="fas fa-bell"></i>
-              </Link>
-              <label>{user}</label>
-            </div>
-          </div>
 
-          <div className="left">
-            <div className="logo">
-              <img src={logo} alt="logo" />
+            <div className="left">
+              <div className="logo">
+                <img src={logo} alt="logo" />
+              </div>
+              <AdminTools url={url} />
             </div>
-            <AdminTools url={url} />
-          </div>
-          <div className="visible-place">
-            <Route path={SECRET_PAGE_PATH} exact component={Dashboard} />
-            <Route
-              path={`${url}${STAFF}`}
-              render={() => <Staff url={`${url}${STAFF}`} />}
-              exact
-            />
-            <Route
-              path={`${url}${STAFF}/add`}
-              render={() => (
-                <AddStaff onAddStaff={addStaff} url={`${url}${STAFF}`} />
-              )}
-            />
-            <Route path={`${url}${ATTENDANCE}`} component={Attendance} />
-            <Route
-              path={`${url}${BENEFITS}`}
-              exact
-              render={() => <Benefits url={`${url}${BENEFITS}`} />}
-            />
-            <Route
-              path={`${url}${BENEFITS}/history`}
-              render={() => <BenefitsHistory url={`${url}${BENEFITS}`} />}
-              exact
-            />
-            <Route
-              path={`${url}${OPEN_POSSITIONS}`}
-              component={OpenPossitions}
-            />
-            <Route path={`${url}${CANDIDATES}`} component={Candidates} />
-            <Route path={`${url}${TICKETS}`} component={Tickets} />
-            <Route
-              path={`${url}${PUSH_NOTIFICATIONS}`}
-              component={PushNotifications}
-            />
-            <Route path={`${url}${RATING}`} component={Rating} />
-          </div>
-        </Router>
-      </div>
+            <div className="visible-place">
+              <Route path={SECRET_PAGE_PATH} exact component={Dashboard} />
+              <Route
+                path={`${url}${STAFF}`}
+                render={() => <Staff url={`${url}${STAFF}`} />}
+                exact
+              />
+              <Route
+                path={`${url}${STAFF}/add`}
+                render={() => (
+                  <AddStaff onAddStaff={addUser} url={`${url}${STAFF}`} />
+                )}
+              />
+              <Route path={`${url}${ATTENDANCE}`} component={Attendance} />
+              <Route
+                path={`${url}${BENEFITS}`}
+                exact
+                render={() => <Benefits url={`${url}${BENEFITS}`} />}
+              />
+              <Route
+                path={`${url}${BENEFITS}/history`}
+                render={() => <BenefitsHistory url={`${url}${BENEFITS}`} />}
+                exact
+              />
+              <Route
+                path={`${url}${OPEN_POSSITIONS}`}
+                component={OpenPossitions}
+              />
+              <Route path={`${url}${CANDIDATES}`} component={Candidates} />
+              <Route path={`${url}${TICKETS}`} component={Tickets} />
+              <Route
+                path={`${url}${PUSH_NOTIFICATIONS}`}
+                component={PushNotifications}
+              />
+              <Route path={`${url}${RATING}`} component={Rating} />
+            </div>
+          </Router>
+        </div>
+      </PrivateRoute>
     );
   }
 
@@ -111,7 +115,7 @@ const mapStateToProps = ({ isLoggedIn, user }) => {
 };
 
 const mapDispatchToProps = {
-  addStaff
+  addUser
 };
 
 export default connect(

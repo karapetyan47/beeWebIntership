@@ -1,31 +1,36 @@
 export const FETCH_STAFFS_SUCCESS = "FETCH_STAFFS_SUCCESS";
 export const FETCHED_STAFFS = "FETCHED_STAFFS";
-export const REMOVED_STAFF = "REMOVED_STAFF";
+export const REMOVED_USER = "REMOVED_USER";
 export const ADD_STAFF = "ADD_STAFF";
 export const EDIT_STAFF = "EDIT_STAFF";
 
-const staffsLoaded = newStaffs => {
+const fetchUsersSuccess = newStaffs => {
   return {
     type: FETCH_STAFFS_SUCCESS,
     payload: newStaffs
   };
 };
 
-const removedStaff = staffId => {
+const removedUser = staffId => {
   return {
-    type: REMOVED_STAFF,
+    type: REMOVED_USER,
     payload: staffId
   };
 };
+// const removedUserFaild = (e)=>{
+//   return {
+//     type:
+//   }
+// }
 
-const editStaff = payload => {
+const editUser = payload => {
   return {
     type: EDIT_STAFF,
     payload: payload
   };
 };
 
-const addStaff = newStaff => {
+const addUser = newStaff => {
   return {
     type: ADD_STAFF,
     payload: newStaff
@@ -38,4 +43,4 @@ const fetchStaffs = () => {
   };
 };
 
-export { staffsLoaded, removedStaff, fetchStaffs, addStaff, editStaff };
+export { fetchUsersSuccess, removedUser, fetchStaffs, addUser, editUser };

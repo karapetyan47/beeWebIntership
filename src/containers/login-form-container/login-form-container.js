@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import LoginForm from "components/login-form";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { userLoggedIn, fetchUsers } from "redux/actions/actions-login";
+import { attemptLogin } from "redux/actions/actions-login";
 import { SECRET_PAGE_PATH } from "constants/const-paths/paths";
 
 const useInputValue = (resetError = () => {}, defaultValue = "") => {
@@ -21,19 +21,10 @@ const useInputValue = (resetError = () => {}, defaultValue = "") => {
   };
 };
 
-const LoginFormContainer = ({
-  isLoggedIn,
-  users,
-  userLoggedIn,
-  fetchUsers
-}) => {
-  const name = useInputValue(resetError);
+const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, loginUser }) => {
+  const email = useInputValue(resetError);
   const password = useInputValue(resetError);
   const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
 
   function resetError() {
     setHasError(false);
@@ -46,44 +37,40 @@ const LoginFormContainer = ({
   const login = e => {
     e.preventDefault();
     let errorStatus = true;
-    if (name.value().trim() && password.value().trim()) {
-      const userList = users;
-      for (let user = 0; user < userList.length; user++) {
-        if (
-          userList[user].name === name.value() &&
-          userList[user].password === password.value()
-        ) {
-          errorStatus = false;
-          userLoggedIn(userList[user].name);
-          break;
-        }
-      }
+    if (email.value().trim() && password.value().trim()) {
+      const data = { email: email.value(), password: password.value() };
+      errorStatus = false;
+      loginUser(data);
     }
     errorStatus && setHasError(true);
-    name.clear();
+    email.clear();
     password.clear();
   };
 
   return (
     <LoginForm
       submit={login}
-      name={name}
+      email={email}
       password={password}
       error={hasError}
     />
   );
 };
 
-const mapStateToProps = ({ users, isLoggedIn }) => {
+const mapStateToProps = ({ isLoggedIn }) => {
   return {
-    users,
     isLoggedIn
   };
 };
 
-const mapDispatchToProps = {
-  userLoggedIn,
-  fetchUsers
+// const mapDispatchToProps = {
+//   userLoggedIn,
+//   loginUser
+// };
+const mapDispatchToProps = dispatch => {
+  return {
+    loginUser: data => dispatch(attemptLogin(data))
+  };
 };
 
 export default connect(

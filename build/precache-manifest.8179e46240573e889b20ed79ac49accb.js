@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d5f654b3613ed3e6b02bc586c6db7550",
+    "revision": "4bf97a4b6f4db1018419ad072ba64f89",
     "url": "/beeWebIntership/index.html"
   },
   {
-    "revision": "34bd84a20346f61088fc",
+    "revision": "a2e41238e83909d5c6fc",
     "url": "/beeWebIntership/static/css/main.a8f3aa83.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beeWebIntership/static/js/2.9027cbe9.chunk.js"
   },
   {
-    "revision": "34bd84a20346f61088fc",
-    "url": "/beeWebIntership/static/js/main.ff1a9276.chunk.js"
+    "revision": "a2e41238e83909d5c6fc",
+    "url": "/beeWebIntership/static/js/main.1efae7a9.chunk.js"
   },
   {
     "revision": "0b8716b79dd02a30b130",

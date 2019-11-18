@@ -1,24 +1,47 @@
-export default class StaffServices {
-  data = [
-    {
-      id: 1,
-      name: "Poxos",
-      surname: "Poxosyan",
-      position: "front-end",
-      salary: "200000"
-    },
-    {
-      id: 2,
-      name: "Petros",
-      surname: "Petrosyan",
-      position: "back-end",
-      salary: "270000"
-    }
-  ];
+import axios from "axios";
 
-  getStaffs() {
-    return new Promise(resolve => {
-      resolve(this.data);
+export default class StaffServices {
+  baseUrl = "https://hr-service-beeweb.herokuapp.com/users";
+
+  getAllUsers = () => {
+    return axios({
+      method: "GET",
+      url: `${this.baseUrl}`
     });
-  }
+  };
+
+  deleteUser = userId => {
+    // axios({
+    //   method: "DELETE",
+    //   url: `${this.baseUrl}/${userId}`
+    // });
+    // setAuterizationToken(localStorage.jwtToken);
+    // console.log(userId);
+    axios.delete(`${this.baseUrl}/${userId}`);
+  };
+
+  addUser = data => {
+    axios({
+      method: "POST",
+      url: `${this.baseUrl}/register`,
+      data: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        role: data.email,
+        birthday: data.birthday,
+        phoneNumber: data.phoneNumber,
+        password: data.password,
+        repeatPassword: data.repeatPassword
+      }
+    });
+  };
+
+  editUser = ({ name, value, id }) => {
+    axios({
+      method: "PUT",
+      url: `${this.baseUrl}/${id}`,
+      data: {}
+    });
+  };
 }

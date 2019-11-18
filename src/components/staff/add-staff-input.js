@@ -19,7 +19,7 @@ const useInputValue = (setInputValue = () => {}, defaultValue = "") => {
 const PopupInput = ({ placeName, setInput }) => {
   const place = useInputValue(setInput());
   return (
-    <input className="input-staff" placeholder={placeName} {...place.bind} />
+    <input className="form-control" placeholder={placeName} {...place.bind} />
   );
 };
 

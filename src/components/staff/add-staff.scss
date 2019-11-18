@@ -1,50 +1,27 @@
 .content {
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(236, 111, 8, 0.8);
-  h2 {
-    text-align: center;
-  }
-  .popup-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 500px;
-
-    .input-staff {
-      width: 70%;
-      color: black;
-      margin-top: 10px;
-      font-style: bold;
-      background-image: linear-gradient(to left, #fd2137, #ffc321, #fd2137);
-      border: 1px solid black;
-      border-radius: 7px;
-      text-align: center;
-      box-sizing: border-box;
-      padding: 15px;
-    }
-    input:focus {
-      outline: none;
-    }
-  }
-}
-button {
-  display: block;
-  padding: 8px 28px;
-  margin: 15px 10px 7px;
-  height: 50px;
-  width: 130px;
-  color: black;
-  background-size: 200%;
-  background-image: linear-gradient(to left, #e67e22, #ffc321, #e67e22);
-  font-size: 15px;
-  cursor: pointer;
-  border: 1px solid #2d3436;
+  background-color: silver;
+  box-sizing: border-box;
   border-radius: 10px;
-  transition: 0.3s;
+  padding: 8px;
+  margin-top: 8px;
+  width: 100%;
+  .h3 {
+    text-align: center;
+    color: black;
+    background: yellow;
+    width: 100%;
+    margin-bottom: 5px;
+  }
 }
-button:hover {
-  background-position: right;
+form {
+  width: 100%;
+}
+
+.form-control {
+  display: inline-block;
 }

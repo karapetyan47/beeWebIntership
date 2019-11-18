@@ -48,6 +48,7 @@ const TableInput = ({ value, updateValue = () => {}, name, id }) => {
       onBlur={onBlur}
       readOnly={true}
       value={inputValue}
+      className="form-control"
     />
   );
 };

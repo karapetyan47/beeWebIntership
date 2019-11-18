@@ -1,22 +1,25 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { FETCHED_USERS, usersLoaded } from "redux/actions";
+import { ATTEMPT_LOGIN } from "redux/actions";
 import UsersService from "services/users-service";
+import { loginFailed, loginSuccess } from "../actions/actions-login";
+import setAutheriztionToken from "../../utils/setAutorizationToken";
 
 const usersService = new UsersService();
 
-function* watchFetchUsers() {
-  yield takeEvery(FETCHED_USERS, fetchUsersAsync);
+function* watchLogin() {
+  yield takeEvery(ATTEMPT_LOGIN, login);
 }
 
-function* fetchUsersAsync() {
+function* login({ payload }) {
   try {
-    const data = yield call(() => {
-      return usersService.getUsers().then(res => res);
-    });
-    yield put(usersLoaded(data));
-  } catch {
-    console.log("error Users");
+    const data = yield call(usersService.login, payload);
+    localStorage.setItem("jwtToken", data.data.token);
+    yield put(loginSuccess(data.data.user));
+    console.log(localStorage);
+    setAutheriztionToken(data.data.token);
+  } catch (e) {
+    put(loginFailed(e));
   }
 }
 
-export { watchFetchUsers };
+export { watchLogin };

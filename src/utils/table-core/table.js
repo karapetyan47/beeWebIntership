@@ -23,7 +23,12 @@ const Table = ({
         </td>
       ))}
       <td>
-        <button onClick={() => deleteItem(x.id)}>
+        <button
+          className="del-btn"
+          onClick={() => {
+            deleteItem(x._id);
+          }}
+        >
           <i className="fas fa-user-times"></i>
         </button>
       </td>
@@ -32,13 +37,15 @@ const Table = ({
 
   return (
     <div className="table-section">
-      <table>
-        <thead>
+      <table className="table">
+        <thead className="thead-dark">
           <tr>
             {header.map((x, i) => (
-              <th key={i}>{x.name}</th>
+              <th scope="col" key={i}>
+                {x.name}
+              </th>
             ))}
-            <th>Delete</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>{data.map((x, i) => row(x, i, header))}</tbody>
