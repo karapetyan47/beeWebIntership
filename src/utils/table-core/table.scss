@@ -6,19 +6,23 @@ input {
   margin: 0;
   padding: 8px;
   text-align: center;
-}
-input:read-only {
-  background: none;
-}
-input:focus {
   outline: none;
+  border-bottom: 1px solid #000;
 }
+// input:read-only {
+//   background: none;
+// }
+// input:focus {
+//   outline: none;
+// }
 
 td {
   padding: 3px;
 }
 
-.del-btn {
+.del-btn,
+.edit-btn,
+.cancel-btn {
   margin: 0;
   width: 100%;
   text-align: center;
@@ -28,7 +32,13 @@ td {
 .del-btn:hover {
   color: tomato;
 }
+.edit-btn:hover {
+  color: green;
+}
+.cancel-btn:hover {
+  color: #e1b12c;
+}
 
-th {
+th:last-child {
   text-align: center;
 }

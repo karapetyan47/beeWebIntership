@@ -6,7 +6,7 @@ ul {
     display: flex;
     align-items: center;
     list-style: none;
-    color: #f39c12;
+    color: #ffffff;
     height: 10%;
     box-sizing: border-box;
     padding: 10px 0 10px 30px;
@@ -24,11 +24,16 @@ ul {
     margin-right: 7px;
   }
   .log-out {
-    width: 100%;
-    text-align: center;
+    // width: 100%;
+    margin-left: 27px;
     margin-top: 80px;
     background: none;
     border: none;
+    color: #ffffff;
+    margin-right: 5px;
+    transition: 0.2s;
+  }
+  .log-out:hover {
     color: #f39c12;
   }
 }

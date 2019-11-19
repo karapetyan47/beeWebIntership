@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import TableInput from "./table-input";
 
@@ -7,33 +7,89 @@ import "./table.scss";
 const Table = ({
   data,
   header,
+  startEditing,
+  stopEditing,
+  editIdx,
   deleteItem = () => {},
   updateItem = () => {}
 }) => {
-  const row = (x, i, header) => (
-    <tr key={i}>
-      {header.map((y, k) => (
-        <td key={k}>
-          <TableInput
-            id={x.id}
-            updateValue={updateItem}
-            value={x[y.prop]}
-            name={y.prop}
-          />
+  const [value, setValue] = useState([]);
+  const handleUpdateItem = e => {
+    // console.log("e", e);
+    setValue([...value, e]);
+  };
+
+  const onUpdateItem = () => {
+    if (value.length) updateItem(value);
+    setValue([]);
+  };
+
+  const row = (x, i, header) => {
+    const currentlyEditing = editIdx === i;
+    return (
+      <tr key={i}>
+        {header.map((y, k) => (
+          <td key={k}>
+            {currentlyEditing ? (
+              <TableInput
+                id={x._id}
+                updateValue={e => handleUpdateItem(e)}
+                value={x[y.prop]}
+                name={y.prop}
+              />
+            ) : (
+              x[y.prop]
+            )}
+          </td>
+        ))}
+        <td>
+          {currentlyEditing ? (
+            <button
+              className="edit-btn"
+              onClick={() => {
+                onUpdateItem();
+                stopEditing();
+              }}
+            >
+              <i className="fas fa-check"></i>
+            </button>
+          ) : (
+            <button
+              className="edit-btn"
+              onClick={() => {
+                // setValue(x);
+                startEditing(i);
+              }}
+            >
+              <i className="fas fa-pen"></i>
+            </button>
+          )}
         </td>
-      ))}
-      <td>
-        <button
-          className="del-btn"
-          onClick={() => {
-            deleteItem(x._id);
-          }}
-        >
-          <i className="fas fa-user-times"></i>
-        </button>
-      </td>
-    </tr>
-  );
+        <td>
+          {currentlyEditing ? (
+            <button
+              className="cancel-btn"
+              onClick={() => {
+                setValue([]);
+                stopEditing();
+              }}
+            >
+              <i className="fas fa-ban"></i>
+            </button>
+          ) : (
+            <button
+              className="del-btn"
+              onClick={() => {
+                deleteItem(x._id);
+              }}
+            >
+              <i className="fas fa-trash-alt"></i>
+            </button>
+          )}
+        </td>
+      </tr>
+    );
+  };
 
   return (
     <div className="table-section">
@@ -45,6 +101,7 @@ const Table = ({
                 {x.name}
               </th>
             ))}
+            <th scope="col">Edit</th>
             <th scope="col">Delete</th>
           </tr>
         </thead>

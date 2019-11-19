@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStaffs, removedUser, addUser, editUser } from "redux/actions";
+import { fetchStaffs, removedUser, editUser } from "redux/actions";
 import { Link } from "react-router-dom";
 
 import Table from "utils/table-core/table";
@@ -8,12 +8,28 @@ import Table from "utils/table-core/table";
 import "./staff.scss";
 
 class Staff extends Component {
+  state = {
+    editIdx: -1
+  };
+
   componentDidMount() {
     this.props.fetchStaffs();
   }
   // componentDidUpdate(prevProps) {
   //   if (prevProps.users !== this.props.users) this.props.fetchStaffs();
   // }
+
+  startEditing = i => {
+    this.setState({
+      editIdx: i
+    });
+  };
+
+  stopEditing = () => {
+    this.setState({
+      editIdx: -1
+    });
+  };
 
   render() {
     return (
@@ -53,9 +69,13 @@ class Staff extends Component {
             console.log(id);
             this.props.removedUser(id);
           }}
-          updateItem={(name, value, id) =>
-            this.staffServices.editUser({ name, value, id })
+          updateItem={(title, value, id) =>
+            // this.staffServices.editUser({ title, value, id })
+            console.log("obj", title, value, id)
           }
+          editIdx={this.state.editIdx}
+          startEditing={this.startEditing}
+          stopEditing={this.stopEditing}
         />
       </div>
     );
@@ -71,7 +91,6 @@ const mapStateToProps = ({ users }) => {
 const mapDispatchToProps = {
   fetchStaffs,
   removedUser,
-  addUser,
   editUser
 };
 

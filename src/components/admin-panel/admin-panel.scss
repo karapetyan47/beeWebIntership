@@ -16,7 +16,7 @@ body {
     justify-content: center;
     img {
       margin-top: 20px;
-      max-height: 100%;
+      max-height: 70%;
       max-width: 50%;
     }
   }
@@ -31,9 +31,9 @@ body {
   height: 50px;
   width: 100%;
   background-color: #f1c40f;
-  border-bottom: 1px solid #f1c40f;
+
   color: #2d3436;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+
   .search {
     font-size: 20px;
     display: flex;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import {
   SECRET_PAGE_PATH,
   STAFF,
@@ -10,15 +10,18 @@ import {
   TICKETS,
   RATING
 } from "constants/const-paths/paths";
+import { MAIN_PATH } from "../../constants/const-paths/paths";
 
 import "./admin-tools.scss";
+import setAuterizationToken from "../../utils/setAutorizationToken";
 
-export default class AdminTools extends Component {
+class AdminTools extends Component {
   logOut = () => {
     console.log("logOut");
     localStorage.removeItem("jwtToken");
-    console.log(localStorage);
-    return <Redirect to="/" />;
+    setAuterizationToken(localStorage.jwtToken);
+
+    this.props.history.push({ MAIN_PATH });
   };
 
   render() {
@@ -70,9 +73,11 @@ export default class AdminTools extends Component {
           </li>
         </Link>
         <button className="log-out" onClick={this.logOut}>
-          <i className="fas fa-sign-out-alt fa-2x"></i>
+          <i className="fas fa-sign-out-alt fa-2x"></i>Log out
         </button>
       </ul>
     );
   }
 }
+
+export default withRouter(AdminTools);
