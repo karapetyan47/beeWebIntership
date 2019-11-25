@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import StaffServices from "../../services/staff-services";
+
+import { connect } from "react-redux";
+import { addedUser } from "../../redux/actions/index";
 
 import "./add-staff.scss";
+import { STAFF } from "../../constants/const-paths/paths";
+// import ValidateInput from "../validate-input";
 
 const useInputValue = (resetError = () => {}, defaultValue = "") => {
   const [value, setValue] = useState(defaultValue);
+  // const [isValid, setValid] = useState(false);
 
   return {
     bind: {
@@ -20,17 +25,16 @@ const useInputValue = (resetError = () => {}, defaultValue = "") => {
   };
 };
 
-const AddStaff = ({ onAddStaff, url }) => {
+const AddStaff = ({ addedUser }) => {
   const firstName = useInputValue();
   const lastName = useInputValue();
   const email = useInputValue();
   const role = useInputValue();
+  const salary = useInputValue();
   const birthday = useInputValue();
   const phoneNumber = useInputValue();
   const password = useInputValue();
   const repeatPassword = useInputValue();
-
-  const staffService = new StaffServices();
 
   const handleAddStaff = e => {
     e.preventDefault();
@@ -40,16 +44,18 @@ const AddStaff = ({ onAddStaff, url }) => {
       lastName.value().trim() &&
       email.value().trim() &&
       role.value().trim() &&
+      salary.value().trim() &&
       birthday.value().trim() &&
       phoneNumber.value().trim() &&
       password.value().trim() &&
       repeatPassword.value().trim()
     ) {
-      staffService.addUser({
+      addedUser({
         firstName: firstName.value(),
         lastName: lastName.value(),
         email: email.value(),
         role: role.value(),
+        salary: salary.value(),
         birthday: birthday.value(),
         phoneNumber: phoneNumber.value(),
         password: password.value(),
@@ -60,6 +66,7 @@ const AddStaff = ({ onAddStaff, url }) => {
     lastName.clear();
     email.clear();
     role.clear();
+    salary.clear();
     birthday.clear();
     phoneNumber.clear();
     password.clear();
@@ -68,7 +75,7 @@ const AddStaff = ({ onAddStaff, url }) => {
 
   return (
     <div>
-      <Link to={url} style={{ textDecoration: "none" }}>
+      <Link to={STAFF} style={{ textDecoration: "none" }}>
         <button className="btn btn-outline-success">
           <i className="fas fa-arrow-left"></i>
         </button>
@@ -111,6 +118,14 @@ const AddStaff = ({ onAddStaff, url }) => {
                 className="form-control"
                 placeholder="Role"
                 {...role.bind}
+              />
+            </div>
+            <div className="form-group col-md-6">
+              <label>Salary</label>
+              <input
+                className="form-control"
+                placeholder="Salary"
+                {...salary.bind}
               />
             </div>
             <div className="form-group col-md-6">
@@ -159,4 +174,11 @@ const AddStaff = ({ onAddStaff, url }) => {
   );
 };
 
-export default AddStaff;
+const mapDispatchToProps = {
+  addedUser
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddStaff);

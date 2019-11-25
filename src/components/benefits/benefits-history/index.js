@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Table from "../../../utils/table-core/table";
+import { BENEFITS } from "../../../constants/const-paths/paths";
 
 const BenefitsHistory = ({ url }) => {
   const data = [
@@ -13,13 +14,14 @@ const BenefitsHistory = ({ url }) => {
   return (
     <div>
       <Link
-        to={`${url}`}
+        to={BENEFITS}
         style={{ textDecoration: "none", display: "inline-block" }}
       >
         <button className="btn btn-outline-success">
           <i className="fas fa-arrow-left"></i>
         </button>
       </Link>
+
       <Table
         data={data}
         header={[

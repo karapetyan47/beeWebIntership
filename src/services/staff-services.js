@@ -1,34 +1,30 @@
 import axios from "axios";
 
 export default class StaffServices {
-  baseUrl = "https://hr-service-beeweb.herokuapp.com/users";
+  // baseUrl = "https://hr-service-beeweb.herokuapp.com/users";
+  baseUrl = "https://beeweb-2536.herokuapp.com";
 
   getAllUsers = () => {
     return axios({
       method: "GET",
-      url: `${this.baseUrl}`
+      url: `${this.baseUrl}/users`
     });
   };
 
   deleteUser = userId => {
-    // axios({
-    //   method: "DELETE",
-    //   url: `${this.baseUrl}/${userId}`
-    // });
-    // setAuterizationToken(localStorage.jwtToken);
-    // console.log(userId);
-    axios.delete(`${this.baseUrl}/${userId}`);
+    axios.delete(`${this.baseUrl}/users/${userId}`);
   };
 
   addUser = data => {
     axios({
       method: "POST",
-      url: `${this.baseUrl}/register`,
+      url: `${this.baseUrl}/signup`,
       data: {
-        firstName: data.firstName,
-        lastName: data.lastName,
+        firstname: data.firstName,
+        lastname: data.lastName,
         email: data.email,
-        role: data.email,
+        role: data.role,
+        salary: data.salary,
         birthday: data.birthday,
         phoneNumber: data.phoneNumber,
         password: data.password,
@@ -37,11 +33,12 @@ export default class StaffServices {
     });
   };
 
-  editUser = ({ name, value, id }) => {
+  editUser = obj => {
+    console.log("obj", obj);
     axios({
-      method: "PUT",
-      url: `${this.baseUrl}/${id}`,
-      data: {}
+      method: "PATCH",
+      url: `${this.baseUrl}/users/${obj.id}`,
+      data: obj.obj
     });
   };
 }

@@ -4,21 +4,24 @@ export {
   //   fetchUsers,
   //   FETCH_USERS_SUCCESS,
   ATTEMPT_LOGIN,
+  LOGOUT,
   LOGIN_SUCCESS,
-  loginFailed
+  LOGIN_FAILED,
+  loginFailed,
+  logOut
 } from "redux/actions/actions-login";
 
 export {
   fetchUsersSuccess,
   fetchStaffs,
   removedUser,
-  addUser,
+  addedUser,
   editUser,
-  EDIT_STAFF,
+  EDIT_USER,
   FETCH_STAFFS_SUCCESS,
   FETCHED_STAFFS,
   REMOVED_USER,
-  ADD_STAFF
+  ADD_USER
 } from "redux/actions/actions-staff-list";
 
 // export {

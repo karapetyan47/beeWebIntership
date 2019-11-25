@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Table from "utils/table-core/table";
 
 import "./staff.scss";
+import { STAFF } from "../../constants/const-paths/paths";
 
 class Staff extends Component {
   state = {
@@ -16,7 +17,8 @@ class Staff extends Component {
     this.props.fetchStaffs();
   }
   // componentDidUpdate(prevProps) {
-  //   if (prevProps.users !== this.props.users) this.props.fetchStaffs();
+  //   if (prevProps.users.length !== this.props.users.length)
+  //     this.props.fetchStaffs();
   // }
 
   startEditing = i => {
@@ -34,57 +36,73 @@ class Staff extends Component {
   render() {
     return (
       <div>
-        <Link to={`${this.props.url}/add`} style={{ textDecoration: "none" }}>
-          <button className="btn btn-success">Add User</button>
-        </Link>
-        <Table
-          data={this.props.users}
-          header={[
-            {
-              name: "Name",
-              prop: "firstName"
-            },
-            {
-              name: "Surname",
-              prop: "lastName"
-            },
-            {
-              name: "Email",
-              prop: "email"
-            },
-            {
-              name: "Role",
-              prop: "role"
-            },
-            {
-              name: "Birthday",
-              prop: "birthday"
-            },
-            {
-              name: "Phone number",
-              prop: "phoneNumber"
-            }
-          ]}
-          deleteItem={id => {
-            console.log(id);
-            this.props.removedUser(id);
-          }}
-          updateItem={(title, value, id) =>
-            // this.staffServices.editUser({ title, value, id })
-            console.log("obj", title, value, id)
-          }
-          editIdx={this.state.editIdx}
-          startEditing={this.startEditing}
-          stopEditing={this.stopEditing}
-        />
+        {this.props.loadingUsers ? (
+          <p>...Loading</p>
+        ) : (
+          <>
+            <Link to={`${STAFF}/add`} style={{ textDecoration: "none" }}>
+              <button className="btn btn-success">Add User</button>
+            </Link>
+            <Table
+              data={this.props.users}
+              header={[
+                {
+                  name: "Name",
+                  prop: "firstname",
+                  type: "text"
+                },
+                {
+                  name: "Surname",
+                  prop: "lastname",
+                  type: "text"
+                },
+                {
+                  name: "Email",
+                  prop: "email",
+                  type: "email"
+                },
+                {
+                  name: "Role",
+                  prop: "role",
+                  type: "text"
+                },
+                {
+                  name: "Salary",
+                  prop: "salary",
+                  type: "number"
+                },
+                {
+                  name: "Birthday",
+                  prop: "birthday",
+                  type: "date"
+                },
+                {
+                  name: "Phone number",
+                  prop: "phoneNumber",
+                  type: "number"
+                }
+              ]}
+              deleteItem={id => {
+                this.props.removedUser(id);
+              }}
+              updateItem={obj => {
+                this.props.editUser(obj);
+              }}
+              editIdx={this.state.editIdx}
+              startEditing={this.startEditing}
+              stopEditing={this.stopEditing}
+            />
+          </>
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ users }) => {
+const mapStateToProps = ({ users, loadingUsers }) => {
   return {
-    users
+    users,
+    loadingUsers
   };
 };
 

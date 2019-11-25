@@ -3,7 +3,7 @@ import LoginForm from "components/login-form";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { attemptLogin } from "redux/actions/actions-login";
-import { SECRET_PAGE_PATH } from "constants/const-paths/paths";
+import { MAIN_PATH } from "../../constants/const-paths/paths";
 
 const useInputValue = (resetError = () => {}, defaultValue = "") => {
   const [value, setValue] = useState(defaultValue);
@@ -21,7 +21,7 @@ const useInputValue = (resetError = () => {}, defaultValue = "") => {
   };
 };
 
-const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, loginUser }) => {
+const LoginFormContainer = ({ loginUser, loadingUser }) => {
   const email = useInputValue(resetError);
   const password = useInputValue(resetError);
   const [hasError, setHasError] = useState(false);
@@ -30,8 +30,8 @@ const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, loginUser }) => {
     setHasError(false);
   }
 
-  if (isLoggedIn) {
-    return <Redirect to={SECRET_PAGE_PATH} />;
+  if (localStorage.jwtToken) {
+    return <Redirect to={MAIN_PATH} />;
   }
 
   const login = e => {
@@ -48,25 +48,25 @@ const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, loginUser }) => {
   };
 
   return (
-    <LoginForm
-      submit={login}
-      email={email}
-      password={password}
-      error={hasError}
-    />
+    <>
+      {loadingUser ? (
+        <p>Loading...</p>
+      ) : (
+        <LoginForm
+          submit={login}
+          email={email}
+          password={password}
+          error={hasError}
+        />
+      )}
+    </>
   );
 };
 
-const mapStateToProps = ({ isLoggedIn }) => {
-  return {
-    isLoggedIn
-  };
+const mapStateToProps = ({ loadingUser }) => {
+  return { loadingUser };
 };
 
-// const mapDispatchToProps = {
-//   userLoggedIn,
-//   loginUser
-// };
 const mapDispatchToProps = dispatch => {
   return {
     loginUser: data => dispatch(attemptLogin(data))

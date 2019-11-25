@@ -13,15 +13,15 @@ const Table = ({
   deleteItem = () => {},
   updateItem = () => {}
 }) => {
-  const [value, setValue] = useState([]);
+  const [value, setValue] = useState({ id: null, obj: {} });
   const handleUpdateItem = e => {
     // console.log("e", e);
-    setValue([...value, e]);
+    setValue({ id: e.id, obj: { ...value.obj, ...e.obj } });
   };
 
   const onUpdateItem = () => {
-    if (value.length) updateItem(value);
-    setValue([]);
+    if (value.id && Object.keys(value.obj).length) updateItem(value);
+    setValue({ id: null, obj: {} });
   };
 
   const row = (x, i, header) => {
@@ -36,9 +36,16 @@ const Table = ({
                 updateValue={e => handleUpdateItem(e)}
                 value={x[y.prop]}
                 name={y.prop}
+                type={y.type}
               />
             ) : (
-              x[y.prop]
+              <p
+                onDoubleClick={() => {
+                  startEditing(i);
+                }}
+              >
+                {x[y.prop]}
+              </p>
             )}
           </td>
         ))}
@@ -101,8 +108,8 @@ const Table = ({
                 {x.name}
               </th>
             ))}
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>{data.map((x, i) => row(x, i, header))}</tbody>

@@ -14,11 +14,11 @@ function* login({ payload }) {
   try {
     const data = yield call(usersService.login, payload);
     localStorage.setItem("jwtToken", data.data.token);
-    yield put(loginSuccess(data.data.user));
-    console.log(localStorage);
+    yield put(loginSuccess(data.data.user[0]));
+
     setAutheriztionToken(data.data.token);
   } catch (e) {
-    put(loginFailed(e));
+    yield put(loginFailed(e));
   }
 }
 

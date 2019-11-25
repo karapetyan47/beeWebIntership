@@ -4,16 +4,16 @@ body {
 }
 
 .login-section {
-  background: url("../../assets/images/bee.jpg");
-  height: 100vh;
+  background: #fff;
   font-family: sans-serif;
   background-size: cover;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .box {
+  margin-top: 50px;
   width: 400px;
   padding: 40px;
   background: rgba(0, 0, 0, 0.8);
@@ -36,6 +36,7 @@ body {
 .inputBox input {
   width: 100%;
   padding: 10px 5px;
+  text-align: left;
   font-size: 16px;
   color: #fff;
   margin-bottom: 30px;
@@ -52,7 +53,7 @@ body {
   pointer-events: none;
   top: -18px;
   left: 0;
-  color: #ffc321;
+  color: #2ecc71;
   font-size: 12px;
   width: 100%;
 }
@@ -62,7 +63,7 @@ body {
   border: none;
   outline: none;
   color: #fff;
-  background-image: linear-gradient(to left, #ffc321, #ee5a24, #ffc321);
+  background-image: linear-gradient(to left, #2ecc71, #16a085, #2ecc71);
   background-size: 200%;
   padding: 20px 20px;
   cursor: pointer;

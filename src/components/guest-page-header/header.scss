@@ -1,0 +1,36 @@
+.guest-header {
+  background: #2f3640;
+  box-sizing: border-box;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h3 {
+    color: white;
+  }
+  .guest-header-list {
+    margin: 8px;
+    display: flex;
+    box-sizing: border-box;
+    margin-right: 28px;
+    button {
+      margin-left: 7px;
+    }
+    li {
+      padding: 5px;
+      margin-right: 10px;
+      border-radius: 8px;
+      border: 1px solid #2ecc71;
+      height: 100%;
+    }
+    li:hover {
+      background: #ffffff;
+    }
+  }
+  .list-group-item {
+    background: #e67e22;
+  }
+  .list-group-item:hover {
+    background-color: #e74c3c;
+  }
+}
