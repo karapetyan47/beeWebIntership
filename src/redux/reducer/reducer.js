@@ -3,10 +3,8 @@ import {
   FETCH_STAFFS_SUCCESS,
   ATTEMPT_LOGIN,
   LOGOUT,
-  LOGIN_FAILED
-  // REMOVED_STAFF,
-  // ADD_STAFF,
-  // EDIT_STAFF
+  LOGIN_FAILED,
+  FETCH_BENEFITS_SUCCESS
 } from "redux/actions";
 
 const initialState = {
@@ -14,7 +12,8 @@ const initialState = {
   loadingUser: false,
   errorUser: false,
   users: [],
-  loadingUsers: true
+  loadingUsers: true,
+  benefits: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -48,6 +47,11 @@ const reducer = (state = initialState, action) => {
         loadingUser: false,
         users: [],
         loadingUsers: true
+      };
+    case FETCH_BENEFITS_SUCCESS:
+      return {
+        ...state,
+        benefits: action.payload
       };
     default:
       return state;

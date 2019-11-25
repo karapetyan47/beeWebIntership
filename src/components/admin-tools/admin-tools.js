@@ -22,7 +22,6 @@ class AdminTools extends Component {
     localStorage.removeItem("jwtToken");
     setAuterizationToken(localStorage.jwtToken);
     this.props.logOut();
-    this.props.history.replace(LOGIN_PATH);
   };
 
   render() {
@@ -45,7 +44,7 @@ class AdminTools extends Component {
             <i className="far fa-clipboard"></i>Attendance
           </li>
         </Link>
-        <Link to={BENEFITS} style={{ textDecoration: "none" }}>
+        <Link to={`${BENEFITS}/history`} style={{ textDecoration: "none" }}>
           <li>
             <i className="fas fa-coins"></i>Benefits
           </li>
@@ -71,9 +70,11 @@ class AdminTools extends Component {
             <i className="fas fa-star-half-alt"></i>Rating
           </li>
         </Link>
-        <button className="log-out" onClick={this.logout}>
-          <i className="fas fa-sign-out-alt fa-2x"></i>Log out
-        </button>
+        <Link to={LOGIN_PATH}>
+          <button className="log-out" onClick={this.logout}>
+            <i className="fas fa-sign-out-alt fa-2x"></i>Log out
+          </button>
+        </Link>
       </ul>
     );
   }

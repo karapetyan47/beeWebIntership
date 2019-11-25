@@ -14,7 +14,7 @@ function* login({ payload }) {
   try {
     const data = yield call(usersService.login, payload);
     localStorage.setItem("jwtToken", data.data.token);
-    yield put(loginSuccess(data.data.user[0]));
+    yield put(loginSuccess(data.data.user));
 
     setAutheriztionToken(data.data.token);
   } catch (e) {

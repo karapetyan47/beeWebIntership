@@ -18,7 +18,7 @@ const BenefitsHistory = ({ url }) => {
         style={{ textDecoration: "none", display: "inline-block" }}
       >
         <button className="btn btn-outline-success">
-          <i className="fas fa-arrow-left"></i>
+          <i className="fas fa-sliders-h"></i>
         </button>
       </Link>
 

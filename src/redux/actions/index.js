@@ -1,8 +1,4 @@
 export {
-  //   userLoggedIn,
-  //   usersLoaded,
-  //   fetchUsers,
-  //   FETCH_USERS_SUCCESS,
   ATTEMPT_LOGIN,
   LOGOUT,
   LOGIN_SUCCESS,
@@ -24,21 +20,15 @@ export {
   ADD_USER
 } from "redux/actions/actions-staff-list";
 
-// export {
-//   // userLoggedIn,
-//   // usersLoaded,
-//   // fetchUsers,
-//   // FETCH_USERS_SUCCESS,
-//   USER_LOGGED_IN,
-//   // FETCHED_USERS,
-//   staffsLoaded,
-//   fetchStaffs,
-//   removedStaff,
-//   editStaff,
-//   EDIT_STAFF,
-//   FETCH_STAFFS_SUCCESS,
-//   FETCHED_STAFFS,
-//   REMOVED_STAFF,
-//   ADD_STAFF,
-//   addStaff
-// };
+export {
+  fetchBenefitsSuccess,
+  removedBenefit,
+  fetchBenefits,
+  addedBenefit,
+  editBenefit,
+  FETCH_BENEFITS_SUCCESS,
+  FETCHED_BENEFITS,
+  REMOVED_BENEFIT,
+  ADD_BENEFIT,
+  EDIT_BENEFIT
+} from "redux/actions/actions-benefits";

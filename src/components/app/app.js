@@ -4,6 +4,7 @@ import Staff from "components/staff";
 import Attendance from "components/attendance";
 import Benefits from "components/benefits";
 import BenefitsHistory from "../benefits/benefits-history";
+import AddBenefit from "../benefits/add-benefit";
 import AddStaff from "../staff/add-staff";
 import OpenPossitions from "components/open-possitions";
 import Candidates from "components/candidates";
@@ -60,11 +61,7 @@ const App = () => {
                   component={BenefitsHistory}
                   exact
                 />
-                <Route
-                  path={`${BENEFITS}/add`}
-                  component={BenefitsHistory}
-                  exact
-                />
+                <Route path={`${BENEFITS}/add`} component={AddBenefit} exact />
                 <Route path={OPEN_POSSITIONS} component={OpenPossitions} />
                 <Route path={CANDIDATES} component={Candidates} />
                 <Route path={TICKETS} component={Tickets} />

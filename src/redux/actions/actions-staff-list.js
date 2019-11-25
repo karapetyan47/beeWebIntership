@@ -17,11 +17,6 @@ const removedUser = staffId => {
     payload: staffId
   };
 };
-// const removedUserFaild = (e)=>{
-//   return {
-//     type:
-//   }
-// }
 
 const editUser = payload => {
   return {
