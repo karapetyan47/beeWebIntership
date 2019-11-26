@@ -33,4 +33,25 @@ export default class BenefitsService {
       data: obj.obj
     });
   };
+
+  getBenefitsHistorys = () => {
+    return axios({
+      method: "GET",
+      url: `${this.baseUrl}/benefitshistorys`
+    });
+  };
+  deleteBenefitsHistory = benefitsHistoryId => {
+    axios.delete(`${this.baseUrl}/benefitshistorys/${benefitsHistoryId}`);
+  };
+
+  addBenefitsHistory = data => {
+    axios({
+      method: "POST",
+      url: `${this.baseUrl}/benefitshistorys`,
+      data: {
+        benefitId: data.benefitId,
+        userId: data.userId
+      }
+    });
+  };
 }

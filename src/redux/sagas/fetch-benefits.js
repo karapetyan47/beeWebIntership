@@ -1,10 +1,17 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import BenefitsServices from "../../services/benefits-services";
-import { FETCHED_BENEFITS, fetchBenefitsSuccess } from "../actions";
+import {
+  FETCHED_BENEFITS,
+  fetchBenefitsSuccess,
+  fetchBenefitsHistorysSuccess,
+  FETCHED_BENEFITS_HISTORYS
+} from "../actions";
 import {
   REMOVED_BENEFIT,
   EDIT_BENEFIT,
-  ADD_BENEFIT
+  ADD_BENEFIT,
+  REMOVED_BENEFIT_HISTORYS,
+  ADD_BENEFITS_HISTORY
 } from "../actions/actions-benefits";
 
 const benefitsService = new BenefitsServices();
@@ -20,6 +27,15 @@ function* watchEditBenefit() {
 }
 function* watchAddBenefit() {
   yield takeEvery(ADD_BENEFIT, addBenefit);
+}
+function* watchGetBenefitsHistorys() {
+  yield takeEvery(FETCHED_BENEFITS_HISTORYS, getBenefitsHistorys);
+}
+function* watchRemoveBenefitsHistory() {
+  yield takeEvery(REMOVED_BENEFIT_HISTORYS, removeBenefitsHistorys);
+}
+function* watchAddBenefitsHistory() {
+  yield takeEvery(ADD_BENEFITS_HISTORY, addBenefitsHistory);
 }
 
 function* getBenefits() {
@@ -75,9 +91,46 @@ function* editBenefit({ payload }) {
   }
 }
 
+function* getBenefitsHistorys() {
+  try {
+    const data = yield call(() => {
+      return benefitsService.getBenefitsHistorys().then(res => res);
+    });
+    yield put(fetchBenefitsHistorysSuccess(data.data.benHistory));
+  } catch (e) {
+    console.log(e);
+  }
+}
+function* removeBenefitsHistorys({ payload }) {
+  try {
+    yield call(benefitsService.deleteBenefitsHistory, payload);
+    let data = yield call(() => {
+      return benefitsService.getBenefitsHistorys().then(res => res);
+    });
+    if (data.statusText === "Created")
+      data = yield call(() => {
+        return benefitsService.getBenefitsHistorys().then(res => res);
+      });
+
+    yield put(fetchBenefitsSuccess(data.data.benefits));
+  } catch (e) {
+    console.log("e", e);
+  }
+}
+function* addBenefitsHistory({ payload }) {
+  try {
+    yield call(benefitsService.addBenefitsHistory, payload);
+  } catch (e) {
+    console.log("error", e);
+  }
+}
+
 export {
   watchGetBenefits,
   watchAddBenefit,
   watchEditBenefit,
-  watchRemoveBenefit
+  watchRemoveBenefit,
+  watchGetBenefitsHistorys,
+  watchRemoveBenefitsHistory,
+  watchAddBenefitsHistory
 };

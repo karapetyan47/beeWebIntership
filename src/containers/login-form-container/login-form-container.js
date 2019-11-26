@@ -50,7 +50,7 @@ const LoginFormContainer = ({ loginUser, loadingUser }) => {
   return (
     <>
       {loadingUser ? (
-        <p>Loading...</p>
+        <p style={{ marginLeft: "50%", marginTop: "150px" }}>Bzz~~</p>
       ) : (
         <LoginForm
           submit={login}

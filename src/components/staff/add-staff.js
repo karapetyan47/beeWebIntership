@@ -103,15 +103,17 @@ const AddStaff = ({ addedUser }) => {
                 {...lastName.bind}
               />
             </div>
-            <div className="form-group col-md-6">
-              <label>Email</label>
-              <input
-                className="form-control"
-                placeholder="Email"
-                {...email.bind}
-                type="email"
-              />
-            </div>
+          </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              className="form-control"
+              placeholder="Email"
+              {...email.bind}
+              type="email"
+            />
+          </div>
+          <div className="form-row">
             <div className="form-group col-md-6">
               <label>Role</label>
               <input
@@ -143,7 +145,6 @@ const AddStaff = ({ addedUser }) => {
                 className="form-control"
                 placeholder="Phone number"
                 {...phoneNumber.bind}
-                type="number"
               />
             </div>
             <div className="form-group col-md-6">

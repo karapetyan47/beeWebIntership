@@ -16,10 +16,6 @@ class Staff extends Component {
   componentDidMount() {
     this.props.fetchStaffs();
   }
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.users.length !== this.props.users.length)
-  //     this.props.fetchStaffs();
-  // }
 
   startEditing = i => {
     this.setState({
@@ -37,7 +33,7 @@ class Staff extends Component {
     return (
       <div>
         {this.props.loadingUsers ? (
-          <p>...Loading</p>
+          <p>Bzz~~</p>
         ) : (
           <>
             <Link to={`${STAFF}/add`} style={{ textDecoration: "none" }}>

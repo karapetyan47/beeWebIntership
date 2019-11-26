@@ -54,23 +54,21 @@ const AddBenefit = ({ addedBenefit }) => {
         </div>
 
         <form onSubmit={handleAddBenefit}>
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <label>Title</label>
-              <input
-                className="form-control"
-                placeholder="Name"
-                {...title.bind}
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <label>Description</label>
-              <input
-                className="form-control"
-                placeholder="Surname"
-                {...description.bind}
-              />
-            </div>
+          <div className="form-group">
+            <label>Title</label>
+            <input
+              className="form-control"
+              placeholder="Name"
+              {...title.bind}
+            />
+          </div>
+          <div className="form-group">
+            <label>Description</label>
+            <input
+              className="form-control"
+              placeholder="Surname"
+              {...description.bind}
+            />
           </div>
           <button className="btn btn-warning" type="submit">
             Add

@@ -36,6 +36,7 @@ import "./app.scss";
 import GuestLayout from "../../containers/guest-layout";
 import GuestPageHeader from "../guest-page-header";
 import Possitions from "../possitions";
+import AddBenefitsHistory from "../benefits/benefits-history/add-bh";
 
 const App = () => {
   return (
@@ -59,6 +60,11 @@ const App = () => {
                 <Route
                   path={`${BENEFITS}/history`}
                   component={BenefitsHistory}
+                  exact
+                />
+                <Route
+                  path={`${BENEFITS}/history/add`}
+                  component={AddBenefitsHistory}
                   exact
                 />
                 <Route path={`${BENEFITS}/add`} component={AddBenefit} exact />

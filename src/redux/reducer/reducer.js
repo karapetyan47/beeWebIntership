@@ -4,8 +4,10 @@ import {
   ATTEMPT_LOGIN,
   LOGOUT,
   LOGIN_FAILED,
-  FETCH_BENEFITS_SUCCESS
+  FETCH_BENEFITS_SUCCESS,
+  FETCH_BENEFITS_HISTORYS_SUCCESS
 } from "redux/actions";
+import { FETCHED_BENEFITS_HISTORYS } from "../actions/actions-benefits";
 
 const initialState = {
   user: {},
@@ -13,7 +15,9 @@ const initialState = {
   errorUser: false,
   users: [],
   loadingUsers: true,
-  benefits: []
+  benefits: [],
+  benefitsHistorys: [],
+  loadingBenefitsHistorys: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,6 +56,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         benefits: action.payload
+      };
+    case FETCHED_BENEFITS_HISTORYS:
+      return {
+        ...state,
+        loadingBenefitsHistorys: true
+      };
+    case FETCH_BENEFITS_HISTORYS_SUCCESS:
+      return {
+        ...state,
+        benefitsHistorys: action.payload,
+        loadingBenefitsHistorys: false
       };
     default:
       return state;

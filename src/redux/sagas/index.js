@@ -9,7 +9,10 @@ import {
   watchGetBenefits,
   watchAddBenefit,
   watchEditBenefit,
-  watchRemoveBenefit
+  watchRemoveBenefit,
+  watchGetBenefitsHistorys,
+  watchRemoveBenefitsHistory,
+  watchAddBenefitsHistory
 } from "./fetch-benefits";
 
 import { all } from "redux-saga/effects";
@@ -24,6 +27,9 @@ export default function* rootSaga() {
     watchGetBenefits(),
     watchAddBenefit(),
     watchEditBenefit(),
-    watchRemoveBenefit()
+    watchRemoveBenefit(),
+    watchGetBenefitsHistorys(),
+    watchRemoveBenefitsHistory(),
+    watchAddBenefitsHistory()
   ]);
 }
