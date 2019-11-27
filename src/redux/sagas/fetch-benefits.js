@@ -103,16 +103,10 @@ function* getBenefitsHistorys() {
 }
 function* removeBenefitsHistorys({ payload }) {
   try {
-    yield call(benefitsService.deleteBenefitsHistory, payload);
-    let data = yield call(() => {
-      return benefitsService.getBenefitsHistorys().then(res => res);
-    });
-    if (data.statusText === "Created")
-      data = yield call(() => {
-        return benefitsService.getBenefitsHistorys().then(res => res);
-      });
-
-    yield put(fetchBenefitsSuccess(data.data.benefits));
+    const result = yield call(benefitsService.deleteBenefitsHistory, payload);
+    if (result.status === 201) {
+      yield call(getBenefitsHistorys);
+    }
   } catch (e) {
     console.log("e", e);
   }

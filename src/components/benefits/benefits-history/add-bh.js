@@ -80,11 +80,15 @@ const AddBenefitsHistory = ({
               <option value="" style={{ display: "none" }}>
                 Select benefit
               </option>
-              {benefits.map((x, i) => (
-                <option key={i} value={x._id}>
-                  {x.title}
-                </option>
-              ))}
+              {benefits ? (
+                benefits.map((x, i) => (
+                  <option key={i} value={x._id}>
+                    {x.title}
+                  </option>
+                ))
+              ) : (
+                <option value="">bzzz</option>
+              )}
             </select>
           </div>
           <div className="form-group">
@@ -97,11 +101,15 @@ const AddBenefitsHistory = ({
               <option value="" style={{ display: "none" }}>
                 Select user
               </option>
-              {users.map((x, i) => (
-                <option key={i} value={x._id}>
-                  {x.firstname}
-                </option>
-              ))}
+              {users ? (
+                users.map((x, i) => (
+                  <option key={i} value={x._id}>
+                    {x.firstname}
+                  </option>
+                ))
+              ) : (
+                <option value="">...bzzz</option>
+              )}
             </select>
           </div>
           <button className="btn btn-warning" type="submit">

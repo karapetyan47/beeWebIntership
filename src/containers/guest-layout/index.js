@@ -1,9 +1,23 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import {
+  LOGIN_PATH,
+  MAIN_PATH,
+  POSSITIONS
+} from "../../constants/const-paths/paths";
+
+const PUBLIC_ROUTES = [LOGIN_PATH, POSSITIONS];
 
 const GuestLayout = props => {
-  const { loadingUser } = props;
+  const { loadingUser, location, history } = props;
+
+  const checkRouting = () => {
+    if (PUBLIC_ROUTES.includes(location.pathname)) {
+      history.push(MAIN_PATH);
+    }
+  };
+
   return (
     <div>
       {!localStorage.jwtToken ? (
@@ -11,7 +25,7 @@ const GuestLayout = props => {
       ) : loadingUser ? (
         <p style={{ float: "right" }}>...Loading</p>
       ) : (
-        <Redirect to="/" />
+        checkRouting()
       )}
     </div>
   );
@@ -23,4 +37,4 @@ const mapStateToProps = ({ loadingUser }) => {
 export default connect(
   mapStateToProps,
   null
-)(GuestLayout);
+)(withRouter(GuestLayout));

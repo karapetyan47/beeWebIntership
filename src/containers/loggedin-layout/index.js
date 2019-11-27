@@ -1,28 +1,58 @@
 import React from "react";
 import Navbar from "../../components/navbar";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { LOGIN_PATH } from "../../constants/const-paths/paths";
+import { withRouter } from "react-router-dom";
+import {
+  LOGIN_PATH,
+  STAFF,
+  ATTENDANCE,
+  BENEFITS,
+  OPEN_POSSITIONS,
+  CANDIDATES,
+  TICKETS,
+  RATING,
+  MAIN_PATH
+} from "../../constants/const-paths/paths";
+
+const PRIVATE_ROUTES = [
+  STAFF,
+  ATTENDANCE,
+  BENEFITS,
+  OPEN_POSSITIONS,
+  CANDIDATES,
+  TICKETS,
+  RATING,
+  MAIN_PATH,
+  `${STAFF}/add`,
+  `${BENEFITS}/history`,
+  `${BENEFITS}/history/add`,
+  `${BENEFITS}/add`
+];
 
 const LoggedInLayout = props => {
-  const { loadingUser } = props;
+  const { loadingUser, location, history } = props;
+
+  const checkRouting = () => {
+    if (PRIVATE_ROUTES.includes(location.pathname)) {
+      history.push(LOGIN_PATH);
+    }
+  };
+
   return (
-    <>
-      <>
-        {localStorage.jwtToken ? (
-          loadingUser ? (
-            <p>...loading</p>
-          ) : (
-            <>
-              <Navbar />
-              {props.children}
-            </>
-          )
+    <div className="back">
+      {localStorage.jwtToken ? (
+        loadingUser ? (
+          <p>...loading</p>
         ) : (
-          <Redirect to={LOGIN_PATH} />
-        )}
-      </>
-    </>
+          <>
+            <Navbar />
+            <div className="visible-place">{props.children}</div>
+          </>
+        )
+      ) : (
+        checkRouting()
+      )}
+    </div>
   );
 };
 
@@ -33,4 +63,4 @@ const mapStateToProps = ({ loadingUser }) => {
 export default connect(
   mapStateToProps,
   null
-)(LoggedInLayout);
+)(withRouter(LoggedInLayout));

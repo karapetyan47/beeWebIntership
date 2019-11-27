@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
       };
     case LOGIN_SUCCESS:
       return {
-        users: [],
+        ...state,
         user: action.payload,
         loadingUser: false
       };
@@ -49,8 +49,12 @@ const reducer = (state = initialState, action) => {
       return {
         user: {},
         loadingUser: false,
+        errorUser: false,
         users: [],
-        loadingUsers: true
+        loadingUsers: true,
+        benefits: [],
+        benefitsHistorys: [],
+        loadingBenefitsHistorys: true
       };
     case FETCH_BENEFITS_SUCCESS:
       return {

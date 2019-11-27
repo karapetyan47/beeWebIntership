@@ -49,36 +49,29 @@ const App = () => {
         </GuestLayout>
 
         <LoggedInLayout>
-          <div className="back">
-            <div className="visible-place">
-              <Switch>
-                <Route path={MAIN_PATH} exact component={Dashboard} />
-                <Route path={STAFF} exact component={Staff} />
-                <Route path={`${STAFF}/add`} component={AddStaff} />
-                <Route path={ATTENDANCE} component={Attendance} />
-                <Route path={BENEFITS} exact component={Benefits} />
-                <Route
-                  path={`${BENEFITS}/history`}
-                  component={BenefitsHistory}
-                  exact
-                />
-                <Route
-                  path={`${BENEFITS}/history/add`}
-                  component={AddBenefitsHistory}
-                  exact
-                />
-                <Route path={`${BENEFITS}/add`} component={AddBenefit} exact />
-                <Route path={OPEN_POSSITIONS} component={OpenPossitions} />
-                <Route path={CANDIDATES} component={Candidates} />
-                <Route path={TICKETS} component={Tickets} />
-                <Route
-                  path={PUSH_NOTIFICATIONS}
-                  component={PushNotifications}
-                />
-                <Route path={RATING} component={Rating} />
-              </Switch>
-            </div>
-          </div>
+          <Switch>
+            <Route path={MAIN_PATH} exact component={Dashboard} />
+            <Route path={STAFF} exact component={Staff} />
+            <Route path={`${STAFF}/add`} component={AddStaff} />
+            <Route path={ATTENDANCE} component={Attendance} />
+            <Route path={BENEFITS} exact component={Benefits} />
+            <Route
+              path={`${BENEFITS}/history`}
+              component={BenefitsHistory}
+              exact
+            />
+            <Route
+              path={`${BENEFITS}/history/add`}
+              component={AddBenefitsHistory}
+              exact
+            />
+            <Route path={`${BENEFITS}/add`} component={AddBenefit} exact />
+            <Route path={OPEN_POSSITIONS} component={OpenPossitions} />
+            <Route path={CANDIDATES} component={Candidates} />
+            <Route path={TICKETS} component={Tickets} />
+            <Route path={PUSH_NOTIFICATIONS} component={PushNotifications} />
+            <Route path={RATING} component={Rating} />
+          </Switch>
         </LoggedInLayout>
       </Router>
     </Provider>

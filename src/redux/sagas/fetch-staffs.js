@@ -29,7 +29,7 @@ function* fetchStaffsAsync() {
       return staffService.getAllUsers().then(res => res);
     });
 
-    yield put(fetchUsersSuccess(data.data.users));
+    yield put(fetchUsersSuccess(data.data.results));
   } catch (e) {
     console.log("error", e);
   }
@@ -53,7 +53,7 @@ function* removeUser({ payload }) {
       return staffService.getAllUsers().then(res => res);
     });
 
-    yield put(fetchUsersSuccess(data.data.users));
+    yield put(fetchUsersSuccess(data.data.results));
   } catch (e) {
     console.log("e", e);
   }
@@ -70,7 +70,7 @@ function* editUser({ payload }) {
       return staffService.getAllUsers().then(res => res);
     });
 
-    yield put(fetchUsersSuccess(data.data.users));
+    yield put(fetchUsersSuccess(data.data.results));
   } catch (e) {
     console.log("e", e);
   }

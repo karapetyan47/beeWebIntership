@@ -24,7 +24,6 @@ const removedBenefit = benefitId => {
 };
 
 const editBenefit = payload => {
-  console.log(payload);
   return {
     type: EDIT_BENEFIT,
     payload: payload

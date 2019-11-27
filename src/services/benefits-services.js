@@ -41,7 +41,9 @@ export default class BenefitsService {
     });
   };
   deleteBenefitsHistory = benefitsHistoryId => {
-    axios.delete(`${this.baseUrl}/benefitshistorys/${benefitsHistoryId}`);
+    return axios.delete(
+      `${this.baseUrl}/benefitshistorys/${benefitsHistoryId}`
+    );
   };
 
   addBenefitsHistory = data => {

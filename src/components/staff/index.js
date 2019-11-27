@@ -58,11 +58,6 @@ class Staff extends Component {
                   type: "email"
                 },
                 {
-                  name: "Role",
-                  prop: "role",
-                  type: "text"
-                },
-                {
                   name: "Salary",
                   prop: "salary",
                   type: "number"
