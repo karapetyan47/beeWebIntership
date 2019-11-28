@@ -40,3 +40,29 @@ export {
   REMOVED_BENEFIT_HISTORYS,
   ADD_BENEFITS_HISTORY
 } from "redux/actions/actions-benefits";
+
+export {
+  fetchPositionsSuccess,
+  removedPosition,
+  fetchPositions,
+  addedPosition,
+  editPosition,
+  FETCH_POSITIONS_SUCCESS,
+  FETCHED_POSITIONS,
+  REMOVED_POSITION,
+  ADD_POSITION,
+  EDIT_POSITION
+} from "./actions-open-positions";
+
+export {
+  fetchCandidatsSuccess,
+  removedCandidat,
+  fetchCandidats,
+  addedCandidat,
+  editCandidat,
+  FETCH_CANDIDATS_SUCCESS,
+  FETCHED_CANDIDATS,
+  REMOVED_CANDIDAT,
+  ADD_CANDIDAT,
+  EDIT_CANDIDAT
+} from "./actions-candidats";

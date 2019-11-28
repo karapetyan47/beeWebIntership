@@ -5,9 +5,11 @@ import {
   LOGOUT,
   LOGIN_FAILED,
   FETCH_BENEFITS_SUCCESS,
-  FETCH_BENEFITS_HISTORYS_SUCCESS
-} from "redux/actions";
-import { FETCHED_BENEFITS_HISTORYS } from "../actions/actions-benefits";
+  FETCH_BENEFITS_HISTORYS_SUCCESS,
+  FETCH_POSITIONS_SUCCESS,
+  FETCH_CANDIDATS_SUCCESS,
+  FETCHED_BENEFITS_HISTORYS
+} from "../actions";
 
 const initialState = {
   user: {},
@@ -17,7 +19,11 @@ const initialState = {
   loadingUsers: true,
   benefits: [],
   benefitsHistorys: [],
-  loadingBenefitsHistorys: true
+  loadingBenefitsHistorys: true,
+  positions: [],
+  loadingPositions: true,
+  candidats: [],
+  loadingCandidats: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -54,7 +60,11 @@ const reducer = (state = initialState, action) => {
         loadingUsers: true,
         benefits: [],
         benefitsHistorys: [],
-        loadingBenefitsHistorys: true
+        loadingBenefitsHistorys: true,
+        positions: [],
+        loadingPositions: true,
+        candidats: [],
+        loadingCandidats: true
       };
     case FETCH_BENEFITS_SUCCESS:
       return {
@@ -71,6 +81,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         benefitsHistorys: action.payload,
         loadingBenefitsHistorys: false
+      };
+    case FETCH_POSITIONS_SUCCESS:
+      return {
+        ...state,
+        positions: action.payload,
+        loadingPositions: false
+      };
+    case FETCH_CANDIDATS_SUCCESS:
+      return {
+        ...state,
+        candidats: action.payload,
+        loadingCandidats: false
       };
     default:
       return state;

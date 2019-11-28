@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import FileUpload from "../file-upload";
+import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
+
+import { connect } from "react-redux";
+import { fetchPositions, addedCandidat } from "../../redux/actions";
 
 const useInputValue = (resetError = () => {}, defaultValue = "") => {
   const [value, setValue] = useState(defaultValue);
-  // const [isValid, setValid] = useState(false);
-
   return {
     bind: {
       value,
@@ -18,29 +19,43 @@ const useInputValue = (resetError = () => {}, defaultValue = "") => {
   };
 };
 
-const Possitions = () => {
+const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
+  const [file, setFile] = useState(null);
   const name = useInputValue();
+  const surName = useInputValue();
   const email = useInputValue();
-  const about = useInputValue();
-  const address = useInputValue();
-  const city = useInputValue();
-  const possition = useInputValue();
+  const skills = useInputValue();
+  const experience = useInputValue();
+  const education = useInputValue();
+  const position = useInputValue();
+  const gender = useInputValue();
+  const age = useInputValue();
+
+  useEffect(() => {
+    fetchPositions();
+  }, [fetchPositions]);
 
   //Errors
   const [nameError, setNameError] = useState("");
+  const [surNameError, setSurNameError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [aboutError, setAboutError] = useState("");
-  const [addressError, setAddressError] = useState("");
-  const [cityError, setCityError] = useState("");
-  const [possitionError, setPossitionError] = useState("");
-
+  const [skillsError, setSkillsError] = useState("");
+  const [experienceError, setExperienceError] = useState("");
+  const [educationError, setEducationError] = useState("");
+  const [positionError, setPositionError] = useState("");
+  const [genderError, setGenderError] = useState("");
+  const [ageError, setAgeError] = useState("");
+  console.log(location);
   const validate = () => {
     let nameError = "";
+    let surNameError = "";
     let emailError = "";
-    let aboutError = "";
-    let addressError = "";
-    let cityError = "";
-    let possitionError = "";
+    let skillsError = "";
+    let experienceError = "";
+    let educationError = "";
+    let positionError = "";
+    let genderError = "";
+    let ageError = "";
     if (
       !email.value().includes("@") ||
       !email.value().includes(".") ||
@@ -48,72 +63,105 @@ const Possitions = () => {
     ) {
       emailError = "invalid email";
     }
-    if (!possition.value()) {
-      possitionError = "possition cannot be blank";
+    if (!position.value()) {
+      positionError = "position cannot be blank";
+    }
+    if (!gender.value()) {
+      genderError = "gender cannot be blank";
+    }
+    if (!age.value()) {
+      nameError = "age cannot be blank";
     }
     if (!name.value()) {
       nameError = "name cannot be blank";
     }
+    if (!surName.value()) {
+      surNameError = "surname cannot be blank";
+    }
     if (!email.value()) {
       emailError = "email cannot be blank";
     }
-    if (!about.value()) {
-      aboutError = "about cannot be blank";
+    if (!skills.value()) {
+      skillsError = "skills cannot be blank";
     }
-    if (about.value().length < 100) {
-      aboutError = "100 characters minimum";
+
+    if (!experience.value()) {
+      experienceError = "experience cannot be blank";
     }
-    if (!address.value()) {
-      addressError = "address cannot be blank";
-    }
-    if (!city.value()) {
-      cityError = "city cannot be blank";
+    if (!education.value()) {
+      educationError = "education cannot be blank";
     }
     if (
       emailError ||
       nameError ||
-      aboutError ||
-      addressError ||
-      cityError ||
-      possitionError
+      surNameError ||
+      skillsError ||
+      experienceError ||
+      educationError ||
+      positionError ||
+      genderError ||
+      ageError
     ) {
       setEmailError(emailError);
       setNameError(nameError);
-      setAboutError(aboutError);
-      setAddressError(addressError);
-      setCityError(cityError);
-      setPossitionError(possitionError);
+      setSurNameError(surNameError);
+      setSkillsError(skillsError);
+      setExperienceError(experienceError);
+      setEducationError(educationError);
+      setPositionError(positionError);
+      setGenderError(genderError);
+      setAgeError(ageError);
       return false;
     }
     return true;
   };
 
+  const fileSelectedHendler = e => {
+    console.log(e.target.files[0]);
+    setFile(e.target.files[0]);
+  };
+
   const handleAddCondidate = e => {
     e.preventDefault();
 
+    const fd = new FormData();
+    if (fd.name) {
+      fd.append("cv", file, file.name);
+    }
     const isValid = validate();
     if (isValid) {
       const obj = {
+        // cv: fd,
         name: name.value(),
+        surName: surName.value(),
         email: email.value(),
-        about: about.value(),
-        address: address.value(),
-        city: city.value(),
-        possition: possition.value()
+        skills: skills.value(),
+        experience: experience.value(),
+        education: education.value(),
+        position: position.value(),
+        gender: gender.value(),
+        age: age.value()
       };
-      console.log(obj);
+      addedCandidat(obj);
       name.clear();
+      surName.clear();
       email.clear();
-      about.clear();
-      address.clear();
-      city.clear();
-      possition.clear();
+      skills.clear();
+      experience.clear();
+      education.clear();
+      position.clear();
+      gender.clear();
+      age.clear();
+      setFile(null);
       setNameError("");
+      setSurNameError("");
       setEmailError("");
-      setAboutError("");
-      setAddressError("");
-      setCityError("");
-      setPossitionError("");
+      setExperienceError("");
+      setEducationError("");
+      setSkillsError("");
+      setPositionError("");
+      setGenderError("");
+      setAgeError("");
     }
   };
 
@@ -121,35 +169,37 @@ const Possitions = () => {
     <div style={{ margin: "20px", height: "100%" }}>
       <form onSubmit={handleAddCondidate}>
         <div className="form-group">
-          <label htmlFor="exampleFormControlSelect1">Select possition</label>
+          <label htmlFor="exampleFormControlSelect1">Select position</label>
           <select
-            {...possition.bind}
+            {...position.bind}
             className="form-control"
             id="exampleFormControlSelect1"
           >
             <option value="" style={{ display: "none" }}>
-              Select possition
+              Select position
             </option>
-            <option value="react">React.js</option>
-            <option value="node.js">Node.js</option>
-            <option value="python">Python</option>
-            <option value="java">Java</option>
-            <option value="ux/ui">UX/UI</option>
+            {positions.map((x, i) => {
+              return (
+                <option key={i} value={x._id}>
+                  {x.title}
+                </option>
+              );
+            })}
           </select>
-          <div style={{ color: "red", fontSize: "12px" }}>{possitionError}</div>
+          <div style={{ color: "red", fontSize: "12px" }}>{positionError}</div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="inputEmail4">Email</label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputEmail4"
+            placeholder="Email"
+            {...email.bind}
+          />
+          <div style={{ color: "red", fontSize: "12px" }}>{emailError}</div>
         </div>
         <div className="form-row">
-          <div className="form-group col-md-6">
-            <label htmlFor="inputEmail4">Email</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputEmail4"
-              placeholder="Email"
-              {...email.bind}
-            />
-            <div style={{ color: "red", fontSize: "12px" }}>{emailError}</div>
-          </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputPassword4">Name</label>
             <input
@@ -161,44 +211,91 @@ const Possitions = () => {
             />
             <div style={{ color: "red", fontSize: "12px" }}>{nameError}</div>
           </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="inputEmail4">Surname</label>
+            <input
+              type="text"
+              className="form-control"
+              id="inputEmail4"
+              placeholder="Surname"
+              {...surName.bind}
+            />
+            <div style={{ color: "red", fontSize: "12px" }}>{surNameError}</div>
+          </div>
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="inputAddress">Address</label>
+            <label htmlFor="exampleFormControlSelect1">Select Gender</label>
+            <select
+              {...gender.bind}
+              className="form-control"
+              id="exampleFormControlSelect1"
+            >
+              <option value="" style={{ display: "none" }}>
+                Select gender
+              </option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            <div style={{ color: "red", fontSize: "12px" }}>{genderError}</div>
+          </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="inputPassword4">Age</label>
+            <input
+              type="text"
+              className="form-control"
+              id="inputPassword4"
+              placeholder="Age"
+              {...age.bind}
+            />
+            <div style={{ color: "red", fontSize: "12px" }}>{ageError}</div>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label htmlFor="inputAddress">Experience</label>
             <input
               type="text"
               className="form-control"
               id="inputAddress"
-              placeholder="1234 Main St"
-              {...address.bind}
+              placeholder="Experience"
+              {...experience.bind}
             />
-            <div style={{ color: "red", fontSize: "12px" }}>{addressError}</div>
+            <div style={{ color: "red", fontSize: "12px" }}>
+              {experienceError}
+            </div>
           </div>
-
           <div className="form-group col-md-6">
-            <label htmlFor="inputCity">City</label>
+            <label htmlFor="exampleFormControlTextarea1">Skills</label>
             <input
-              type="text"
               className="form-control"
-              id="inputCity"
-              placeholder="City"
-              {...city.bind}
+              id="exampleFormControlTextarea1"
+              placeholder="Skills"
+              {...skills.bind}
             />
-            <div style={{ color: "red", fontSize: "12px" }}>{cityError}</div>
+            <div style={{ color: "red", fontSize: "12px" }}>{skillsError}</div>
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="exampleFormControlTextarea1">About You</label>
+          <label htmlFor="inputCity">Education</label>
           <textarea
+            type="text"
             className="form-control"
-            id="exampleFormControlTextarea1"
+            id="inputCity"
             rows="3"
-            {...about.bind}
+            {...education.bind}
           ></textarea>
-          <div style={{ color: "red", fontSize: "12px" }}>{aboutError}</div>
+          <div style={{ color: "red", fontSize: "12px" }}>{educationError}</div>
         </div>
+
         <div className="form-group">
-          <FileUpload />
+          <label htmlFor="exampleFormControlFile1">Example file input</label>
+          <input
+            type="file"
+            className="form-control-file"
+            id="exampleFormControlFile1"
+            onChange={fileSelectedHendler}
+          />
         </div>
 
         <button type="submit" className="btn btn-success">
@@ -209,4 +306,18 @@ const Possitions = () => {
   );
 };
 
-export default Possitions;
+const mapStateToProps = ({ positions }) => {
+  return {
+    positions
+  };
+};
+
+const mapDispatchToProps = {
+  fetchPositions,
+  addedCandidat
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Positions));

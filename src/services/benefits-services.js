@@ -42,14 +42,14 @@ export default class BenefitsService {
   };
   deleteBenefitsHistory = benefitsHistoryId => {
     return axios.delete(
-      `${this.baseUrl}/benefitshistorys/${benefitsHistoryId}`
+      `${this.baseUrl}/benefits-history/${benefitsHistoryId}`
     );
   };
 
   addBenefitsHistory = data => {
     axios({
       method: "POST",
-      url: `${this.baseUrl}/benefitshistorys`,
+      url: `${this.baseUrl}/benefits-history`,
       data: {
         benefitId: data.benefitId,
         userId: data.userId

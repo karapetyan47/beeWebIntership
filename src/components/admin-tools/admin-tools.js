@@ -13,7 +13,7 @@ import {
 } from "../../constants/const-paths/paths";
 import { connect } from "react-redux";
 import { logOut } from "../../redux/actions";
-import { Redirect } from "react-router-dom";
+
 import "./admin-tools.scss";
 import setAuterizationToken from "../../utils/setAutorizationToken";
 
@@ -22,12 +22,11 @@ class AdminTools extends Component {
     localStorage.removeItem("jwtToken");
     setAuterizationToken(localStorage.jwtToken);
     this.props.logOut();
+    this.props.history.push(LOGIN_PATH);
   };
 
   render() {
-    return !localStorage.jwtToken ? (
-      <Redirect to={LOGIN_PATH} />
-    ) : (
+    return (
       <ul>
         <Link to={MAIN_PATH} style={{ textDecoration: "none" }}>
           <li>
@@ -84,9 +83,7 @@ const mapDispatchToProps = {
   logOut
 };
 
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(AdminTools)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(AdminTools));

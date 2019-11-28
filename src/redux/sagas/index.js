@@ -15,6 +15,20 @@ import {
   watchAddBenefitsHistory
 } from "./fetch-benefits";
 
+import {
+  watchFetchCandidats,
+  watchRemoveCandidat,
+  watchEditCandidat,
+  watchAddCandidat
+} from "./fetch-candidats";
+
+import {
+  watchFetchPositions,
+  watchRemovePosition,
+  watchEditPosition,
+  watchAddPosition
+} from "./fetch-open-positions";
+
 import { all } from "redux-saga/effects";
 
 export default function* rootSaga() {
@@ -30,6 +44,14 @@ export default function* rootSaga() {
     watchRemoveBenefit(),
     watchGetBenefitsHistorys(),
     watchRemoveBenefitsHistory(),
-    watchAddBenefitsHistory()
+    watchAddBenefitsHistory(),
+    watchFetchPositions(),
+    watchRemovePosition(),
+    watchEditPosition(),
+    watchAddPosition(),
+    watchFetchCandidats(),
+    watchRemoveCandidat(),
+    watchEditCandidat(),
+    watchAddCandidat()
   ]);
 }

@@ -6,8 +6,8 @@ import Benefits from "components/benefits";
 import BenefitsHistory from "../benefits/benefits-history";
 import AddBenefit from "../benefits/add-benefit";
 import AddStaff from "../staff/add-staff";
-import OpenPossitions from "components/open-possitions";
-import Candidates from "components/candidates";
+import OpenPositions from "components/open-positions";
+import Candidats from "components/candidats";
 import Tickets from "components/tickets";
 import PushNotifications from "components/push-notifications";
 import Rating from "components/rating";
@@ -37,6 +37,7 @@ import GuestLayout from "../../containers/guest-layout";
 import GuestPageHeader from "../guest-page-header";
 import Possitions from "../possitions";
 import AddBenefitsHistory from "../benefits/benefits-history/add-bh";
+import AddOpenPosition from "../open-positions/add-op";
 
 const App = () => {
   return (
@@ -45,7 +46,7 @@ const App = () => {
         <GuestLayout>
           <GuestPageHeader />
           <Route path={LOGIN_PATH} component={LoginFormContainer} exact />
-          <Route path={POSSITIONS} component={Possitions} exact />
+          <Route path={`${POSSITIONS}`} component={Possitions} />
         </GuestLayout>
 
         <LoggedInLayout>
@@ -66,8 +67,12 @@ const App = () => {
               exact
             />
             <Route path={`${BENEFITS}/add`} component={AddBenefit} exact />
-            <Route path={OPEN_POSSITIONS} component={OpenPossitions} />
-            <Route path={CANDIDATES} component={Candidates} />
+            <Route path={OPEN_POSSITIONS} component={OpenPositions} exact />
+            <Route
+              path={`${OPEN_POSSITIONS}/add`}
+              component={AddOpenPosition}
+            />
+            <Route path={CANDIDATES} component={Candidats} />
             <Route path={TICKETS} component={Tickets} />
             <Route path={PUSH_NOTIFICATIONS} component={PushNotifications} />
             <Route path={RATING} component={Rating} />
