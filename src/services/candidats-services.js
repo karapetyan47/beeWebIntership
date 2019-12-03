@@ -19,19 +19,7 @@ export default class CandidatsServices {
     return axios({
       method: "POST",
       url: `${this.baseUrl}/candidats`,
-      data: {
-        cv: data.cv,
-        openPosId: data.position,
-        name: data.name,
-        surname: data.surName,
-        email: data.email,
-        age: data.age,
-        gender: data.gender,
-        birthday: data.birthday,
-        skills: data.skills,
-        experience: data.experience,
-        education: data.education
-      }
+      data: data
     });
   };
 
@@ -41,6 +29,12 @@ export default class CandidatsServices {
       method: "PATCH",
       url: `${this.baseUrl}/candidats/${obj.id}`,
       data: obj.obj
+    });
+  };
+  getCandidat = canId => {
+    return axios({
+      method: "GET",
+      url: `${this.baseUrl}/candidats/${canId}`
     });
   };
 }

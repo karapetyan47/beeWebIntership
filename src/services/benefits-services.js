@@ -11,11 +11,11 @@ export default class BenefitsService {
   };
 
   deleteBenefit = benefitId => {
-    axios.delete(`${this.baseUrl}/benefits/${benefitId}`);
+    return axios.delete(`${this.baseUrl}/benefits/${benefitId}`);
   };
 
   addBenefit = data => {
-    axios({
+    return axios({
       method: "POST",
       url: `${this.baseUrl}/benefits`,
       data: {
@@ -27,7 +27,7 @@ export default class BenefitsService {
 
   editBenefit = obj => {
     console.log("obj", obj);
-    axios({
+    return axios({
       method: "PATCH",
       url: `${this.baseUrl}/benefits/${obj.id}`,
       data: obj.obj
@@ -37,7 +37,7 @@ export default class BenefitsService {
   getBenefitsHistorys = () => {
     return axios({
       method: "GET",
-      url: `${this.baseUrl}/benefitshistorys`
+      url: `${this.baseUrl}/benefits-historys`
     });
   };
   deleteBenefitsHistory = benefitsHistoryId => {
@@ -47,7 +47,7 @@ export default class BenefitsService {
   };
 
   addBenefitsHistory = data => {
-    axios({
+    return axios({
       method: "POST",
       url: `${this.baseUrl}/benefits-history`,
       data: {

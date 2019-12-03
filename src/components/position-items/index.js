@@ -19,7 +19,18 @@ const useInputValue = (resetError = () => {}, defaultValue = "") => {
   };
 };
 
-const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
+const PositionItem = ({
+  positions,
+  fetchPositions,
+  addedCandidat,
+  location
+}) => {
+  const _extractId = item => {
+    const idREgExp = /=([a-z0-9]*)$/;
+    let match = idREgExp.exec(item);
+    return match[1];
+  };
+  const id = _extractId(location.pathname);
   const [file, setFile] = useState(null);
   const name = useInputValue();
   const surName = useInputValue();
@@ -27,7 +38,7 @@ const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
   const skills = useInputValue();
   const experience = useInputValue();
   const education = useInputValue();
-  const position = useInputValue();
+  const position = useInputValue(() => {}, id);
   const gender = useInputValue();
   const age = useInputValue();
 
@@ -117,7 +128,6 @@ const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
   };
 
   const fileSelectedHendler = e => {
-    console.log(e.target.files[0]);
     setFile(e.target.files[0]);
   };
 
@@ -125,17 +135,13 @@ const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
     e.preventDefault();
 
     const fd = new FormData();
-    console.log("fd", fd);
-    if (file) {
-      console.log("file", file);
+    if (fd.name) {
       fd.append("cv", file, file.name);
-      for (var key of fd.entries()) {
-        console.log(key[0] + ", " + key[1]);
-      }
     }
     const isValid = validate();
     if (isValid) {
       const obj = {
+        // cv: fd,
         name: name.value(),
         surName: surName.value(),
         email: email.value(),
@@ -146,11 +152,7 @@ const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
         gender: gender.value(),
         age: age.value()
       };
-
-      Object.keys(obj).map(key => {
-        fd.append(key, obj[key]);
-      });
-      addedCandidat(fd);
+      addedCandidat(obj);
       name.clear();
       surName.clear();
       email.clear();
@@ -172,6 +174,7 @@ const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
       setAgeError("");
     }
   };
+  const pos = positions.find(x => x._id === id);
 
   return (
     <div style={{ margin: "20px", height: "100%" }}>
@@ -183,9 +186,16 @@ const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
             className="form-control"
             id="exampleFormControlSelect1"
           >
-            <option value="" style={{ display: "none" }}>
-              Select position
-            </option>
+            {!pos ? (
+              <option value="" style={{ display: "none" }}>
+                Select position
+              </option>
+            ) : (
+              <option value={id} style={{ display: "none" }}>
+                {pos.title}
+              </option>
+            )}
+
             {positions.map((x, i) => {
               return (
                 <option key={i} value={x._id}>
@@ -328,4 +338,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(Positions));
+)(withRouter(PositionItem));

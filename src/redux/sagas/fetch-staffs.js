@@ -7,6 +7,7 @@ import {
   ADD_USER
 } from "redux/actions";
 import StaffServices from "services/staff-services";
+import { getUserSucceed, GET_USER } from "../actions/actions-staff-list";
 
 const staffService = new StaffServices();
 
@@ -21,6 +22,9 @@ function* watchEditUser() {
 }
 function* watchAddUser() {
   yield takeEvery(ADD_USER, addUser);
+}
+function* watchFetchUserAsync() {
+  yield takeEvery(GET_USER, fetchUserAsync);
 }
 
 function* fetchStaffsAsync() {
@@ -45,15 +49,11 @@ function* addUser({ payload }) {
 
 function* removeUser({ payload }) {
   try {
-    yield call(staffService.deleteUser, payload);
-    let data = yield call(() => {
-      return staffService.getAllUsers().then(res => res);
-    });
-    data = yield call(() => {
-      return staffService.getAllUsers().then(res => res);
-    });
+    const result = yield call(staffService.deleteUser, payload);
 
-    yield put(fetchUsersSuccess(data.data.results));
+    if (result.status === 201) {
+      yield call(fetchStaffsAsync);
+    }
   } catch (e) {
     console.log("e", e);
   }
@@ -61,19 +61,32 @@ function* removeUser({ payload }) {
 
 function* editUser({ payload }) {
   try {
-    yield call(staffService.editUser, payload);
-    let data = yield call(() => {
-      return staffService.getAllUsers().then(res => res);
-    });
+    console.log("payload", payload);
 
-    data = yield call(() => {
-      return staffService.getAllUsers().then(res => res);
-    });
-
-    yield put(fetchUsersSuccess(data.data.results));
+    const result = yield yield call(staffService.editUser, payload);
+    console.log("result", result);
+    if (result.status === 200) {
+      yield call(fetchStaffsAsync);
+    }
   } catch (e) {
     console.log("e", e);
   }
 }
 
-export { watchFetchStaffs, watchRemoveUser, watchEditUser, watchAddUser };
+function* fetchUserAsync({ payload }) {
+  try {
+    const data = yield call(staffService.getUser, payload);
+
+    yield put(getUserSucceed(data.data));
+  } catch (e) {
+    console.log("e", e);
+  }
+}
+
+export {
+  watchFetchStaffs,
+  watchRemoveUser,
+  watchEditUser,
+  watchAddUser,
+  watchFetchUserAsync
+};

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCandidats, removedCandidat, editCandidat } from "redux/actions";
+import { Link } from "react-router-dom";
 
 import Table from "utils/table-core/table";
+import { CANDIDATES } from "../../constants/const-paths/paths";
 
 class Candidats extends Component {
   state = {
@@ -32,9 +34,17 @@ class Candidats extends Component {
           <p>Bzz~~</p>
         ) : (
           <>
+            <Link to={`${CANDIDATES}/add`} style={{ textDecoration: "none" }}>
+              <button className="btn btn-success">Add new candidat</button>
+            </Link>
             <Table
               data={this.props.candidats}
               header={[
+                {
+                  name: "Info",
+                  prop: "_id",
+                  type: "text"
+                },
                 {
                   name: "Name",
                   prop: "name",
@@ -67,6 +77,7 @@ class Candidats extends Component {
                   type: "text"
                 }
               ]}
+              redirectTo={CANDIDATES}
               deleteItem={id => {
                 this.props.removedCandidat(id);
               }}

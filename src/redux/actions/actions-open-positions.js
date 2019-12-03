@@ -3,6 +3,8 @@ export const FETCHED_POSITIONS = "FETCHED_POSITIONS";
 export const REMOVED_POSITION = "REMOVED_POSITION";
 export const ADD_POSITION = "ADD_POSITION";
 export const EDIT_POSITION = "EDIT_POSITION";
+export const GET_POSITION = "GET_POSITION";
+export const GET_POSITION_SUCCEED = "GET_POSITION_SUCCEED";
 
 const fetchPositionsSuccess = newPositions => {
   return {
@@ -38,10 +40,26 @@ const fetchPositions = () => {
   };
 };
 
+const getPosition = id => {
+  return {
+    type: GET_POSITION,
+    payload: id
+  };
+};
+
+const getPositionSucced = obj => {
+  return {
+    type: GET_POSITION_SUCCEED,
+    payload: obj
+  };
+};
+
 export {
   fetchPositionsSuccess,
   removedPosition,
   fetchPositions,
   addedPosition,
-  editPosition
+  editPosition,
+  getPosition,
+  getPositionSucced
 };

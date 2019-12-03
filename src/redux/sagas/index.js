@@ -1,9 +1,10 @@
-import { watchLogin } from "./fetch-user";
+import { watchLogin, watchFetchMe } from "./fetch-user";
 import {
   watchFetchStaffs,
   watchRemoveUser,
   watchEditUser,
-  watchAddUser
+  watchAddUser,
+  watchFetchUserAsync
 } from "./fetch-staffs";
 import {
   watchGetBenefits,
@@ -19,14 +20,16 @@ import {
   watchFetchCandidats,
   watchRemoveCandidat,
   watchEditCandidat,
-  watchAddCandidat
+  watchAddCandidat,
+  watchFetchCandidatAsync
 } from "./fetch-candidats";
 
 import {
   watchFetchPositions,
   watchRemovePosition,
   watchEditPosition,
-  watchAddPosition
+  watchAddPosition,
+  watchFetchPositionAsync
 } from "./fetch-open-positions";
 
 import { all } from "redux-saga/effects";
@@ -38,6 +41,7 @@ export default function* rootSaga() {
     watchRemoveUser(),
     watchEditUser(),
     watchAddUser(),
+    watchFetchUserAsync(),
     watchGetBenefits(),
     watchAddBenefit(),
     watchEditBenefit(),
@@ -52,6 +56,9 @@ export default function* rootSaga() {
     watchFetchCandidats(),
     watchRemoveCandidat(),
     watchEditCandidat(),
-    watchAddCandidat()
+    watchAddCandidat(),
+    watchFetchCandidatAsync(),
+    watchFetchPositionAsync(),
+    watchFetchMe()
   ]);
 }

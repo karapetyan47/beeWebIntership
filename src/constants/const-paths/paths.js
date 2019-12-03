@@ -10,3 +10,4 @@ export const TICKETS = "/tickets";
 export const PUSH_NOTIFICATIONS = "/push-notifications";
 export const RATING = "/rating";
 export const POSSITIONS = "/possitions";
+export const OPEN_POSSITION_ID = "/open-position/positionId";

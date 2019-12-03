@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import {
   LOGIN_PATH,
   MAIN_PATH,
-  POSSITIONS
+  POSSITIONS,
+  OPEN_POSSITION_ID
 } from "../../constants/const-paths/paths";
 
-const PUBLIC_ROUTES = [LOGIN_PATH, POSSITIONS];
+const PUBLIC_ROUTES = [LOGIN_PATH, POSSITIONS, OPEN_POSSITION_ID];
 
 const GuestLayout = props => {
   const { loadingUser, location, history } = props;

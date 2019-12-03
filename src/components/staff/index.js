@@ -43,6 +43,11 @@ class Staff extends Component {
               data={this.props.users}
               header={[
                 {
+                  name: "Info",
+                  prop: "_id",
+                  type: "text"
+                },
+                {
                   name: "Name",
                   prop: "firstname",
                   type: "text"
@@ -73,6 +78,7 @@ class Staff extends Component {
                   type: "number"
                 }
               ]}
+              redirectTo={`${STAFF}`}
               deleteItem={id => {
                 this.props.removedUser(id);
               }}

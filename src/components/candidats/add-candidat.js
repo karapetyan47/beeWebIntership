@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { fetchPositions, addedCandidat } from "../../redux/actions";
+import { CANDIDATES } from "../../constants/const-paths/paths";
 
 const useInputValue = (resetError = () => {}, defaultValue = "") => {
   const [value, setValue] = useState(defaultValue);
@@ -19,7 +20,7 @@ const useInputValue = (resetError = () => {}, defaultValue = "") => {
   };
 };
 
-const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
+const AddCandidat = ({ positions, fetchPositions, addedCandidat }) => {
   const [file, setFile] = useState(null);
   const name = useInputValue();
   const surName = useInputValue();
@@ -174,142 +175,163 @@ const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
   };
 
   return (
-    <div style={{ margin: "20px", height: "100%" }}>
-      <form onSubmit={handleAddCondidate}>
-        <div className="form-group">
-          <label htmlFor="exampleFormControlSelect1">Select position</label>
-          <select
-            {...position.bind}
-            className="form-control"
-            id="exampleFormControlSelect1"
-          >
-            <option value="" style={{ display: "none" }}>
-              Select position
-            </option>
-            {positions.map((x, i) => {
-              return (
-                <option key={i} value={x._id}>
-                  {x.title}
-                </option>
-              );
-            })}
-          </select>
-          <div style={{ color: "red", fontSize: "12px" }}>{positionError}</div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputEmail4">Email</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputEmail4"
-            placeholder="Email"
-            {...email.bind}
-          />
-          <div style={{ color: "red", fontSize: "12px" }}>{emailError}</div>
-        </div>
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label htmlFor="inputPassword4">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputPassword4"
-              placeholder="Name"
-              {...name.bind}
-            />
-            <div style={{ color: "red", fontSize: "12px" }}>{nameError}</div>
-          </div>
-          <div className="form-group col-md-6">
-            <label htmlFor="inputEmail4">Surname</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputEmail4"
-              placeholder="Surname"
-              {...surName.bind}
-            />
-            <div style={{ color: "red", fontSize: "12px" }}>{surNameError}</div>
-          </div>
-        </div>
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label htmlFor="exampleFormControlSelect1">Select Gender</label>
+    <div>
+      <Link to={CANDIDATES} style={{ textDecoration: "none" }}>
+        <button className="btn btn-outline-success">
+          <i className="fas fa-arrow-left"></i>
+        </button>
+      </Link>
+
+      <div
+        className="shadow p-3 mb-5 bg-white rounded content"
+        style={{ margin: "20px", height: "100%" }}
+      >
+        <form onSubmit={handleAddCondidate}>
+          <div className="form-group">
+            <label htmlFor="exampleFormControlSelect1">Select position</label>
             <select
-              {...gender.bind}
+              {...position.bind}
               className="form-control"
               id="exampleFormControlSelect1"
             >
               <option value="" style={{ display: "none" }}>
-                Select gender
+                Select position
               </option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              {positions.map((x, i) => {
+                return (
+                  <option key={i} value={x._id}>
+                    {x.title}
+                  </option>
+                );
+              })}
             </select>
-            <div style={{ color: "red", fontSize: "12px" }}>{genderError}</div>
-          </div>
-          <div className="form-group col-md-6">
-            <label htmlFor="inputPassword4">Age</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputPassword4"
-              placeholder="Age"
-              {...age.bind}
-            />
-            <div style={{ color: "red", fontSize: "12px" }}>{ageError}</div>
-          </div>
-        </div>
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label htmlFor="inputAddress">Experience</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputAddress"
-              placeholder="Experience"
-              {...experience.bind}
-            />
             <div style={{ color: "red", fontSize: "12px" }}>
-              {experienceError}
+              {positionError}
             </div>
           </div>
-          <div className="form-group col-md-6">
-            <label htmlFor="exampleFormControlTextarea1">Skills</label>
+          <div className="form-group">
+            <label htmlFor="inputEmail4">Email</label>
             <input
+              type="text"
               className="form-control"
-              id="exampleFormControlTextarea1"
-              placeholder="Skills"
-              {...skills.bind}
+              id="inputEmail4"
+              placeholder="Email"
+              {...email.bind}
             />
-            <div style={{ color: "red", fontSize: "12px" }}>{skillsError}</div>
+            <div style={{ color: "red", fontSize: "12px" }}>{emailError}</div>
           </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputCity">Education</label>
-          <textarea
-            type="text"
-            className="form-control"
-            id="inputCity"
-            rows="3"
-            {...education.bind}
-          ></textarea>
-          <div style={{ color: "red", fontSize: "12px" }}>{educationError}</div>
-        </div>
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label htmlFor="inputPassword4">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputPassword4"
+                placeholder="Name"
+                {...name.bind}
+              />
+              <div style={{ color: "red", fontSize: "12px" }}>{nameError}</div>
+            </div>
+            <div className="form-group col-md-6">
+              <label htmlFor="inputEmail4">Surname</label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputEmail4"
+                placeholder="Surname"
+                {...surName.bind}
+              />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {surNameError}
+              </div>
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label htmlFor="exampleFormControlSelect1">Select Gender</label>
+              <select
+                {...gender.bind}
+                className="form-control"
+                id="exampleFormControlSelect1"
+              >
+                <option value="" style={{ display: "none" }}>
+                  Select gender
+                </option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {genderError}
+              </div>
+            </div>
+            <div className="form-group col-md-6">
+              <label htmlFor="inputPassword4">Age</label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputPassword4"
+                placeholder="Age"
+                {...age.bind}
+              />
+              <div style={{ color: "red", fontSize: "12px" }}>{ageError}</div>
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label htmlFor="inputAddress">Experience</label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputAddress"
+                placeholder="Experience"
+                {...experience.bind}
+              />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {experienceError}
+              </div>
+            </div>
+            <div className="form-group col-md-6">
+              <label htmlFor="exampleFormControlTextarea1">Skills</label>
+              <input
+                className="form-control"
+                id="exampleFormControlTextarea1"
+                placeholder="Skills"
+                {...skills.bind}
+              />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {skillsError}
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="inputCity">Education</label>
+            <textarea
+              type="text"
+              className="form-control"
+              id="inputCity"
+              rows="3"
+              {...education.bind}
+            ></textarea>
+            <div style={{ color: "red", fontSize: "12px" }}>
+              {educationError}
+            </div>
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="exampleFormControlFile1">Example file input</label>
-          <input
-            type="file"
-            className="form-control-file"
-            id="exampleFormControlFile1"
-            onChange={fileSelectedHendler}
-          />
-        </div>
+          <div className="form-group">
+            <label htmlFor="exampleFormControlFile1">Candidate's Cv</label>
+            <input
+              type="file"
+              className="form-control-file"
+              id="exampleFormControlFile1"
+              onChange={fileSelectedHendler}
+            />
+          </div>
 
-        <button type="submit" className="btn btn-success">
-          Submit your application
-        </button>
-      </form>
+          <button type="submit" className="btn btn-success">
+            Add
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
@@ -328,4 +350,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(Positions));
+)(withRouter(AddCandidat));

@@ -12,11 +12,11 @@ export default class StaffServices {
   };
 
   deleteUser = userId => {
-    axios.delete(`${this.baseUrl}/users/${userId}`);
+    return axios.delete(`${this.baseUrl}/users/${userId}`);
   };
 
   addUser = data => {
-    axios({
+    return axios({
       method: "POST",
       url: `${this.baseUrl}/signup`,
       data: {
@@ -35,10 +35,17 @@ export default class StaffServices {
 
   editUser = obj => {
     console.log("obj", obj);
-    axios({
+    return axios({
       method: "PATCH",
       url: `${this.baseUrl}/users/${obj.id}`,
       data: obj.obj
+    });
+  };
+
+  getUser = userId => {
+    return axios({
+      method: "GET",
+      url: `${this.baseUrl}/users/${userId}`
     });
   };
 }

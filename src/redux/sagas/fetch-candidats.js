@@ -7,6 +7,7 @@ import {
   ADD_CANDIDAT
 } from "redux/actions";
 import CandidatsServices from "../../services/candidats-services";
+import { getCandidatSucced, GET_CANDIDAT } from "../actions";
 
 const candidatService = new CandidatsServices();
 
@@ -21,6 +22,9 @@ function* watchEditCandidat() {
 }
 function* watchAddCandidat() {
   yield takeEvery(ADD_CANDIDAT, addCandidat);
+}
+function* watchFetchCandidatAsync() {
+  yield takeEvery(GET_CANDIDAT, fetchCandidatAsync);
 }
 
 function* fetchCandidatsAsync() {
@@ -66,9 +70,20 @@ function* editCandidat({ payload }) {
   }
 }
 
+function* fetchCandidatAsync({ payload }) {
+  try {
+    const data = yield call(candidatService.getCandidat, payload);
+
+    yield put(getCandidatSucced(data.data));
+  } catch (e) {
+    console.log("e", e);
+  }
+}
+
 export {
   watchFetchCandidats,
   watchRemoveCandidat,
   watchEditCandidat,
-  watchAddCandidat
+  watchAddCandidat,
+  watchFetchCandidatAsync
 };

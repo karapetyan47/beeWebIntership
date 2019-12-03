@@ -8,7 +8,10 @@ import {
   FETCH_BENEFITS_HISTORYS_SUCCESS,
   FETCH_POSITIONS_SUCCESS,
   FETCH_CANDIDATS_SUCCESS,
-  FETCHED_BENEFITS_HISTORYS
+  FETCHED_BENEFITS_HISTORYS,
+  GET_POSITION_SUCCEED,
+  GET_USER_SUCCEED,
+  GET_CANDIDAT_SUCCEED
 } from "../actions";
 
 const initialState = {
@@ -23,7 +26,10 @@ const initialState = {
   positions: [],
   loadingPositions: true,
   candidats: [],
-  loadingCandidats: true
+  loadingCandidats: true,
+  openPosition: {},
+  userAbout: {},
+  candidat: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -93,6 +99,21 @@ const reducer = (state = initialState, action) => {
         ...state,
         candidats: action.payload,
         loadingCandidats: false
+      };
+    case GET_POSITION_SUCCEED:
+      return {
+        ...state,
+        openPosition: action.payload
+      };
+    case GET_USER_SUCCEED:
+      return {
+        ...state,
+        userAbout: action.payload
+      };
+    case GET_CANDIDAT_SUCCEED:
+      return {
+        ...state,
+        candidat: action.payload
       };
     default:
       return state;

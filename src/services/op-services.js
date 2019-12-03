@@ -6,40 +6,40 @@ export default class OPServices {
   getAllPositions = () => {
     return axios({
       method: "GET",
-      url: `${this.baseUrl}/openpositions`
+      url: `${this.baseUrl}/open-positions`
     });
   };
 
   deletePosition = positionId => {
-    return axios.delete(`${this.baseUrl}/openpositions/${positionId}`);
+    return axios.delete(`${this.baseUrl}/open-positions/${positionId}`);
   };
 
   addPosition = data => {
-    console.log("data", data);
     return axios({
       method: "POST",
-      url: `${this.baseUrl}/openpositions`,
+      url: `${this.baseUrl}/open-positions`,
       data: {
-        openPosId: data.position,
-        name: data.name,
-        surname: data.surName,
-        email: data.email,
-        age: data.age,
-        gender: data.gender,
-        birthday: data.birthday,
-        skills: data.skills,
-        experience: data.experience,
-        education: data.education
+        title: data.title,
+        description: data.description,
+        ageLimit: data.ageLimit,
+        salary: data.salary,
+        gender: data.gender
       }
     });
   };
 
   editPosition = obj => {
-    console.log("obj", obj);
     return axios({
       method: "PATCH",
-      url: `${this.baseUrl}/openpositions/${obj.id}`,
+      url: `${this.baseUrl}/open-positions/${obj.id}`,
       data: obj.obj
+    });
+  };
+
+  getPosition = posId => {
+    return axios({
+      method: "GET",
+      url: `${this.baseUrl}/open-positions/${posId}`
     });
   };
 }

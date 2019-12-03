@@ -3,6 +3,8 @@ export const FETCHED_CANDIDATS = "FETCHED_CANDIDATS";
 export const REMOVED_CANDIDAT = "REMOVED_CANDIDAT";
 export const ADD_CANDIDAT = "ADD_CANDIDAT";
 export const EDIT_CANDIDAT = "EDIT_CANDIDAT";
+export const GET_CANDIDAT = "GET_CANDIDAT";
+export const GET_CANDIDAT_SUCCEED = "GET_CANDIDAT_SUCCEED";
 
 const fetchCandidatsSuccess = newCandidats => {
   return {
@@ -38,10 +40,26 @@ const fetchCandidats = () => {
   };
 };
 
+const getCandidat = id => {
+  return {
+    type: GET_CANDIDAT,
+    payload: id
+  };
+};
+
+const getCandidatSucced = obj => {
+  return {
+    type: GET_CANDIDAT_SUCCEED,
+    payload: obj
+  };
+};
+
 export {
   fetchCandidatsSuccess,
   removedCandidat,
   fetchCandidats,
   addedCandidat,
-  editCandidat
+  editCandidat,
+  getCandidat,
+  getCandidatSucced
 };

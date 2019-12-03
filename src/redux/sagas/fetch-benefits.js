@@ -59,15 +59,11 @@ function* addBenefit({ payload }) {
 
 function* removeBenefit({ payload }) {
   try {
-    yield call(benefitsService.deleteBenefit, payload);
-    let data = yield call(() => {
-      return benefitsService.getBenefits().then(res => res);
-    });
-    data = yield call(() => {
-      return benefitsService.getBenefits().then(res => res);
-    });
-
-    yield put(fetchBenefitsSuccess(data.data.benefits));
+    const result = yield call(benefitsService.deleteBenefit, payload);
+    console.log("result", result);
+    if (result.status === 201) {
+      yield call(getBenefits);
+    }
   } catch (e) {
     console.log("e", e);
   }
@@ -75,17 +71,11 @@ function* removeBenefit({ payload }) {
 
 function* editBenefit({ payload }) {
   try {
-    console.log("edit");
-    yield call(benefitsService.editBenefit, payload);
-    let data = yield call(() => {
-      return benefitsService.getBenefits().then(res => res);
-    });
+    const result = yield call(benefitsService.editBenefit, payload);
 
-    data = yield call(() => {
-      return benefitsService.getBenefits().then(res => res);
-    });
-
-    yield put(fetchBenefitsSuccess(data.data.benefits));
+    if (result.status === 200) {
+      yield call(getBenefits);
+    }
   } catch (e) {
     console.log("e", e);
   }

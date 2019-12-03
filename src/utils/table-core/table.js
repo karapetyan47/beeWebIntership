@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 import TableInput from "./table-input";
 
 import "./table.scss";
@@ -10,6 +10,7 @@ const Table = ({
   startEditing,
   stopEditing,
   editIdx,
+  redirectTo = "",
   deleteItem = () => {},
   updateItem = () => {}
 }) => {
@@ -30,7 +31,19 @@ const Table = ({
       <tr key={i}>
         {header.map((y, k) => (
           <td key={k}>
-            {currentlyEditing ? (
+            {y.name === "Info" ? (
+              <Link
+                to={{
+                  pathname: `${redirectTo}/${x[y.prop]}/edit`,
+                  state: { id: x[y.prop] }
+                }}
+                style={{ textDecoration: "none", textAlign: "center" }}
+              >
+                <button className="info-btn">
+                  <i className="fas fa-info"></i>
+                </button>
+              </Link>
+            ) : currentlyEditing ? (
               <TableInput
                 id={x._id}
                 updateValue={e => handleUpdateItem(e)}
@@ -108,6 +121,7 @@ const Table = ({
                 {x.name}
               </th>
             ))}
+
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>

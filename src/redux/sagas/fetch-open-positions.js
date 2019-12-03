@@ -4,9 +4,11 @@ import {
   FETCHED_POSITIONS,
   REMOVED_POSITION,
   EDIT_POSITION,
-  ADD_POSITION
+  ADD_POSITION,
+  GET_POSITION
 } from "redux/actions";
 import OPService from "../../services/op-services";
+import { getPositionSucced } from "../actions";
 
 const positionService = new OPService();
 
@@ -21,6 +23,9 @@ function* watchEditPosition() {
 }
 function* watchAddPosition() {
   yield takeEvery(ADD_POSITION, addPosition);
+}
+function* watchFetchPositionAsync() {
+  yield takeEvery(GET_POSITION, fetchPositionAsync);
 }
 
 function* fetchPositionsAsync() {
@@ -56,11 +61,24 @@ function* removePosition({ payload }) {
 
 function* editPosition({ payload }) {
   try {
+    console.log("payload", payload);
     const result = yield call(positionService.editPosition, payload);
     console.log("result", result);
     if (result.status === 200) {
       yield call(fetchPositionsAsync);
+      // console.log(payload.id);
+      // yield call(fetchPositionAsync(payload.id));
     }
+  } catch (e) {
+    console.log("e", e);
+  }
+}
+
+function* fetchPositionAsync({ payload }) {
+  try {
+    const data = yield call(positionService.getPosition, payload);
+
+    yield put(getPositionSucced(data.data));
   } catch (e) {
     console.log("e", e);
   }
@@ -70,5 +88,6 @@ export {
   watchFetchPositions,
   watchRemovePosition,
   watchEditPosition,
-  watchAddPosition
+  watchAddPosition,
+  watchFetchPositionAsync
 };

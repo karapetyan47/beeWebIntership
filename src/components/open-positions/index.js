@@ -47,6 +47,11 @@ class OpenPositions extends Component {
               data={this.props.positions}
               header={[
                 {
+                  name: "Info",
+                  prop: "_id",
+                  type: "text"
+                },
+                {
                   name: "Title",
                   prop: "title",
                   type: "text"
@@ -68,6 +73,7 @@ class OpenPositions extends Component {
                   type: "text"
                 }
               ]}
+              redirectTo={`${OPEN_POSSITIONS}`}
               deleteItem={id => {
                 this.props.removedPosition(id);
               }}

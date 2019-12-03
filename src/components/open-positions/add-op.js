@@ -26,51 +26,35 @@ const useInputValue = (resetError = () => {}, defaultValue = "") => {
 };
 
 const AddOpenPosition = ({ addedPosition }) => {
-  const firstName = useInputValue();
-  const lastName = useInputValue();
-  const email = useInputValue();
-  const role = useInputValue();
+  const title = useInputValue();
+  const description = useInputValue();
+  const ageLimit = useInputValue();
   const salary = useInputValue();
-  const birthday = useInputValue();
-  const phoneNumber = useInputValue();
-  const password = useInputValue();
-  const repeatPassword = useInputValue();
+  const gender = useInputValue();
 
   const handleAddOpenPosition = e => {
     e.preventDefault();
 
     if (
-      firstName.value().trim() &&
-      lastName.value().trim() &&
-      email.value().trim() &&
-      role.value().trim() &&
+      title.value().trim() &&
+      description.value().trim() &&
+      ageLimit.value().trim() &&
       salary.value().trim() &&
-      birthday.value().trim() &&
-      phoneNumber.value().trim() &&
-      password.value().trim() &&
-      repeatPassword.value().trim()
+      gender.value().trim()
     ) {
       addedPosition({
-        firstName: firstName.value(),
-        lastName: lastName.value(),
-        email: email.value(),
-        role: role.value(),
+        title: title.value(),
+        description: description.value(),
+        ageLimit: ageLimit.value(),
         salary: salary.value(),
-        birthday: birthday.value(),
-        phoneNumber: phoneNumber.value(),
-        password: password.value(),
-        repeatPassword: repeatPassword.value()
+        gender: gender.value()
       });
     }
-    firstName.clear();
-    lastName.clear();
-    email.clear();
-    role.clear();
+    title.clear();
+    description.clear();
+    ageLimit.clear();
     salary.clear();
-    birthday.clear();
-    phoneNumber.clear();
-    password.clear();
-    repeatPassword.clear();
+    gender.clear();
   };
 
   return (
@@ -82,44 +66,35 @@ const AddOpenPosition = ({ addedPosition }) => {
       </Link>
       <div className="shadow p-3 mb-5 bg-white rounded content">
         <div className="h3">
-          <h3>OpenPosition About</h3>
+          <h3>Open Position About</h3>
         </div>
 
         <form onSubmit={handleAddOpenPosition}>
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <label>Name</label>
-              <input
-                className="form-control"
-                placeholder="Name"
-                {...firstName.bind}
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <label>Surname</label>
-              <input
-                className="form-control"
-                placeholder="Surname"
-                {...lastName.bind}
-              />
-            </div>
-          </div>
           <div className="form-group">
-            <label>Email</label>
+            <label>Title</label>
             <input
               className="form-control"
-              placeholder="Email"
-              {...email.bind}
-              type="email"
+              placeholder="Title"
+              {...title.bind}
             />
           </div>
+          <div className="form-group">
+            <label>Description</label>
+            <input
+              className="form-control"
+              placeholder="Description"
+              {...description.bind}
+            />
+          </div>
+
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label>Role</label>
+              <label>Age limit</label>
               <input
                 className="form-control"
-                placeholder="Role"
-                {...role.bind}
+                placeholder="Age limit"
+                {...ageLimit.bind}
+                type="ageLimit"
               />
             </div>
             <div className="form-group col-md-6">
@@ -130,40 +105,21 @@ const AddOpenPosition = ({ addedPosition }) => {
                 {...salary.bind}
               />
             </div>
+          </div>
+          <div className="form-row">
             <div className="form-group col-md-6">
-              <label>Birthday</label>
-              <input
+              <label htmlFor="exampleFormControlSelect1">Select Gender</label>
+              <select
+                {...gender.bind}
                 className="form-control"
-                placeholder="Birthday"
-                {...birthday.bind}
-                type="date"
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <label>Phone number</label>
-              <input
-                className="form-control"
-                placeholder="Phone number"
-                {...phoneNumber.bind}
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <label>Password</label>
-              <input
-                className="form-control"
-                placeholder="Password"
-                {...password.bind}
-                type="password"
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <label>Repeat password</label>
-              <input
-                className="form-control"
-                placeholder="Repeat password"
-                {...repeatPassword.bind}
-                type="password"
-              />
+                id="exampleFormControlSelect1"
+              >
+                <option value="" style={{ display: "none" }}>
+                  Select gender
+                </option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
             </div>
           </div>
           <button className="btn btn-warning" type="submit">
