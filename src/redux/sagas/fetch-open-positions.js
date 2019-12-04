@@ -61,13 +61,12 @@ function* removePosition({ payload }) {
 
 function* editPosition({ payload }) {
   try {
-    console.log("payload", payload);
     const result = yield call(positionService.editPosition, payload);
-    console.log("result", result);
+
     if (result.status === 200) {
-      yield call(fetchPositionsAsync);
-      // console.log(payload.id);
-      // yield call(fetchPositionAsync(payload.id));
+      payload.multi
+        ? yield call(fetchPositionsAsync)
+        : yield put(getPositionSucced(result.data));
     }
   } catch (e) {
     console.log("e", e);

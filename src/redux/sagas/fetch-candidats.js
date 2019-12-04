@@ -62,8 +62,11 @@ function* removeCandidat({ payload }) {
 function* editCandidat({ payload }) {
   try {
     const result = yield call(candidatService.editCandidat, payload);
-    if (result.status === 200) {
-      yield call(fetchCandidatsAsync);
+
+    if (result.status === 201) {
+      payload.multi
+        ? yield call(fetchCandidatsAsync)
+        : yield put(getCandidatSucced(result.data));
     }
   } catch (e) {
     console.log("e", e);

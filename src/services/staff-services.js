@@ -34,7 +34,6 @@ export default class StaffServices {
   };
 
   editUser = obj => {
-    console.log("obj", obj);
     return axios({
       method: "PATCH",
       url: `${this.baseUrl}/users/${obj.id}`,

@@ -15,7 +15,6 @@ export default class CandidatsServices {
   };
 
   addCandidat = data => {
-    console.log("data", data);
     return axios({
       method: "POST",
       url: `${this.baseUrl}/candidats`,
@@ -24,7 +23,6 @@ export default class CandidatsServices {
   };
 
   editCandidat = obj => {
-    console.log("obj", obj);
     return axios({
       method: "PATCH",
       url: `${this.baseUrl}/candidats/${obj.id}`,

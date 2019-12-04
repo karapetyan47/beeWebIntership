@@ -43,11 +43,6 @@ class Staff extends Component {
               data={this.props.users}
               header={[
                 {
-                  name: "Info",
-                  prop: "_id",
-                  type: "text"
-                },
-                {
                   name: "Name",
                   prop: "firstname",
                   type: "text"
@@ -76,6 +71,11 @@ class Staff extends Component {
                   name: "Phone number",
                   prop: "phoneNumber",
                   type: "number"
+                },
+                {
+                  name: "Info",
+                  prop: "_id",
+                  type: "text"
                 }
               ]}
               redirectTo={`${STAFF}`}

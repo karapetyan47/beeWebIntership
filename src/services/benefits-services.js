@@ -26,7 +26,6 @@ export default class BenefitsService {
   };
 
   editBenefit = obj => {
-    console.log("obj", obj);
     return axios({
       method: "PATCH",
       url: `${this.baseUrl}/benefits/${obj.id}`,

@@ -61,10 +61,8 @@ function* removeUser({ payload }) {
 
 function* editUser({ payload }) {
   try {
-    console.log("payload", payload);
-
     const result = yield yield call(staffService.editUser, payload);
-    console.log("result", result);
+
     if (result.status === 200) {
       yield call(fetchStaffsAsync);
     }

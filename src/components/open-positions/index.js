@@ -47,11 +47,6 @@ class OpenPositions extends Component {
               data={this.props.positions}
               header={[
                 {
-                  name: "Info",
-                  prop: "_id",
-                  type: "text"
-                },
-                {
                   name: "Title",
                   prop: "title",
                   type: "text"
@@ -71,6 +66,11 @@ class OpenPositions extends Component {
                   name: "Salary",
                   prop: "salary",
                   type: "text"
+                },
+                {
+                  name: "Info",
+                  prop: "_id",
+                  type: "text"
                 }
               ]}
               redirectTo={`${OPEN_POSSITIONS}`}
@@ -78,7 +78,7 @@ class OpenPositions extends Component {
                 this.props.removedPosition(id);
               }}
               updateItem={obj => {
-                this.props.editPosition(obj);
+                this.props.editPosition({ ...obj, multi: true });
               }}
               editIdx={this.state.editIdx}
               startEditing={this.startEditing}

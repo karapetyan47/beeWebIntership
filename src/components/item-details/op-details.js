@@ -20,10 +20,6 @@ const OpenPositionDetail = ({
   removedPosition,
   editPosition
 }) => {
-  // state = {
-  //   editIdx: -1
-  // };
-
   const [currentlyEditing, setCurrentlyEditiing] = useState(false);
   const [value, setValue] = useState({ obj: {} });
   const handleUpdateItem = e => {
@@ -104,7 +100,17 @@ const OpenPositionDetail = ({
                         type={x.type}
                       />
                     ) : (
-                      <span>{openPosition[x.prop]}</span>
+                      <p
+                        className="text-center"
+                        onDoubleClick={() => setCurrentlyEditiing(true)}
+                        style={{
+                          border: "0.5px solid grey",
+                          borderRadius: "7px",
+                          marginTop: "3px"
+                        }}
+                      >
+                        {openPosition[x.prop]}
+                      </p>
                     )}
                   </div>
                 );
@@ -116,7 +122,18 @@ const OpenPositionDetail = ({
                 >
                   URL
                 </div>{" "}
-                {`${OPEN_POSSITION_ID}=${id}`}
+                <p
+                  className="text-center text-break"
+                  style={{
+                    border: "0.5px solid grey",
+                    borderRadius: "7px",
+                    marginTop: "3px",
+                    padding: "0 10px"
+                  }}
+                >
+                  {" "}
+                  {`${OPEN_POSSITION_ID}=${id}`}
+                </p>
               </div>
             </div>
           ) : (

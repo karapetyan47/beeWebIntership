@@ -41,11 +41,6 @@ class Candidats extends Component {
               data={this.props.candidats}
               header={[
                 {
-                  name: "Info",
-                  prop: "_id",
-                  type: "text"
-                },
-                {
                   name: "Name",
                   prop: "name",
                   type: "text"
@@ -75,6 +70,11 @@ class Candidats extends Component {
                   name: "Experience",
                   prop: "experience",
                   type: "text"
+                },
+                {
+                  name: "Info",
+                  prop: "_id",
+                  type: "text"
                 }
               ]}
               redirectTo={CANDIDATES}
@@ -82,7 +82,7 @@ class Candidats extends Component {
                 this.props.removedCandidat(id);
               }}
               updateItem={obj => {
-                this.props.editCandidat(obj);
+                this.props.editCandidat({ ...obj, multi: true });
               }}
               editIdx={this.state.editIdx}
               startEditing={this.startEditing}

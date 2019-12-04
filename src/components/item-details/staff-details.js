@@ -1,17 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/actions";
-
+import { getUser, removedUser, editUser } from "../../redux/actions";
+import DetailInput from "./details-input";
 import "./details.scss";
 import { STAFF } from "../../constants/const-paths/paths";
 
-const StaffDetails = ({ match, getUser, userAbout }) => {
+const StaffDetails = ({ match, getUser, userAbout, removedUser, editUser }) => {
+  const [currentlyEditing, setCurrentlyEditiing] = useState(false);
+  const [value, setValue] = useState({ obj: {} });
+  const handleUpdateItem = e => {
+    // console.log("e", e);
+    setValue({ obj: { ...value.obj, ...e.obj } });
+  };
+
+  const onUpdateItem = () => {
+    if (Object.keys(value.obj).length) editUser({ id: id, ...value });
+    setValue({ obj: {} });
+  };
+
+  const startEditing = () => {
+    setCurrentlyEditiing(true);
+  };
+
+  const stopEditing = () => {
+    setCurrentlyEditiing(false);
+  };
   const id = match.params.id;
   useEffect(() => {
     getUser(id);
   }, [getUser, id]);
-  console.log("id", id);
+
   const keys = [
     {
       name: "Name",
@@ -53,14 +72,43 @@ const StaffDetails = ({ match, getUser, userAbout }) => {
         </button>
       </Link>
 
-      <div className="shadow p-3 mb-5 bg-white rounded content">
+      <div className="shadow p-3 mb-5 bg-white rounded content details">
         {userAbout ? (
           Object.keys(userAbout).length ? (
             <div>
               {keys.map((x, i) => {
                 return (
-                  <div key={i} className="op-detail">
-                    {x.name}: {userAbout[x.prop]}
+                  <div key={i} className="detail">
+                    <div
+                      className="badge badge-primary text-wrap"
+                      style={{
+                        width: "6rem",
+                        height: "24px"
+                      }}
+                    >
+                      {x.name}
+                    </div>{" "}
+                    {currentlyEditing ? (
+                      <DetailInput
+                        id={id}
+                        updateValue={e => handleUpdateItem(e)}
+                        value={userAbout[x.prop]}
+                        name={x.prop}
+                        type={x.type}
+                      />
+                    ) : (
+                      <p
+                        className="text-center"
+                        onDoubleClick={() => setCurrentlyEditiing(true)}
+                        style={{
+                          border: "0.5px solid grey",
+                          borderRadius: "7px",
+                          marginTop: "3px"
+                        }}
+                      >
+                        {userAbout[x.prop]}
+                      </p>
+                    )}
                   </div>
                 );
               })}
@@ -71,6 +119,52 @@ const StaffDetails = ({ match, getUser, userAbout }) => {
         ) : (
           <span>Bzz~~</span>
         )}
+        <div className="assets">
+          <div style={{ marginRight: "5px" }}>
+            {currentlyEditing ? (
+              <button
+                className="btn btn-outline-success"
+                onClick={() => {
+                  onUpdateItem();
+                  stopEditing();
+                }}
+              >
+                <i className="fas fa-check"></i>
+              </button>
+            ) : (
+              <button
+                className="btn btn-outline-success"
+                onClick={() => {
+                  startEditing();
+                }}
+              >
+                <i className="fas fa-pen"></i>
+              </button>
+            )}
+          </div>
+          <div style={{ marginRight: "5px" }}>
+            {currentlyEditing ? (
+              <button
+                className="btn btn-outline-warning"
+                onClick={() => {
+                  setValue({ obj: {} });
+                  stopEditing();
+                }}
+              >
+                <i className="fas fa-ban"></i>
+              </button>
+            ) : (
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => {
+                  removedUser(id);
+                }}
+              >
+                <i className="fas fa-trash-alt"></i>
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -83,7 +177,9 @@ const mapStateToProps = ({ userAbout }) => {
 };
 
 const mapDispatchToProps = {
-  getUser
+  getUser,
+  removedUser,
+  editUser
 };
 
 export default connect(

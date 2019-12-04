@@ -28,7 +28,7 @@ function* login({ payload }) {
 function* fetchMe() {
   try {
     const data = yield call(usersService.getMe);
-    console.log("data", data);
+
     yield put(loginSuccess(data.data));
   } catch (e) {
     yield put(loginFailed(e));

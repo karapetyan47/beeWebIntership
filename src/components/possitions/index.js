@@ -129,9 +129,6 @@ const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
     if (file) {
       console.log("file", file);
       fd.append("cv", file, file.name);
-      for (var key of fd.entries()) {
-        console.log(key[0] + ", " + key[1]);
-      }
     }
     const isValid = validate();
     if (isValid) {
@@ -148,8 +145,11 @@ const Positions = ({ positions, fetchPositions, addedCandidat, location }) => {
       };
 
       Object.keys(obj).map(key => {
-        fd.append(key, obj[key]);
+        return fd.append(key, obj[key]);
       });
+      for (var key of fd.entries()) {
+        console.log(key[0] + ", " + key[1]);
+      }
       addedCandidat(fd);
       name.clear();
       surName.clear();

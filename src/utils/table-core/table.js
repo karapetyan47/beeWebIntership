@@ -40,7 +40,7 @@ const Table = ({
                 style={{ textDecoration: "none", textAlign: "center" }}
               >
                 <button className="info-btn">
-                  <i className="fas fa-info"></i>
+                  <i className="far fa-eye"></i>
                 </button>
               </Link>
             ) : currentlyEditing ? (
@@ -118,7 +118,7 @@ const Table = ({
           <tr>
             {header.map((x, i) => (
               <th scope="col" key={i}>
-                {x.name}
+                {x.name === "Info" ? "" : x.name}
               </th>
             ))}
 

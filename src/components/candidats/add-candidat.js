@@ -149,7 +149,7 @@ const AddCandidat = ({ positions, fetchPositions, addedCandidat }) => {
       };
 
       Object.keys(obj).map(key => {
-        fd.append(key, obj[key]);
+        return fd.append(key, obj[key]);
       });
       addedCandidat(fd);
       name.clear();

@@ -60,7 +60,7 @@ function* addBenefit({ payload }) {
 function* removeBenefit({ payload }) {
   try {
     const result = yield call(benefitsService.deleteBenefit, payload);
-    console.log("result", result);
+
     if (result.status === 201) {
       yield call(getBenefits);
     }
