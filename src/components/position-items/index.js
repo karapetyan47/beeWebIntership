@@ -159,7 +159,6 @@ const PositionItem = ({
       skills.clear();
       experience.clear();
       education.clear();
-      position.clear();
       gender.clear();
       age.clear();
       setFile(null);

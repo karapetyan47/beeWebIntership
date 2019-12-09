@@ -64,7 +64,9 @@ function* editUser({ payload }) {
     const result = yield yield call(staffService.editUser, payload);
 
     if (result.status === 200) {
-      yield call(fetchStaffsAsync);
+      payload.multi
+        ? yield yield call(fetchStaffsAsync)
+        : yield put(getUserSucceed(result.data));
     }
   } catch (e) {
     console.log("e", e);

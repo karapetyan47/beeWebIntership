@@ -83,7 +83,7 @@ class Staff extends Component {
                 this.props.removedUser(id);
               }}
               updateItem={obj => {
-                this.props.editUser(obj);
+                this.props.editUser({ ...obj, multi: true });
               }}
               editIdx={this.state.editIdx}
               startEditing={this.startEditing}

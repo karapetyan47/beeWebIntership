@@ -26,12 +26,22 @@ class AdminTools extends Component {
   }
   logout = () => {
     localStorage.removeItem("jwtToken");
+    document.cookie = "refreshToken= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
     setAuterizationToken(localStorage.jwtToken);
     this.props.logOut();
     this.props.history.push(LOGIN_PATH);
   };
 
   componentDidMount() {
+    this.updateLocation();
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.updateLocation();
+    }
+  }
+
+  updateLocation = () => {
     const {
       location: { pathname }
     } = this.props;
@@ -40,7 +50,7 @@ class AdminTools extends Component {
     } else if (pathname.includes(ATTENDANCE)) {
       this.setState({ activePathName: ATTENDANCE });
     } else if (pathname.includes(BENEFITS)) {
-      this.setState({ activePathName: BENEFITS });
+      this.setState({ activePathName: `${BENEFITS}/history` });
     } else if (pathname.includes(OPEN_POSSITIONS)) {
       this.setState({ activePathName: OPEN_POSSITIONS });
     } else if (pathname.includes(CANDIDATES)) {
@@ -50,7 +60,7 @@ class AdminTools extends Component {
     } else if (pathname.includes(RATING)) {
       this.setState({ activePathName: RATING });
     }
-  }
+  };
 
   selectTool = prop => {
     this.setState({

@@ -44,6 +44,7 @@ import OpenPositionDetails from "../item-details/op-details";
 import StaffDetails from "../item-details/staff-details";
 import AddCandidat from "../candidats/add-candidat";
 import CandidatDetail from "../item-details/candidat-detail";
+import "../../common/interceptor";
 
 const App = () => {
   return (

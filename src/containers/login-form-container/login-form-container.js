@@ -22,7 +22,7 @@ const useInputValue = (resetError = () => {}, defaultValue = "") => {
 };
 
 const LoginFormContainer = ({ loginUser, loadingUser }) => {
-  const email = useInputValue(resetError, "test1@mail.ru");
+  const email = useInputValue(resetError, "test47@mail.ru");
   const password = useInputValue(resetError, "00000000");
   const [hasError, setHasError] = useState(false);
 

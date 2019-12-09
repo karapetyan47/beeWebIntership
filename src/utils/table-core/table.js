@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TableInput from "./table-input";
+import Popup from "reactjs-popup";
 
 import "./table.scss";
 
@@ -97,14 +98,43 @@ const Table = ({
               <i className="fas fa-ban"></i>
             </button>
           ) : (
-            <button
-              className="del-btn"
-              onClick={() => {
-                deleteItem(x._id);
-              }}
+            <Popup
+              modal
+              trigger={
+                <button className="del-btn">
+                  <i className="fas fa-trash-alt"></i>
+                </button>
+              }
             >
-              <i className="fas fa-trash-alt"></i>
-            </button>
+              {close => (
+                <div style={{ textAlign: "center" }}>
+                  <p style={{ fontSize: "20px" }}>
+                    Are you sure you want to delete ?
+                  </p>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <button
+                      className="btn btn-outline-danger"
+                      style={{ marginRight: "5px" }}
+                      onClick={() => {
+                        deleteItem(x._id);
+                        close();
+                      }}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      className="btn btn-outline-warning"
+                      onClick={() => {
+                        console.log("modal closed");
+                        close();
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+            </Popup>
           )}
         </td>
       </tr>

@@ -17,6 +17,7 @@ function* login({ payload }) {
   try {
     const data = yield call(usersService.login, payload);
     localStorage.setItem("jwtToken", data.data.tokens.accessToken);
+    document.cookie = `refreshToken=${data.data.tokens.refreshToken}`;
     yield put(loginSuccess(data.data.user));
 
     setAutheriztionToken(data.data.tokens.accessToken);

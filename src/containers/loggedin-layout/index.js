@@ -39,7 +39,6 @@ const LoggedInLayout = props => {
       fetchMe();
     }
   }, [fetchMe, user]);
-  console.log(!location.pathname.includes(OPEN_POSSITION_ID));
 
   const checkRouting = () => {
     if (
