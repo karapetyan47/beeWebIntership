@@ -16,11 +16,11 @@ function* watchFetchMe() {
 function* login({ payload }) {
   try {
     const data = yield call(usersService.login, payload);
-    localStorage.setItem("jwtToken", data.data.tokens.accessToken);
-    document.cookie = `refreshToken=${data.data.tokens.refreshToken}`;
+    localStorage.setItem("jwtToken", data.data.Tokens.accessToken);
+    document.cookie = `refreshToken=${data.data.Tokens.refreshToken}`;
     yield put(loginSuccess(data.data.user));
 
-    setAutheriztionToken(data.data.tokens.accessToken);
+    setAutheriztionToken(data.data.Tokens.accessToken);
   } catch (e) {
     yield put(loginFailed(e));
   }

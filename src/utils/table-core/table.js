@@ -13,7 +13,9 @@ const Table = ({
   editIdx,
   redirectTo = "",
   deleteItem = () => {},
-  updateItem = () => {}
+  updateItem = () => {},
+  search = () => {},
+  searchValue = ""
 }) => {
   const [value, setValue] = useState({ id: null, obj: {} });
   const handleUpdateItem = e => {
@@ -143,6 +145,23 @@ const Table = ({
 
   return (
     <div className="table-section">
+      <div className="input-group mb-3">
+        <div className="input-group-prepend">
+          <span className="input-group-text" id="basic-addon1">
+            <i className="fas fa-search"></i>
+          </span>
+        </div>
+        <input
+          value={searchValue}
+          onChange={e => search(e)}
+          placeholder="Search"
+          type="text"
+          className="form-control"
+          aria-label="Search"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+
       <table className="table">
         <thead className="thead-dark">
           <tr>

@@ -10,9 +10,15 @@ import { STAFF } from "../../constants/const-paths/paths";
 
 class Staff extends Component {
   state = {
-    editIdx: -1
+    editIdx: -1,
+    searchValue: ""
   };
 
+  updateSearch(e) {
+    this.setState({
+      searchValue: e.target.value.substr(0, 20)
+    });
+  }
   componentDidMount() {
     this.props.fetchStaffs();
   }
@@ -30,6 +36,13 @@ class Staff extends Component {
   };
 
   render() {
+    const users = this.props.users.filter(user => {
+      return (
+        user.firstname
+          .toLowerCase()
+          .indexOf(this.state.searchValue.toLowerCase()) !== -1
+      );
+    });
     return (
       <div>
         {this.props.loadingUsers ? (
@@ -40,7 +53,7 @@ class Staff extends Component {
               <button className="btn btn-success">Add User</button>
             </Link>
             <Table
-              data={this.props.users}
+              data={users}
               header={[
                 {
                   name: "Name",
@@ -88,6 +101,8 @@ class Staff extends Component {
               editIdx={this.state.editIdx}
               startEditing={this.startEditing}
               stopEditing={this.stopEditing}
+              search={e => this.updateSearch(e)}
+              searchValue={this.state.searchValue}
             />
           </>
         )}

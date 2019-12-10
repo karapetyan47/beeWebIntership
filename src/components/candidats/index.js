@@ -8,8 +8,15 @@ import { CANDIDATES } from "../../constants/const-paths/paths";
 
 class Candidats extends Component {
   state = {
-    editIdx: -1
+    editIdx: -1,
+    searchValue: ""
   };
+
+  updateSearch(e) {
+    this.setState({
+      searchValue: e.target.value.substr(0, 20)
+    });
+  }
 
   componentDidMount() {
     this.props.fetchCandidats();
@@ -28,6 +35,13 @@ class Candidats extends Component {
   };
 
   render() {
+    const candidats = this.props.candidats.filter(candidat => {
+      return (
+        candidat.name
+          .toLowerCase()
+          .indexOf(this.state.searchValue.toLowerCase()) !== -1
+      );
+    });
     return (
       <div>
         {this.props.loadingCandidats ? (
@@ -38,7 +52,7 @@ class Candidats extends Component {
               <button className="btn btn-success">Add new candidat</button>
             </Link>
             <Table
-              data={this.props.candidats}
+              data={candidats}
               header={[
                 {
                   name: "Name",
@@ -87,6 +101,8 @@ class Candidats extends Component {
               editIdx={this.state.editIdx}
               startEditing={this.startEditing}
               stopEditing={this.stopEditing}
+              search={e => this.updateSearch(e)}
+              searchValue={this.state.searchValue}
             />
           </>
         )}

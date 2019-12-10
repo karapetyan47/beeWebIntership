@@ -11,9 +11,15 @@ import "./open-positions.scss";
 
 class OpenPositions extends Component {
   state = {
-    editIdx: -1
+    editIdx: -1,
+    searchValue: ""
   };
 
+  updateSearch(e) {
+    this.setState({
+      searchValue: e.target.value.substr(0, 20)
+    });
+  }
   componentDidMount() {
     this.props.fetchPositions();
   }
@@ -31,6 +37,13 @@ class OpenPositions extends Component {
   };
 
   render() {
+    const positions = this.props.positions.filter(position => {
+      return (
+        position.title
+          .toLowerCase()
+          .indexOf(this.state.searchValue.toLowerCase()) !== -1
+      );
+    });
     return (
       <div>
         {this.props.loadingPositions ? (
@@ -44,7 +57,7 @@ class OpenPositions extends Component {
               <button className="btn btn-success">Open new position</button>
             </Link>
             <Table
-              data={this.props.positions}
+              data={positions}
               header={[
                 {
                   name: "Title",
@@ -83,6 +96,8 @@ class OpenPositions extends Component {
               editIdx={this.state.editIdx}
               startEditing={this.startEditing}
               stopEditing={this.stopEditing}
+              search={e => this.updateSearch(e)}
+              searchValue={this.state.searchValue}
             />
           </>
         )}

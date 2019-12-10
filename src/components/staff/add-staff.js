@@ -36,20 +36,94 @@ const AddStaff = ({ addedUser }) => {
   const password = useInputValue();
   const repeatPassword = useInputValue();
 
+  //Errors
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [roleError, setRoleError] = useState("");
+  const [salaryError, setSalaryError] = useState("");
+  const [birthdayError, setBirthdayError] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [repeatPasswordError, setRepeatPasswordError] = useState("");
+
+  const validate = () => {
+    let salaryError = "";
+    let birthdayError = "";
+    let emailError = "";
+    let phoneNumberError = "";
+    let passwordError = "";
+    let repeatPasswordError = "";
+    let firstNameError = "";
+    let lastNameError = "";
+    let roleError = "";
+    if (
+      !email.value().includes("@") ||
+      !email.value().includes(".") ||
+      email.value().length < 6
+    ) {
+      emailError = "invalid email";
+    }
+    if (!firstName.value()) {
+      firstNameError = "Name cannot be blank";
+    }
+    if (!lastName.value()) {
+      lastNameError = "Surname cannot be blank";
+    }
+    if (!role.value()) {
+      roleError = "Role cannot be blank";
+    }
+    if (!salary.value()) {
+      salaryError = "Salary cannot be blank";
+    }
+    if (!birthday.value()) {
+      birthdayError = "Birthday cannot be blank";
+    }
+    if (!email.value()) {
+      emailError = "Email cannot be blank";
+    }
+    if (!phoneNumber.value()) {
+      phoneNumberError = "PhoneNumber cannot be blank";
+    }
+
+    if (!password.value()) {
+      passwordError = "password cannot be blank";
+    }
+    if (!repeatPassword.value()) {
+      repeatPasswordError = "repeatPassword cannot be blank";
+    }
+    if (repeatPassword.value() !== password.value()) {
+      repeatPasswordError = "field is wrong";
+    }
+    if (
+      emailError ||
+      salaryError ||
+      birthdayError ||
+      phoneNumberError ||
+      passwordError ||
+      repeatPasswordError ||
+      firstNameError ||
+      lastNameError ||
+      roleError
+    ) {
+      setEmailError(emailError);
+      setSalaryError(salaryError);
+      setBirthdayError(birthdayError);
+      setPhoneNumberError(phoneNumberError);
+      setPasswordError(passwordError);
+      setRepeatPasswordError(repeatPasswordError);
+      setFirstNameError(firstNameError);
+      setLastNameError(lastNameError);
+      setRoleError(roleError);
+      return false;
+    }
+    return true;
+  };
+
   const handleAddStaff = e => {
     e.preventDefault();
-
-    if (
-      firstName.value().trim() &&
-      lastName.value().trim() &&
-      email.value().trim() &&
-      role.value().trim() &&
-      salary.value().trim() &&
-      birthday.value().trim() &&
-      phoneNumber.value().trim() &&
-      password.value().trim() &&
-      repeatPassword.value().trim()
-    ) {
+    const isValid = validate();
+    if (isValid) {
       addedUser({
         firstName: firstName.value(),
         lastName: lastName.value(),
@@ -94,6 +168,9 @@ const AddStaff = ({ addedUser }) => {
                 placeholder="Name"
                 {...firstName.bind}
               />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {firstNameError}
+              </div>
             </div>
             <div className="form-group col-md-6">
               <label>Surname</label>
@@ -102,6 +179,9 @@ const AddStaff = ({ addedUser }) => {
                 placeholder="Surname"
                 {...lastName.bind}
               />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {lastNameError}
+              </div>
             </div>
           </div>
           <div className="form-group">
@@ -112,6 +192,7 @@ const AddStaff = ({ addedUser }) => {
               {...email.bind}
               type="email"
             />
+            <div style={{ color: "red", fontSize: "12px" }}>{emailError}</div>
           </div>
           <div className="form-row">
             <div className="form-group col-md-6">
@@ -121,6 +202,7 @@ const AddStaff = ({ addedUser }) => {
                 placeholder="Role"
                 {...role.bind}
               />
+              <div style={{ color: "red", fontSize: "12px" }}>{roleError}</div>
             </div>
             <div className="form-group col-md-6">
               <label>Salary</label>
@@ -129,6 +211,9 @@ const AddStaff = ({ addedUser }) => {
                 placeholder="Salary"
                 {...salary.bind}
               />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {salaryError}
+              </div>
             </div>
             <div className="form-group col-md-6">
               <label>Birthday</label>
@@ -138,6 +223,9 @@ const AddStaff = ({ addedUser }) => {
                 {...birthday.bind}
                 type="date"
               />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {birthdayError}
+              </div>
             </div>
             <div className="form-group col-md-6">
               <label>Phone number</label>
@@ -146,6 +234,9 @@ const AddStaff = ({ addedUser }) => {
                 placeholder="Phone number"
                 {...phoneNumber.bind}
               />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {phoneNumberError}
+              </div>
             </div>
             <div className="form-group col-md-6">
               <label>Password</label>
@@ -155,6 +246,9 @@ const AddStaff = ({ addedUser }) => {
                 {...password.bind}
                 type="password"
               />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {passwordError}
+              </div>
             </div>
             <div className="form-group col-md-6">
               <label>Repeat password</label>
@@ -164,6 +258,9 @@ const AddStaff = ({ addedUser }) => {
                 {...repeatPassword.bind}
                 type="password"
               />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {repeatPasswordError}
+              </div>
             </div>
           </div>
           <button className="btn btn-warning" type="submit">
