@@ -82,27 +82,28 @@ class AdminTools extends Component {
   render() {
     const { activePathName } = this.state;
     return (
-      <ul>
-        {this.tools.map((x, i) => {
-          return (
-            <Link to={x.to} style={{ textDecoration: "none" }} key={i}>
-              <li
-                onClick={() => this.selectTool(x.to)}
-                className={activePathName === x.to ? "active" : ""}
-              >
-                <i className={x.icon}></i>
-                {x.name}
-              </li>
-            </Link>
-          );
-        })}
-
+      <>
+        <ul className="at-ul">
+          {this.tools.map((x, i) => {
+            return (
+              <Link to={x.to} style={{ textDecoration: "none" }} key={i}>
+                <li
+                  onClick={() => this.selectTool(x.to)}
+                  className={activePathName === x.to ? "active" : "at-li"}
+                >
+                  <i className={x.icon}></i>
+                  {x.name}
+                </li>
+              </Link>
+            );
+          })}
+        </ul>
         <Link to={LOGIN_PATH}>
           <button className="log-out" onClick={this.logout}>
             <i className="fas fa-sign-out-alt fa-2x"></i>Log out
           </button>
         </Link>
-      </ul>
+      </>
     );
   }
 }

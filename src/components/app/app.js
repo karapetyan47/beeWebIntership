@@ -45,6 +45,7 @@ import StaffDetails from "../item-details/staff-details";
 import AddCandidat from "../candidats/add-candidat";
 import CandidatDetail from "../item-details/candidat-detail";
 import "../../common/interceptor";
+import BenefitDetails from "../item-details/benefit-details";
 
 const App = () => {
   return (
@@ -90,6 +91,10 @@ const App = () => {
                       path={`${BENEFITS}/add`}
                       component={AddBenefit}
                       exact
+                    />
+                    <Route
+                      path={`${BENEFITS}/:id?/edit`}
+                      component={BenefitDetails}
                     />
                     <Route
                       path={OPEN_POSSITIONS}

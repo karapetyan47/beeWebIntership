@@ -35,6 +35,8 @@ export {
   fetchBenefitsHistorysSuccess,
   removedBenefitsHistorys,
   addedBenefitsHistory,
+  getBenefit,
+  getBenefitSucced,
   FETCH_BENEFITS_SUCCESS,
   FETCHED_BENEFITS,
   REMOVED_BENEFIT,
@@ -43,7 +45,9 @@ export {
   FETCH_BENEFITS_HISTORYS_SUCCESS,
   FETCHED_BENEFITS_HISTORYS,
   REMOVED_BENEFIT_HISTORYS,
-  ADD_BENEFITS_HISTORY
+  ADD_BENEFITS_HISTORY,
+  GET_BENEFIT,
+  GET_BENEFIT_SUCCEED
 } from "redux/actions/actions-benefits";
 
 export {

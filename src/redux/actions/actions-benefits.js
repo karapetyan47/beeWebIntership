@@ -8,6 +8,8 @@ export const FETCH_BENEFITS_HISTORYS_SUCCESS =
   "FETCH_BENEFITS_HISTORYS_SUCCESS";
 export const REMOVED_BENEFIT_HISTORYS = "REMOVED_BENEFIT_HISTORYS";
 export const ADD_BENEFITS_HISTORY = "ADD_BENEFITS_HISTORY";
+export const GET_BENEFIT = "GET_BENEFIT";
+export const GET_BENEFIT_SUCCEED = "GET_BENEFIT_SUCCEED";
 
 const fetchBenefitsSuccess = newBenefits => {
   return {
@@ -43,6 +45,20 @@ const fetchBenefits = () => {
   };
 };
 
+const getBenefit = id => {
+  return {
+    type: GET_BENEFIT,
+    payload: id
+  };
+};
+
+const getBenefitSucced = obj => {
+  return {
+    type: GET_BENEFIT_SUCCEED,
+    payload: obj
+  };
+};
+
 const fetchBenefitsHistorys = () => {
   return {
     type: FETCHED_BENEFITS_HISTORYS
@@ -75,6 +91,8 @@ export {
   fetchBenefits,
   addedBenefit,
   editBenefit,
+  getBenefit,
+  getBenefitSucced,
   fetchBenefitsHistorys,
   fetchBenefitsHistorysSuccess,
   removedBenefitsHistorys,

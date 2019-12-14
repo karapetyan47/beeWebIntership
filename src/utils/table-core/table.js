@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TableInput from "./table-input";
 import Popup from "reactjs-popup";
+import Pagination from "react-js-pagination";
 
 import "./table.scss";
 
@@ -15,7 +16,9 @@ const Table = ({
   deleteItem = () => {},
   updateItem = () => {},
   search = () => {},
-  searchValue = ""
+  searchValue = "",
+  onPageChange = () => {},
+  activePage = 1
 }) => {
   const [value, setValue] = useState({ id: null, obj: {} });
   const handleUpdateItem = e => {
@@ -177,6 +180,16 @@ const Table = ({
         </thead>
         <tbody>{data.map((x, i) => row(x, i, header))}</tbody>
       </table>
+      <Pagination
+        innerClass="pagination-ul"
+        itemClass="pagination-li"
+        linkClass="pagination-a"
+        activeLinkClass="pagination-active"
+        activePage={activePage}
+        itemsCountPerPage={10}
+        totalItemsCount={50}
+        onChange={onPageChange}
+      />
     </div>
   );
 };

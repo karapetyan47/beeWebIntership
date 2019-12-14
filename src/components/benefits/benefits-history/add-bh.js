@@ -34,6 +34,29 @@ const AddBenefitsHistory = ({
   const benefit = useInputValue();
   const user = useInputValue();
 
+  //Errors
+  const [benefitError, setBenefitError] = useState("");
+  const [userError, setUserError] = useState("");
+
+  const validate = () => {
+    let benefitError = "";
+    let userError = "";
+
+    if (!benefit.value()) {
+      benefitError = "Please select a benefit";
+    }
+    if (!user.value()) {
+      userError = "Please select a user";
+    }
+    if (benefitError || userError) {
+      setBenefitError(benefitError);
+      setUserError(userError);
+
+      return false;
+    }
+    return true;
+  };
+
   useEffect(() => {
     fetchBenefits();
   }, [fetchBenefits]);
@@ -43,9 +66,8 @@ const AddBenefitsHistory = ({
 
   const handleAddBenefitsHistory = e => {
     e.preventDefault();
-
-    if (benefit.value().trim() && user.value().trim()) {
-      console.log(benefit.value(), user.value());
+    const isValid = validate();
+    if (isValid) {
       addedBenefitsHistory({
         benefitId: benefit.value(),
         userId: user.value()
@@ -90,6 +112,7 @@ const AddBenefitsHistory = ({
                 <option value="">bzzz</option>
               )}
             </select>
+            <div style={{ color: "red", fontSize: "12px" }}>{benefitError}</div>
           </div>
           <div className="form-group">
             <label>User name</label>
@@ -111,6 +134,7 @@ const AddBenefitsHistory = ({
                 <option value="">...bzzz</option>
               )}
             </select>
+            <div style={{ color: "red", fontSize: "12px" }}>{userError}</div>
           </div>
           <button className="btn btn-warning" type="submit">
             Add

@@ -27,11 +27,32 @@ const AddBenefit = ({ addedBenefit }) => {
   const title = useInputValue();
   const description = useInputValue();
 
+  //Errors
+  const [titleError, setTitleError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+
+  const validate = () => {
+    let titleError = "";
+    let descriptionError = "";
+
+    if (!title.value()) {
+      titleError = "Title cannot be blank";
+    }
+    if (!description.value()) {
+      descriptionError = "Description cannot be blank";
+    }
+    if (titleError || descriptionError) {
+      setTitleError(titleError);
+      setDescriptionError(descriptionError);
+
+      return false;
+    }
+    return true;
+  };
   const handleAddBenefit = e => {
     e.preventDefault();
-
-    if (title.value().trim() && description.value().trim()) {
-      console.log(title.value(), description.value());
+    const isValid = validate();
+    if (isValid) {
       addedBenefit({
         title: title.value(),
         description: description.value()
@@ -61,6 +82,7 @@ const AddBenefit = ({ addedBenefit }) => {
               placeholder="Name"
               {...title.bind}
             />
+            <div style={{ color: "red", fontSize: "12px" }}>{titleError}</div>
           </div>
           <div className="form-group">
             <label>Description</label>
@@ -69,6 +91,9 @@ const AddBenefit = ({ addedBenefit }) => {
               placeholder="Surname"
               {...description.bind}
             />
+            <div style={{ color: "red", fontSize: "12px" }}>
+              {descriptionError}
+            </div>
           </div>
           <button className="btn btn-warning" type="submit">
             Add

@@ -33,6 +33,13 @@ export default class BenefitsService {
     });
   };
 
+  getBenefit = benId => {
+    return axios({
+      method: "GET",
+      url: `${this.baseUrl}/benefits/${benId}`
+    });
+  };
+
   getBenefitsHistorys = () => {
     return axios({
       method: "GET",

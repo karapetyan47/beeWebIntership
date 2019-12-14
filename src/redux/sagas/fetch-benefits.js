@@ -11,7 +11,9 @@ import {
   EDIT_BENEFIT,
   ADD_BENEFIT,
   REMOVED_BENEFIT_HISTORYS,
-  ADD_BENEFITS_HISTORY
+  ADD_BENEFITS_HISTORY,
+  getBenefitSucced,
+  GET_BENEFIT
 } from "../actions/actions-benefits";
 
 const benefitsService = new BenefitsServices();
@@ -36,6 +38,9 @@ function* watchRemoveBenefitsHistory() {
 }
 function* watchAddBenefitsHistory() {
   yield takeEvery(ADD_BENEFITS_HISTORY, addBenefitsHistory);
+}
+function* watchFetchBenefitAsync() {
+  yield takeEvery(GET_BENEFIT, fetchBenefitAsync);
 }
 
 function* getBenefits() {
@@ -74,7 +79,9 @@ function* editBenefit({ payload }) {
     const result = yield call(benefitsService.editBenefit, payload);
 
     if (result.status === 200) {
-      yield call(getBenefits);
+      payload.multi
+        ? yield call(getBenefits)
+        : yield put(getBenefitSucced(result.data));
     }
   } catch (e) {
     console.log("e", e);
@@ -109,6 +116,16 @@ function* addBenefitsHistory({ payload }) {
   }
 }
 
+function* fetchBenefitAsync({ payload }) {
+  try {
+    const data = yield call(benefitsService.getBenefit, payload);
+
+    yield put(getBenefitSucced(data.data));
+  } catch (e) {
+    console.log("e", e);
+  }
+}
+
 export {
   watchGetBenefits,
   watchAddBenefit,
@@ -116,5 +133,6 @@ export {
   watchRemoveBenefit,
   watchGetBenefitsHistorys,
   watchRemoveBenefitsHistory,
-  watchAddBenefitsHistory
+  watchAddBenefitsHistory,
+  watchFetchBenefitAsync
 };

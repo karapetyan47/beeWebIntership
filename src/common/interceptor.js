@@ -1,5 +1,7 @@
 import axios from "axios";
 import setAuterizationToken from "../utils/setAutorizationToken";
+import { store } from "../redux/store";
+import { fetchMe } from "../redux/actions";
 
 function getCookie(name) {
   let matches = document.cookie.match(
@@ -10,29 +12,15 @@ function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-function setCookie(name, value, options = {}) {
-  options = {
-    path: "/",
-    ...options
-  };
-
-  if (options.expires.toUTCString) {
-    options.expires = options.expires.toUTCString();
-  }
-
-  let updatedCookie =
-    encodeURIComponent(name) + "=" + encodeURIComponent(value);
-
-  for (let optionKey in options) {
-    updatedCookie += "; " + optionKey;
-    let optionValue = options[optionKey];
-    if (optionValue !== true) {
-      updatedCookie += "=" + optionValue;
-    }
-  }
-
-  document.cookie = updatedCookie;
-}
+let refreshToken = getCookie("refreshToken");
+// console.log("refreshToken1", refreshToken);
+const getTokens = async () => {
+  return await axios({
+    method: "POST",
+    url: "https://beeweb-2536.herokuapp.com/users/refresh-tokens",
+    data: { refreshToken }
+  });
+};
 
 axios.interceptors.request.use(
   function(config) {
@@ -49,18 +37,24 @@ axios.interceptors.request.use(
 // Add a response interceptor
 axios.interceptors.response.use(
   function(response) {
-    console.log("response", response);
+    if (response.data.accessToken) {
+      console.log("asdfg");
+      localStorage.jwtToken = response.data.accessToken;
+      document.cookie = `refreshToken=${response.data.refreshToken}`;
+      refreshToken = getCookie("refreshToken");
+      setAuterizationToken(localStorage.jwtToken);
+      store.dispatch(fetchMe());
+    }
     return response;
   },
   function(error) {
-    let refreshToken = document.cookie; //getCookie("refreshToken");
-    console.log("refreshToken", refreshToken);
+    // console.log("refreshToken2", refreshToken);
     if (
       error.response.status === 401 &&
       error.response.statusText === "Unauthorized" &&
       refreshToken
     ) {
-      setAuterizationToken(refreshToken);
+      getTokens();
     }
 
     // Any status codes that falls outside the range of 2xx cause this function to trigger

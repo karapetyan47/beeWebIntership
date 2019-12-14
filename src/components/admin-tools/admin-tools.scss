@@ -1,42 +1,56 @@
-ul {
+.at-ul {
   padding: 0;
   margin: 0;
-  margin-top: 75px;
-  li {
+  margin-bottom: 75px;
+  flex: 1 1;
+  .at-li {
     display: flex;
     align-items: center;
     list-style: none;
     color: #ffffff;
-    height: 10%;
+    height: 12%;
     box-sizing: border-box;
     padding: 10px 0 10px 30px;
     transition: 0.2s;
   }
-  li:hover,
+  .at-li:hover,
   .active {
     background: #f39c12;
     color: whitesmoke;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 12%;
+    box-sizing: border-box;
+    padding: 10px 0 10px 30px;
+    transition: 0.2s;
     i {
       font-size: 20px;
     }
   }
-  li:last-child {
+  .at-li:last-child {
     margin-bottom: auto;
   }
   i {
     font-size: 17px;
     margin-right: 7px;
   }
-  .log-out {
-    margin-left: 27px;
-    margin-top: 100px;
-    background: none;
-    border: none;
-    color: #ffffff;
-    margin-right: 5px;
-    transition: 0.2s;
+}
+
+.log-out {
+  margin-left: 27px;
+  margin-top: auto;
+  margin-bottom: 30px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  margin-right: 5px;
+  transition: 0.2s;
+  flex: 1 1;
+  i {
+    margin-right: 7px;
   }
-  .log-out:hover {
-    color: #f39c12;
-  }
+}
+.log-out:hover {
+  color: #f39c12;
 }

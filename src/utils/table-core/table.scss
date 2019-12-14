@@ -53,3 +53,29 @@ td {
 th:last-child {
   text-align: center;
 }
+.pagination-li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination-ul {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: #2d3436;
+  padding-bottom: 3px;
+}
+.pagination-a {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  color: white;
+}
+
+.pagination-a:hover {
+  color: #f1c40f;
+}
+
+.pagination-active {
+  color: #f1c40f;
+}

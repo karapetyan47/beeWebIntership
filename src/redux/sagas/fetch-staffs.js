@@ -27,11 +27,9 @@ function* watchFetchUserAsync() {
   yield takeEvery(GET_USER, fetchUserAsync);
 }
 
-function* fetchStaffsAsync() {
+function* fetchStaffsAsync({ payload }) {
   try {
-    const data = yield call(() => {
-      return staffService.getAllUsers().then(res => res);
-    });
+    const data = yield call(staffService.getAllUsers, payload);
 
     yield put(fetchUsersSuccess(data.data.results));
   } catch (e) {

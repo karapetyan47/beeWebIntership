@@ -12,8 +12,14 @@ import "./open-positions.scss";
 class OpenPositions extends Component {
   state = {
     editIdx: -1,
-    searchValue: ""
+    searchValue: "",
+    activePage: 1
   };
+
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({ activePage: pageNumber });
+  }
 
   updateSearch(e) {
     this.setState({
@@ -98,6 +104,8 @@ class OpenPositions extends Component {
               stopEditing={this.stopEditing}
               search={e => this.updateSearch(e)}
               searchValue={this.state.searchValue}
+              onPageChange={i => this.handlePageChange(i)}
+              activePage={this.state.activePage}
             />
           </>
         )}

@@ -32,16 +32,57 @@ const AddOpenPosition = ({ addedPosition }) => {
   const salary = useInputValue();
   const gender = useInputValue();
 
+  //Errors
+  const [titleError, setTitleError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+  const [ageLimitError, setAgeLimitError] = useState("");
+  const [salaryError, setSalaryError] = useState("");
+  const [genderError, setGenderError] = useState("");
+
+  const validate = () => {
+    let titleError = "";
+    let descriptionError = "";
+    let ageLimitError = "";
+    let salaryError = "";
+    let genderError = "";
+
+    if (!title.value()) {
+      titleError = "Title cannot be blank";
+    }
+    if (!description.value()) {
+      descriptionError = "Description cannot be blank";
+    }
+    if (!ageLimit.value()) {
+      ageLimitError = "Age limit cannot be blank";
+    }
+    if (!salary.value()) {
+      salaryError = "Salary cannot be blank";
+    }
+    if (!gender.value()) {
+      genderError = "Please select a gender";
+    }
+    if (
+      titleError ||
+      descriptionError ||
+      ageLimitError ||
+      salaryError ||
+      genderError
+    ) {
+      setTitleError(titleError);
+      setDescriptionError(descriptionError);
+      setAgeLimitError(ageLimitError);
+      setSalaryError(salaryError);
+      setGenderError(genderError);
+
+      return false;
+    }
+    return true;
+  };
+
   const handleAddOpenPosition = e => {
     e.preventDefault();
-
-    if (
-      title.value().trim() &&
-      description.value().trim() &&
-      ageLimit.value().trim() &&
-      salary.value().trim() &&
-      gender.value().trim()
-    ) {
+    const isValid = validate();
+    if (isValid) {
       addedPosition({
         title: title.value(),
         description: description.value(),
@@ -77,6 +118,7 @@ const AddOpenPosition = ({ addedPosition }) => {
               placeholder="Title"
               {...title.bind}
             />
+            <div style={{ color: "red", fontSize: "12px" }}>{titleError}</div>
           </div>
           <div className="form-group">
             <label>Description</label>
@@ -85,6 +127,9 @@ const AddOpenPosition = ({ addedPosition }) => {
               placeholder="Description"
               {...description.bind}
             />
+            <div style={{ color: "red", fontSize: "12px" }}>
+              {descriptionError}
+            </div>
           </div>
 
           <div className="form-row">
@@ -96,6 +141,9 @@ const AddOpenPosition = ({ addedPosition }) => {
                 {...ageLimit.bind}
                 type="ageLimit"
               />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {ageLimitError}
+              </div>
             </div>
             <div className="form-group col-md-6">
               <label>Salary</label>
@@ -104,6 +152,9 @@ const AddOpenPosition = ({ addedPosition }) => {
                 placeholder="Salary"
                 {...salary.bind}
               />
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {salaryError}
+              </div>
             </div>
           </div>
           <div className="form-row">
@@ -120,6 +171,9 @@ const AddOpenPosition = ({ addedPosition }) => {
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
+              <div style={{ color: "red", fontSize: "12px" }}>
+                {genderError}
+              </div>
             </div>
           </div>
           <button className="btn btn-warning" type="submit">

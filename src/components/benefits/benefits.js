@@ -10,8 +10,21 @@ import { BENEFITS } from "../../constants/const-paths/paths";
 
 class Benefits extends Component {
   state = {
-    editIdx: -1
+    editIdx: -1,
+    searchValue: "",
+    activePage: 1
   };
+
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({ activePage: pageNumber });
+  }
+
+  updateSearch(e) {
+    this.setState({
+      searchValue: e.target.value.substr(0, 20)
+    });
+  }
 
   componentDidMount() {
     this.props.fetchBenefits();
@@ -30,6 +43,16 @@ class Benefits extends Component {
   };
 
   render() {
+    const benefits = this.props.benefits.filter(benefit => {
+      return (
+        benefit.title
+          .toLowerCase()
+          .indexOf(this.state.searchValue.toLowerCase()) !== -1 ||
+        benefit.description
+          .toLowerCase()
+          .indexOf(this.state.searchValue.toLowerCase()) !== -1
+      );
+    });
     return (
       <div>
         <Link
@@ -48,38 +71,53 @@ class Benefits extends Component {
             <i className="fas fa-arrow-left"></i>
           </button>
         </Link>
-        <Table
-          data={this.props.benefits}
-          header={[
-            {
-              name: "Title",
-              prop: "title",
-              type: "text"
-            },
-            {
-              name: "Description",
-              prop: "description",
-              type: "text"
-            }
-          ]}
-          deleteItem={id => {
-            this.props.removedBenefit(id);
-          }}
-          updateItem={obj => {
-            this.props.editBenefit(obj);
-          }}
-          editIdx={this.state.editIdx}
-          startEditing={this.startEditing}
-          stopEditing={this.stopEditing}
-        />
+        {this.props.loadingBenefits ? (
+          <p>Bzz~~</p>
+        ) : (
+          <Table
+            data={benefits}
+            header={[
+              {
+                name: "Title",
+                prop: "title",
+                type: "text"
+              },
+              {
+                name: "Description",
+                prop: "description",
+                type: "text"
+              },
+              {
+                name: "Info",
+                prop: "_id",
+                type: "text"
+              }
+            ]}
+            redirectTo={`${BENEFITS}`}
+            deleteItem={id => {
+              this.props.removedBenefit(id);
+            }}
+            updateItem={obj => {
+              this.props.editBenefit({ ...obj, multi: true });
+            }}
+            editIdx={this.state.editIdx}
+            startEditing={this.startEditing}
+            stopEditing={this.stopEditing}
+            search={e => this.updateSearch(e)}
+            searchValue={this.state.searchValue}
+            onPageChange={i => this.handlePageChange(i)}
+            activePage={this.state.activePage}
+          />
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ benefits }) => {
+const mapStateToProps = ({ benefits, loadingBenefits }) => {
   return {
-    benefits
+    benefits,
+    loadingBenefits
   };
 };
 

@@ -34,9 +34,10 @@ const addedUser = newStaff => {
   };
 };
 
-const fetchStaffs = () => {
+const fetchStaffs = page => {
   return {
-    type: FETCHED_STAFFS
+    type: FETCHED_STAFFS,
+    payload: page
   };
 };
 const getUser = id => {

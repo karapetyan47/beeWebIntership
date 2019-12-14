@@ -11,8 +11,14 @@ import { STAFF } from "../../constants/const-paths/paths";
 class Staff extends Component {
   state = {
     editIdx: -1,
-    searchValue: ""
+    searchValue: "",
+    activePage: 1
   };
+
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({ activePage: pageNumber });
+  }
 
   updateSearch(e) {
     this.setState({
@@ -20,7 +26,12 @@ class Staff extends Component {
     });
   }
   componentDidMount() {
-    this.props.fetchStaffs();
+    this.props.fetchStaffs(this.state.activePage);
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.activePage !== this.state.activePage) {
+      this.props.fetchStaffs(this.state.activePage);
+    }
   }
 
   startEditing = i => {
@@ -39,6 +50,9 @@ class Staff extends Component {
     const users = this.props.users.filter(user => {
       return (
         user.firstname
+          .toLowerCase()
+          .indexOf(this.state.searchValue.toLowerCase()) !== -1 ||
+        user.lastname
           .toLowerCase()
           .indexOf(this.state.searchValue.toLowerCase()) !== -1
       );
@@ -70,16 +84,16 @@ class Staff extends Component {
                   prop: "email",
                   type: "email"
                 },
-                {
-                  name: "Salary",
-                  prop: "salary",
-                  type: "number"
-                },
-                {
-                  name: "Birthday",
-                  prop: "birthday",
-                  type: "date"
-                },
+                // {
+                //   name: "Salary",
+                //   prop: "salary",
+                //   type: "number"
+                // },
+                // {
+                //   name: "Birthday",
+                //   prop: "birthday",
+                //   type: "date"
+                // },
                 {
                   name: "Phone number",
                   prop: "phoneNumber",
@@ -103,6 +117,8 @@ class Staff extends Component {
               stopEditing={this.stopEditing}
               search={e => this.updateSearch(e)}
               searchValue={this.state.searchValue}
+              onPageChange={i => this.handlePageChange(i)}
+              activePage={this.state.activePage}
             />
           </>
         )}

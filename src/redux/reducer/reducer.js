@@ -13,6 +13,7 @@ import {
   GET_USER_SUCCEED,
   GET_CANDIDAT_SUCCEED
 } from "../actions";
+import { GET_BENEFIT_SUCCEED } from "../actions/actions-benefits";
 
 const initialState = {
   user: {},
@@ -21,6 +22,7 @@ const initialState = {
   users: [],
   loadingUsers: true,
   benefits: [],
+  loadingBenefits: true,
   benefitsHistorys: [],
   loadingBenefitsHistorys: true,
   positions: [],
@@ -29,7 +31,8 @@ const initialState = {
   loadingCandidats: true,
   openPosition: {},
   userAbout: {},
-  candidat: {}
+  candidat: {},
+  benefit: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -75,7 +78,8 @@ const reducer = (state = initialState, action) => {
     case FETCH_BENEFITS_SUCCESS:
       return {
         ...state,
-        benefits: action.payload
+        benefits: action.payload,
+        loadingBenefits: false
       };
     case FETCHED_BENEFITS_HISTORYS:
       return {
@@ -114,6 +118,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         candidat: action.payload
+      };
+    case GET_BENEFIT_SUCCEED:
+      return {
+        ...state,
+        benefit: action.payload
       };
     default:
       return state;

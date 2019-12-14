@@ -9,8 +9,14 @@ import { CANDIDATES } from "../../constants/const-paths/paths";
 class Candidats extends Component {
   state = {
     editIdx: -1,
-    searchValue: ""
+    searchValue: "",
+    activePage: 1
   };
+
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({ activePage: pageNumber });
+  }
 
   updateSearch(e) {
     this.setState({
@@ -44,13 +50,13 @@ class Candidats extends Component {
     });
     return (
       <div>
+        <Link to={`${CANDIDATES}/add`} style={{ textDecoration: "none" }}>
+          <button className="btn btn-success">Add new candidat</button>
+        </Link>
         {this.props.loadingCandidats ? (
           <p>Bzz~~</p>
         ) : (
           <>
-            <Link to={`${CANDIDATES}/add`} style={{ textDecoration: "none" }}>
-              <button className="btn btn-success">Add new candidat</button>
-            </Link>
             <Table
               data={candidats}
               header={[
@@ -103,6 +109,8 @@ class Candidats extends Component {
               stopEditing={this.stopEditing}
               search={e => this.updateSearch(e)}
               searchValue={this.state.searchValue}
+              onPageChange={i => this.handlePageChange(i)}
+              activePage={this.state.activePage}
             />
           </>
         )}

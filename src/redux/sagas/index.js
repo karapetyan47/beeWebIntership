@@ -13,7 +13,8 @@ import {
   watchRemoveBenefit,
   watchGetBenefitsHistorys,
   watchRemoveBenefitsHistory,
-  watchAddBenefitsHistory
+  watchAddBenefitsHistory,
+  watchFetchBenefitAsync
 } from "./fetch-benefits";
 
 import {
@@ -59,6 +60,7 @@ export default function* rootSaga() {
     watchAddCandidat(),
     watchFetchCandidatAsync(),
     watchFetchPositionAsync(),
-    watchFetchMe()
+    watchFetchMe(),
+    watchFetchBenefitAsync()
   ]);
 }
