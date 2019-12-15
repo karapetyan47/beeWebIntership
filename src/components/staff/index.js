@@ -12,12 +12,17 @@ class Staff extends Component {
   state = {
     editIdx: -1,
     searchValue: "",
-    activePage: 1
+    activePage: 1,
+    sortBy: "firstname"
   };
 
   handlePageChange(pageNumber) {
     console.log(`active page is ${pageNumber}`);
     this.setState({ activePage: pageNumber });
+  }
+
+  handleSortBy(sortBy) {
+    this.setState({ sortBy: sortBy });
   }
 
   updateSearch(e) {
@@ -26,11 +31,20 @@ class Staff extends Component {
     });
   }
   componentDidMount() {
-    this.props.fetchStaffs(this.state.activePage);
+    this.props.fetchStaffs({
+      page: this.state.activePage,
+      by: this.state.sortBy
+    });
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.activePage !== this.state.activePage) {
-      this.props.fetchStaffs(this.state.activePage);
+    if (
+      prevState.activePage !== this.state.activePage ||
+      prevState.sortBy !== this.state.sortBy
+    ) {
+      this.props.fetchStaffs({
+        page: this.state.activePage,
+        by: this.state.sortBy
+      });
     }
   }
 
@@ -119,6 +133,9 @@ class Staff extends Component {
               searchValue={this.state.searchValue}
               onPageChange={i => this.handlePageChange(i)}
               activePage={this.state.activePage}
+              count={this.props.usersCount}
+              onSortBy={i => this.handleSortBy(i)}
+              sortBy={this.state.sortBy}
             />
           </>
         )}
@@ -127,10 +144,11 @@ class Staff extends Component {
   }
 }
 
-const mapStateToProps = ({ users, loadingUsers }) => {
+const mapStateToProps = ({ users, loadingUsers, usersCount }) => {
   return {
     users,
-    loadingUsers
+    loadingUsers,
+    usersCount
   };
 };
 

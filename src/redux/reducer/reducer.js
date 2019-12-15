@@ -51,7 +51,8 @@ const reducer = (state = initialState, action) => {
     case FETCH_STAFFS_SUCCESS:
       return {
         ...state,
-        users: action.payload,
+        users: action.payload.users.results,
+        usersCount: action.payload.count,
         loadingUsers: false
       };
     case LOGIN_FAILED:
@@ -66,6 +67,7 @@ const reducer = (state = initialState, action) => {
         loadingUser: false,
         errorUser: false,
         users: [],
+        usersCount: null,
         loadingUsers: true,
         benefits: [],
         benefitsHistorys: [],

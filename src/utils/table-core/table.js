@@ -18,7 +18,10 @@ const Table = ({
   search = () => {},
   searchValue = "",
   onPageChange = () => {},
-  activePage = 1
+  activePage = 1,
+  count = null,
+  onSortBy = () => {},
+  sortBy = null
 }) => {
   const [value, setValue] = useState({ id: null, obj: {} });
   const handleUpdateItem = e => {
@@ -170,7 +173,31 @@ const Table = ({
           <tr>
             {header.map((x, i) => (
               <th scope="col" key={i}>
-                {x.name === "Info" ? "" : x.name}
+                {x.name === "Info" ? (
+                  ""
+                ) : (
+                  <>
+                    {x.name}{" "}
+                    {sortBy ? (
+                      sortBy === x.prop ? (
+                        <i
+                          style={{ color: "#f1c40f", marginLeft: "3px" }}
+                          className="fas fa-sort-up"
+                        ></i>
+                      ) : (
+                        <i
+                          style={{
+                            color: "white",
+                            marginLeft: "3px",
+                            cursor: "pointer"
+                          }}
+                          className="fas fa-sort-down"
+                          onClick={() => onSortBy(x.prop)}
+                        ></i>
+                      )
+                    ) : null}
+                  </>
+                )}
               </th>
             ))}
 
@@ -180,16 +207,18 @@ const Table = ({
         </thead>
         <tbody>{data.map((x, i) => row(x, i, header))}</tbody>
       </table>
-      <Pagination
-        innerClass="pagination-ul"
-        itemClass="pagination-li"
-        linkClass="pagination-a"
-        activeLinkClass="pagination-active"
-        activePage={activePage}
-        itemsCountPerPage={10}
-        totalItemsCount={50}
-        onChange={onPageChange}
-      />
+      {count ? (
+        <Pagination
+          innerClass="pagination-ul"
+          itemClass="pagination-li"
+          linkClass="pagination-a"
+          activeLinkClass="pagination-active"
+          activePage={activePage}
+          itemsCountPerPage={4}
+          totalItemsCount={count}
+          onChange={onPageChange}
+        />
+      ) : null}
     </div>
   );
 };

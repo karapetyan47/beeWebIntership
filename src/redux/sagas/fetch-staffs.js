@@ -31,7 +31,7 @@ function* fetchStaffsAsync({ payload }) {
   try {
     const data = yield call(staffService.getAllUsers, payload);
 
-    yield put(fetchUsersSuccess(data.data.results));
+    yield put(fetchUsersSuccess(data.data));
   } catch (e) {
     console.log("error", e);
   }
