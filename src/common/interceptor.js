@@ -3,6 +3,8 @@ import setAuterizationToken from "../utils/setAutorizationToken";
 import { store } from "../redux/store";
 import { fetchMe } from "../redux/actions";
 
+let lastCall = null;
+
 function getCookie(name) {
   let matches = document.cookie.match(
     new RegExp(
@@ -24,6 +26,7 @@ const getTokens = async () => {
 
 axios.interceptors.request.use(
   function(config) {
+    lastCall = config;
     console.log("config", config);
     return config;
   },
@@ -38,7 +41,6 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   function(response) {
     if (response.data.accessToken) {
-      console.log("asdfg");
       localStorage.jwtToken = response.data.accessToken;
       document.cookie = `refreshToken=${response.data.refreshToken}`;
       refreshToken = getCookie("refreshToken");
@@ -48,12 +50,11 @@ axios.interceptors.response.use(
     return response;
   },
   function(error) {
+    if (lastCall) {
+      console.log(lastCall, "lastCall", error);
+    }
     // console.log("refreshToken2", refreshToken);
-    if (
-      error.response.status === 401 &&
-      error.response.statusText === "Unauthorized" &&
-      refreshToken
-    ) {
+    if (error.response.status === 401 && refreshToken) {
       getTokens();
     }
 

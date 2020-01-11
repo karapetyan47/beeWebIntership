@@ -4,13 +4,15 @@ export default class StaffServices {
   // baseUrl = "https://hr-service-beeweb.herokuapp.com/users";
   baseUrl = "https://beeweb-2536.herokuapp.com";
 
-  getAllUsers = ({ page, by }) => {
+  getAllUsers = ({ page, by, sortType }) => {
     return axios({
       method: "GET",
       url: `${this.baseUrl}/users`,
       params: {
         page,
-        by
+        by,
+        sortType,
+        limit: 4
       }
     });
   };

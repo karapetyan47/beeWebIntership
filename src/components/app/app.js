@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useReducer } from "react";
+import { Context } from "./context";
+import { ticketsReducer } from "./reducers";
 import Dashboard from "components/dashboard";
 import Staff from "components/staff";
 import Attendance from "components/attendance";
@@ -48,86 +50,100 @@ import "../../common/interceptor";
 import BenefitDetails from "../item-details/benefit-details";
 
 const App = () => {
+  const [ticketsState, dispatch] = useReducer(ticketsReducer, {
+    tickets: [],
+    ticketsCount: null
+  });
   return (
     <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route path={`${OPEN_POSSITION_ID}=:id`} component={PositionItem} />
-          <Route
-            render={() => (
-              <>
-                <GuestLayout>
-                  <GuestPageHeader />
-                  <Route
-                    path={LOGIN_PATH}
-                    component={LoginFormContainer}
-                    exact
-                  />
-                  <Route path={`${POSSITIONS}`} component={Possitions} />
-                </GuestLayout>
+      <Context.Provider
+        value={{
+          dispatch,
+          ticketsState
+        }}
+      >
+        <Router>
+          <Switch>
+            <Route path={`${OPEN_POSSITION_ID}=:id`} component={PositionItem} />
+            <Route
+              render={() => (
+                <>
+                  <GuestLayout>
+                    <GuestPageHeader />
+                    <Route
+                      path={LOGIN_PATH}
+                      component={LoginFormContainer}
+                      exact
+                    />
+                    <Route path={`${POSSITIONS}`} component={Possitions} />
+                  </GuestLayout>
 
-                <LoggedInLayout>
-                  <Switch>
-                    <Route path={MAIN_PATH} exact component={Dashboard} />
-                    <Route path={STAFF} exact component={Staff} />
-                    <Route path={`${STAFF}/add`} component={AddStaff} />
-                    <Route
-                      path={`${STAFF}/:id?/edit`}
-                      component={StaffDetails}
-                    />
-                    <Route path={ATTENDANCE} component={Attendance} />
-                    <Route path={BENEFITS} exact component={Benefits} />
-                    <Route
-                      path={`${BENEFITS}/history`}
-                      component={BenefitsHistory}
-                      exact
-                    />
-                    <Route
-                      path={`${BENEFITS}/history/add`}
-                      component={AddBenefitsHistory}
-                      exact
-                    />
-                    <Route
-                      path={`${BENEFITS}/add`}
-                      component={AddBenefit}
-                      exact
-                    />
-                    <Route
-                      path={`${BENEFITS}/:id?/edit`}
-                      component={BenefitDetails}
-                    />
-                    <Route
-                      path={OPEN_POSSITIONS}
-                      component={OpenPositions}
-                      exact
-                    />
-                    <Route
-                      path={`${OPEN_POSSITIONS}/add`}
-                      component={AddOpenPosition}
-                    />
-                    <Route
-                      path={`${OPEN_POSSITIONS}/:id?/edit`}
-                      component={OpenPositionDetails}
-                    />
-                    <Route path={CANDIDATES} component={Candidats} exact />
-                    <Route path={`${CANDIDATES}/add`} component={AddCandidat} />
-                    <Route
-                      path={`${CANDIDATES}/:id?/edit`}
-                      component={CandidatDetail}
-                    />
-                    <Route path={TICKETS} component={Tickets} />
-                    <Route
-                      path={PUSH_NOTIFICATIONS}
-                      component={PushNotifications}
-                    />
-                    <Route path={RATING} component={Rating} />
-                  </Switch>
-                </LoggedInLayout>
-              </>
-            )}
-          />
-        </Switch>
-      </Router>
+                  <LoggedInLayout>
+                    <Switch>
+                      <Route path={MAIN_PATH} exact component={Dashboard} />
+                      <Route path={STAFF} exact component={Staff} />
+                      <Route path={`${STAFF}/add`} component={AddStaff} />
+                      <Route
+                        path={`${STAFF}/:id?/edit`}
+                        component={StaffDetails}
+                      />
+                      <Route path={ATTENDANCE} component={Attendance} />
+                      <Route path={BENEFITS} exact component={Benefits} />
+                      <Route
+                        path={`${BENEFITS}/history`}
+                        component={BenefitsHistory}
+                        exact
+                      />
+                      <Route
+                        path={`${BENEFITS}/history/add`}
+                        component={AddBenefitsHistory}
+                        exact
+                      />
+                      <Route
+                        path={`${BENEFITS}/add`}
+                        component={AddBenefit}
+                        exact
+                      />
+                      <Route
+                        path={`${BENEFITS}/:id?/edit`}
+                        component={BenefitDetails}
+                      />
+                      <Route
+                        path={OPEN_POSSITIONS}
+                        component={OpenPositions}
+                        exact
+                      />
+                      <Route
+                        path={`${OPEN_POSSITIONS}/add`}
+                        component={AddOpenPosition}
+                      />
+                      <Route
+                        path={`${OPEN_POSSITIONS}/:id?/edit`}
+                        component={OpenPositionDetails}
+                      />
+                      <Route path={CANDIDATES} component={Candidats} exact />
+                      <Route
+                        path={`${CANDIDATES}/add`}
+                        component={AddCandidat}
+                      />
+                      <Route
+                        path={`${CANDIDATES}/:id?/edit`}
+                        component={CandidatDetail}
+                      />
+                      <Route path={TICKETS} component={Tickets} />
+                      <Route
+                        path={PUSH_NOTIFICATIONS}
+                        component={PushNotifications}
+                      />
+                      <Route path={RATING} component={Rating} />
+                    </Switch>
+                  </LoggedInLayout>
+                </>
+              )}
+            />
+          </Switch>
+        </Router>
+      </Context.Provider>
     </Provider>
   );
 };

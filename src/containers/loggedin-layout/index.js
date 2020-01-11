@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Navbar from "../../components/navbar";
+
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { fetchMe } from "../../redux/actions";
@@ -15,6 +15,8 @@ import {
   MAIN_PATH,
   OPEN_POSSITION_ID
 } from "../../constants/const-paths/paths";
+
+import LoggedInPage from "../../components/logged-in-page";
 
 const PRIVATE_ROUTES = [
   STAFF,
@@ -55,10 +57,7 @@ const LoggedInLayout = props => {
         loadingUser ? (
           <p>...loading</p>
         ) : (
-          <>
-            <Navbar />
-            <div className="visible-place">{props.children}</div>
-          </>
+          <LoggedInPage>{props.children}</LoggedInPage>
         )
       ) : (
         checkRouting()

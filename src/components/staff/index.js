@@ -13,12 +13,18 @@ class Staff extends Component {
     editIdx: -1,
     searchValue: "",
     activePage: 1,
-    sortBy: "firstname"
+    sortBy: "firstname",
+    sortType: 1
   };
 
   handlePageChange(pageNumber) {
     console.log(`active page is ${pageNumber}`);
     this.setState({ activePage: pageNumber });
+  }
+
+  handleSortType(i) {
+    this.setState({ sortType: i });
+    console.log("sortType", this.state.sortType);
   }
 
   handleSortBy(sortBy) {
@@ -33,17 +39,20 @@ class Staff extends Component {
   componentDidMount() {
     this.props.fetchStaffs({
       page: this.state.activePage,
-      by: this.state.sortBy
+      by: this.state.sortBy,
+      sortType: this.state.sortType
     });
   }
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.activePage !== this.state.activePage ||
-      prevState.sortBy !== this.state.sortBy
+      prevState.sortBy !== this.state.sortBy ||
+      prevState.sortType !== this.state.sortType
     ) {
       this.props.fetchStaffs({
         page: this.state.activePage,
-        by: this.state.sortBy
+        by: this.state.sortBy,
+        sortType: this.state.sortType
       });
     }
   }
@@ -135,7 +144,9 @@ class Staff extends Component {
               activePage={this.state.activePage}
               count={this.props.usersCount}
               onSortBy={i => this.handleSortBy(i)}
+              onSortType={i => this.handleSortType(i)}
               sortBy={this.state.sortBy}
+              sortType={this.state.sortType}
             />
           </>
         )}

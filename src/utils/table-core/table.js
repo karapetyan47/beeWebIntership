@@ -21,14 +21,16 @@ const Table = ({
   activePage = 1,
   count = null,
   onSortBy = () => {},
-  sortBy = null
+  sortBy = null,
+  sortType = null,
+  onSortType = () => {}
 }) => {
   const [value, setValue] = useState({ id: null, obj: {} });
   const handleUpdateItem = e => {
     // console.log("e", e);
     setValue({ id: e.id, obj: { ...value.obj, ...e.obj } });
   };
-
+  console.log("count", count);
   const onUpdateItem = () => {
     if (value.id && Object.keys(value.obj).length) updateItem(value);
     setValue({ id: null, obj: {} });
@@ -180,10 +182,33 @@ const Table = ({
                     {x.name}{" "}
                     {sortBy ? (
                       sortBy === x.prop ? (
-                        <i
-                          style={{ color: "#f1c40f", marginLeft: "3px" }}
-                          className="fas fa-sort-up"
-                        ></i>
+                        sortType === 1 ? (
+                          <i
+                            style={{
+                              color: "#f1c40f",
+                              marginLeft: "3px",
+                              cursor: "pointer"
+                            }}
+                            className="fas fa-sort-up"
+                            onClick={() => {
+                              onSortBy(x.prop);
+                              onSortType(-1);
+                            }}
+                          ></i>
+                        ) : (
+                          <i
+                            style={{
+                              color: "#f1c40f",
+                              marginLeft: "3px",
+                              cursor: "pointer"
+                            }}
+                            className="fas fa-sort-down"
+                            onClick={() => {
+                              onSortBy(x.prop);
+                              onSortType(1);
+                            }}
+                          ></i>
+                        )
                       ) : (
                         <i
                           style={{
@@ -205,7 +230,7 @@ const Table = ({
             <th scope="col"></th>
           </tr>
         </thead>
-        <tbody>{data.map((x, i) => row(x, i, header))}</tbody>
+        <tbody>{data ? data.map((x, i) => row(x, i, header)) : ""}</tbody>
       </table>
       {count ? (
         <Pagination
