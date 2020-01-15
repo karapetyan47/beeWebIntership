@@ -46,6 +46,7 @@ const Tickets = () => {
   const stopEditing = () => {
     setEditIdx(-1);
   };
+
   return (
     <>
       <Link to={`${TICKETS}/add`} style={{ textDecoration: "none" }}>
