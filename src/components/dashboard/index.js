@@ -4,6 +4,12 @@ import "./dashboard.scss";
 
 export default class Dashboard extends Component {
   render() {
-    return <div className="welcome-massege">Welcome</div>;
+    return (
+      <section className="body">
+        <p data-text="PSYCHO" className="p">
+          Welcome to BeeWeb
+        </p>
+      </section>
+    );
   }
 }
