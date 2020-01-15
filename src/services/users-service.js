@@ -1,22 +1,23 @@
-export default class UsersService {
-  data = [
-    {
-      name: "User1",
-      password: "1111"
-    },
-    {
-      name: "User2",
-      password: "2222"
-    },
-    {
-      name: "User3",
-      password: "3333"
-    }
-  ];
+import axios from "axios";
 
-  getUsers() {
-    return new Promise(resolve => {
-      resolve(this.data);
+export default class UsersService {
+  baseUrl = "https://beeweb-2536.herokuapp.com";
+
+  login = ({ email, password }) => {
+    return axios({
+      method: "POST", //GET
+      url: `${this.baseUrl}/signup/login`,
+      data: {
+        email,
+        password
+      }
     });
-  }
+  };
+
+  getMe = () => {
+    return axios({
+      method: "GET", //GET
+      url: `${this.baseUrl}/users/me`
+    });
+  };
 }

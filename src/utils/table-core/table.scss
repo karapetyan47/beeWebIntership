@@ -1,0 +1,81 @@
+input {
+  box-sizing: border-box;
+  border: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 8px;
+  text-align: center;
+  outline: none;
+  border-bottom: 1px solid #000;
+}
+// input:read-only {
+//   background: none;
+// }
+// input:focus {
+//   outline: none;
+// }
+
+td {
+  padding: 3px;
+}
+
+.info-btn {
+  margin: 0;
+  width: 100%;
+  text-align: start;
+  background: none;
+  border: none;
+}
+
+.del-btn,
+.edit-btn,
+.cancel-btn {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: none;
+}
+.del-btn:hover {
+  color: tomato;
+}
+.edit-btn:hover {
+  color: green;
+}
+.cancel-btn:hover {
+  color: #e1b12c;
+}
+.info-btn:hover {
+  color: dodgerblue;
+}
+
+th:last-child {
+  text-align: center;
+}
+.pagination-li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination-ul {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: #2d3436;
+  padding-bottom: 3px;
+}
+.pagination-a {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  color: white;
+}
+
+.pagination-a:hover {
+  color: #f1c40f;
+}
+
+.pagination-active {
+  color: #f1c40f;
+}

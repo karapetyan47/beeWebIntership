@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames/bind";
 import { inputLabel, inputFalse } from "constants/const-styles/styles.js";
 
-import "./login-form.css";
+import "./login-form.scss";
 
 const styles = {
   inputLabel,
@@ -11,7 +11,7 @@ const styles = {
 
 let cx = classNames.bind(styles);
 
-const LoginForm = ({ name, submit, password, error }) => {
+const LoginForm = ({ email, submit, password, error }) => {
   let className = cx("inputLabel", { inputFalse: error });
   return (
     <div className="login-section">
@@ -19,8 +19,8 @@ const LoginForm = ({ name, submit, password, error }) => {
         <h2 className="login-title">Login</h2>
         <form className="login-form" onSubmit={submit}>
           <div className="inputBox">
-            <input type="text" required="" {...name.bind} />
-            <label className={className}>Username</label>
+            <input type="email" required="" {...email.bind} />
+            <label className={className}>Email</label>
           </div>
           <div className="inputBox">
             <input type="password" required="" {...password.bind} />

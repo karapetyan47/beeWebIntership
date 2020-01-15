@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/beeWebIntership/static/css/main.a8f3aa83.chunk.css",
+    "main.js": "/beeWebIntership/static/js/main.1efae7a9.chunk.js",
+    "main.js.map": "/beeWebIntership/static/js/main.1efae7a9.chunk.js.map",
+    "runtime-main.js": "/beeWebIntership/static/js/runtime-main.c64912c7.js",
+    "runtime-main.js.map": "/beeWebIntership/static/js/runtime-main.c64912c7.js.map",
+    "static/js/2.9027cbe9.chunk.js": "/beeWebIntership/static/js/2.9027cbe9.chunk.js",
+    "static/js/2.9027cbe9.chunk.js.map": "/beeWebIntership/static/js/2.9027cbe9.chunk.js.map",
+    "index.html": "/beeWebIntership/index.html",
+    "precache-manifest.8179e46240573e889b20ed79ac49accb.js": "/beeWebIntership/precache-manifest.8179e46240573e889b20ed79ac49accb.js",
+    "service-worker.js": "/beeWebIntership/service-worker.js",
+    "static/css/main.a8f3aa83.chunk.css.map": "/beeWebIntership/static/css/main.a8f3aa83.chunk.css.map",
+    "static/media/admin-panel.scss": "/beeWebIntership/static/media/back.3e841f81.jpg",
+    "static/media/login-form.scss": "/beeWebIntership/static/media/bee.244a3e95.jpg",
+    "static/media/logo.png": "/beeWebIntership/static/media/logo.05c01c77.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c64912c7.js",
+    "static/js/2.9027cbe9.chunk.js",
+    "static/css/main.a8f3aa83.chunk.css",
+    "static/js/main.1efae7a9.chunk.js"
+  ]
+}

@@ -1,82 +1,79 @@
-import React, {useState, useEffect} from 'react';
-import LoginForm from 'components/login-form';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { userLoggedIn, fetchUsers } from 'redux/actions/actions-login';
-import { SECRET_PAGE_PATH } from 'constants/const-paths/paths'
+import React, { useState } from "react";
+import LoginForm from "components/login-form";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { attemptLogin } from "redux/actions/actions-login";
+import { MAIN_PATH } from "../../constants/const-paths/paths";
 
-const useInputValue = (resetError=()=>{}, defaultValue = '') => {
-    const [ value, setValue ] = useState(defaultValue);
+const useInputValue = (resetError = () => {}, defaultValue = "") => {
+  const [value, setValue] = useState(defaultValue);
 
-    return {
-            bind: {
-                value,
-                onChange: (e) => {
-                    resetError();
-                    setValue( e.target.value )}            
-            },
-            clear: () => setValue(""),
-            value: () => value
-        }    
-}
+  return {
+    bind: {
+      value,
+      onChange: e => {
+        resetError();
+        setValue(e.target.value);
+      }
+    },
+    clear: () => setValue(""),
+    value: () => value
+  };
+};
 
-const LoginFormContainer = ({ isLoggedIn, users, userLoggedIn, fetchUsers }) => {
+const LoginFormContainer = ({ loginUser, loadingUser }) => {
+  const email = useInputValue(resetError, "test47@mail.ru");
+  const password = useInputValue(resetError, "00000000");
+  const [hasError, setHasError] = useState(false);
 
-    const name = useInputValue(resetError);
-    const password = useInputValue(resetError);
-    const [hasError, setHasError] = useState(false);
+  function resetError() {
+    setHasError(false);
+  }
 
-    useEffect(()=>{
-        fetchUsers();
-    },[fetchUsers]);
+  if (localStorage.jwtToken) {
+    return <Redirect to={MAIN_PATH} />;
+  }
 
-    function resetError(){
-        setHasError(false)
+  const login = e => {
+    e.preventDefault();
+    let errorStatus = true;
+    if (email.value().trim() && password.value().trim()) {
+      const data = { email: email.value(), password: password.value() };
+      errorStatus = false;
+      loginUser(data);
     }
+    errorStatus && setHasError(true);
+    email.clear();
+    password.clear();
+  };
 
-    if(isLoggedIn){
-        return <Redirect to={SECRET_PAGE_PATH} />
-    }
-
-    const login = (e) => {
-        e.preventDefault();
-        let errorStatus = true;     
-        if(name.value().trim() && password.value().trim()) {            
-            const userList = users;          
-            for(let user = 0; user < userList.length; user++) { 
-                if(userList[user].name === name.value() && 
-                   userList[user].password === password.value()){
-                       errorStatus = false;                     
-                    userLoggedIn();
-                    break;
-                }              
-            }
-        }        
-        errorStatus && setHasError(true);
-        name.clear();
-        password.clear();
-    }
-
-    return(
-        <LoginForm 
-            submit={login} 
-            name={name} 
-            password={password} 
-            error={hasError} 
+  return (
+    <>
+      {loadingUser ? (
+        <p style={{ marginLeft: "50%", marginTop: "150px" }}>Bzz~~</p>
+      ) : (
+        <LoginForm
+          submit={login}
+          email={email}
+          password={password}
+          error={hasError}
         />
-    )
-}
+      )}
+    </>
+  );
+};
 
-const mapStateToProps = ({ users, isLoggedIn }) => {
-    return{
-    users,
-    isLoggedIn
-    }
-}
+const mapStateToProps = ({ loadingUser }) => {
+  return { loadingUser };
+};
 
-const mapDispatchToProps = {
-    userLoggedIn,
-    fetchUsers
-}
+const mapDispatchToProps = dispatch => {
+  return {
+    loginUser: data => dispatch(attemptLogin(data))
+  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(LoginFormContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginFormContainer);

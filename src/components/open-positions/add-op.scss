@@ -1,0 +1,31 @@
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: silver;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 8px;
+  margin-top: 8px;
+  width: 100%;
+  .h3 {
+    text-align: center;
+    color: black;
+    background: yellow;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
+form {
+  width: 100%;
+}
+
+.form-control {
+  display: inline-block;
+}
+
+.btn-outline-success {
+  float: left;
+}
